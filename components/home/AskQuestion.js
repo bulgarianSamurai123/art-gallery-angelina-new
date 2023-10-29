@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
 import InputContainer from "../ui/InputContainer";
-import Button from "../ui/Button";
 import addQuestion from "/helpers/add-question-util";
 import useInput from "../../hooks/use-input";
 
@@ -57,11 +56,20 @@ const AskQuestion = () => {
       </h1>
       <form onSubmit={submitHandler}>
         <InputContainer>
-          <label htmlFor="email" className="text-base md:text-xl">
+          <label
+            htmlFor="email"
+            className={`${
+              invalidEmailHandler ? "text-red-600" : "undefined"
+            } text-base md:text-xl`}
+          >
             Email
           </label>
           <input
-            className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
+            className={`${
+              invalidEmailHandler
+                ? "border-red-600 focus:border-red-600"
+                : "border-gray-850 focus:border-gray-850"
+            } border-2 rounded-lg  p-2 text-sm outline-none focus:border-4 `}
             type="email"
             id="email"
             value={email}
@@ -75,11 +83,20 @@ const AskQuestion = () => {
           )}
         </InputContainer>
         <InputContainer>
-          <label htmlFor="question" className="text-base md:text-xl">
+          <label
+            htmlFor="question"
+            className={`${
+              invalidQuestionHandler ? "text-red-600" : "undefined"
+            } text-base md:text-xl`}
+          >
             Question
           </label>
           <input
-            className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
+            className={`${
+              invalidQuestionHandler
+                ? "border-red-600 focus:border-red-600"
+                : "border-gray-850 focus:border-gray-850"
+            } border-2 rounded-lg p-2 text-sm outline-none focus:border-4 focus:border-gray-850`}
             type="text"
             id="question"
             value={question}
@@ -93,9 +110,13 @@ const AskQuestion = () => {
           )}
         </InputContainer>
         <div className="flex justify-end">
-          <Button type="submit" disabled={!formIsValid}>
+          <button
+            className={`mt-3 bg-gray-730 hover:bg-gray-800 active:bg-gray-600 disabled:text-gray-490 px-7 py-2 rounded-xl`}
+            type="submit"
+            disabled={!formIsValid}
+          >
             Submit
-          </Button>
+          </button>
         </div>
       </form>
     </div>
