@@ -1,8 +1,8 @@
 import React from "react";
 
-import InputContainer from "../ui/InputContainer";
-import addQuestion from "/helpers/add-question-util";
+import addQuestion from "../../helpers/add-util";
 import useInput from "../../hooks/use-input";
+import Input from "../ui/Input";
 
 const AskQuestion = () => {
   const {
@@ -55,63 +55,29 @@ const AskQuestion = () => {
         Ask us a question
       </h1>
       <form onSubmit={submitHandler}>
-        <InputContainer>
-          <label
-            htmlFor="email"
-            className={`${
-              invalidEmailHandler ? "text-red-600" : "undefined"
-            } text-base md:text-xl`}
-          >
-            Email
-          </label>
-          <input
-            className={`${
-              invalidEmailHandler
-                ? "border-red-600 focus:border-red-600"
-                : "border-gray-850 focus:border-gray-850"
-            } border-2 rounded-lg  p-2 text-sm outline-none focus:border-4 `}
-            type="email"
-            id="email"
-            value={email}
-            onChange={emailInputHandler}
-            onBlur={emailInputBlurHandler}
-          />
-          {invalidEmailHandler && (
-            <p className="text-red-600 font-bold">
-              Entered email must not be empty!
-            </p>
-          )}
-        </InputContainer>
-        <InputContainer>
-          <label
-            htmlFor="question"
-            className={`${
-              invalidQuestionHandler ? "text-red-600" : "undefined"
-            } text-base md:text-xl`}
-          >
-            Question
-          </label>
-          <input
-            className={`${
-              invalidQuestionHandler
-                ? "border-red-600 focus:border-red-600"
-                : "border-gray-850 focus:border-gray-850"
-            } border-2 rounded-lg p-2 text-sm outline-none focus:border-4 focus:border-gray-850`}
-            type="text"
-            id="question"
-            value={question}
-            onChange={questionInputHandler}
-            onBlur={questionInputBlurHandler}
-          />
-          {invalidQuestionHandler && (
-            <p className="text-red-600 font-bold">
-              Entered question must not be empty!
-            </p>
-          )}
-        </InputContainer>
+        <Input
+          for="email"
+          invalidPropHandler={invalidEmailHandler}
+          label="Email"
+          type="email"
+          val={email}
+          inputHandler={emailInputHandler}
+          blurHandler={emailInputBlurHandler}
+          errorMessage="Entered name is invalid!"
+        />
+        <Input
+          for="question"
+          invalidPropHandler={invalidQuestionHandler}
+          label="Question"
+          type="text"
+          val={question}
+          inputHandler={questionInputHandler}
+          blurHandler={questionInputBlurHandler}
+          errorMessage="Entered question is invalid!"
+        />
         <div className="flex justify-end">
           <button
-            className={`mt-3 bg-gray-730 hover:bg-gray-800 active:bg-gray-600 disabled:text-gray-490 px-7 py-2 rounded-xl`}
+            className={`mt-3 bg-gray-730 enabled:hover:bg-gray-800 enabled:active:bg-gray-600 disabled:text-gray-490 px-7 py-2 rounded-xl`}
             type="submit"
             disabled={!formIsValid}
           >
