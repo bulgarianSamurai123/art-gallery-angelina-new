@@ -1,39 +1,54 @@
 import React, { useState } from "react";
 
 import InputContainer from "../ui/InputContainer";
-import Input from "../ui/Input";
 import Button from "../ui/Button";
+import addQuestion from "/helpers/add-question-util";
+import useInput from "../../hooks/use-input";
 
 const AskQuestion = () => {
-  const [email, setEmail] = useState();
-  const [question, setQuestion] = useState();
+  const {
+    value: email,
+    invalidInput: invalidEmailHandler,
+    valueIsValid: enteredEmailIsValid,
+    valueChangeHandler: emailInputHandler,
+    inputBlurHandler: emailInputBlurHandler,
+    reset: resetEmailHandler,
+  } = useInput((value) => value.trim() !== "" && value.includes("@"));
+  const {
+    value: question,
+    invalidInput: invalidQuestionHandler,
+    valueIsValid: enteredQuestionIsValid,
+    valueChangeHandler: questionInputHandler,
+    inputBlurHandler: questionInputBlurHandler,
+    reset: resetQuestionHandler,
+  } = useInput((value) => value.trim() !== "");
+
+  const date = new Date();
+
+  let formIsValid = false;
+
+  if (enteredEmailIsValid && enteredQuestionIsValid) {
+    formIsValid = true;
+  }
 
   async function submitHandler(event) {
     event.preventDefault();
 
-    const response = await fetch("/api/questions", {
-      method: "POST",
-      body: {
-        email: email,
-        question: question,
-      },
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    if (!enteredEmailIsValid || !enteredQuestionIsValid) {
+      return;
+    }
 
-    const data = response.json;
+    const newQuestion = {
+      date,
+      email,
+      question,
+    };
 
-      
+    addQuestion(newQuestion);
+
+    resetEmailHandler();
+    resetQuestionHandler();
   }
-
-  const emailChangeHandler = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const questionChangeHandler = (event) => {
-    setQuestion(event.target.value);
-  };
 
   return (
     <div className="my-32">
@@ -49,8 +64,15 @@ const AskQuestion = () => {
             className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
             type="email"
             id="email"
-            onChange={emailChangeHandler}
+            value={email}
+            onChange={emailInputHandler}
+            onBlur={emailInputBlurHandler}
           />
+          {invalidEmailHandler && (
+            <p className="text-red-600 font-bold">
+              Entered email must not be empty!
+            </p>
+          )}
         </InputContainer>
         <InputContainer>
           <label htmlFor="question" className="text-base md:text-xl">
@@ -60,11 +82,20 @@ const AskQuestion = () => {
             className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
             type="text"
             id="question"
-            onChange={questionChangeHandler}
+            value={question}
+            onChange={questionInputHandler}
+            onBlur={questionInputBlurHandler}
           />
+          {invalidQuestionHandler && (
+            <p className="text-red-600 font-bold">
+              Entered question must not be empty!
+            </p>
+          )}
         </InputContainer>
         <div className="flex justify-end">
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={!formIsValid}>
+            Submit
+          </Button>
         </div>
       </form>
     </div>
