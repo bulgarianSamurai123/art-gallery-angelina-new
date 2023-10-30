@@ -1,8 +1,11 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 import { getProductById, getProducts } from "/helpers/api-util";
 import Image from "next/image";
 import Button from "/components/ui/Button";
+import FeaturedProducts from "../../components/products/FeaturedProducts";
+import { DUMMY_PRODUCTS_HOMEPAGE } from "../../dummy-products";
 
 const ProductDetailPage = ({ selectedProduct }) => {
   const product = selectedProduct;
@@ -20,14 +23,21 @@ const ProductDetailPage = ({ selectedProduct }) => {
         <div>
           <h1 className="text-3xl">{product.name}</h1>
           <span className="text-xl font-light">{product.price}лв.</span>
-          <p className="text-base font-light text-gray-250">{product.description}</p>
+          <p className="text-base font-light text-gray-250">
+            {product.description}
+          </p>
           <Button>Поръчай</Button>
         </div>
       </div>
-      <div className="mt-20 flex flex-col items-center">
+      <motion.div
+        className="mt-20 flex flex-col items-center gap-10"
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.8 }}
+      >
         <h1 className="text-2xl">Може също така да харесате</h1>
-        Here will be the list with other products
-      </div>
+        <FeaturedProducts products={DUMMY_PRODUCTS_HOMEPAGE} motion={motion} />
+      </motion.div>
     </section>
   );
 };
