@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useAnimate } from "framer-motion";
 
 import InputContainer from "/components/ui/InputContainer";
 
 const Input = (props) => {
+  const [scope, animate] = useAnimate();
+
+  useEffect(() => {
+    if (props.invalidPropHandler) {
+      animate(
+        "textarea, input",
+        { x: [20, 0, -20, 0, 20, 0] },
+        { type: "tween", duration: .25 }
+      );
+    }
+  }, [props.invalidPropHandler]);
+
   return (
-    <InputContainer>
+    <InputContainer scope={scope}>
       <label
         htmlFor={props.for}
         className={`${

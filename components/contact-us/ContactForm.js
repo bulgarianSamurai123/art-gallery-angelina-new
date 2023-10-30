@@ -75,7 +75,7 @@ const ContactForm = () => {
       message,
     };
 
-    addMessage(newMessage, 'messages');
+    addMessage(newMessage, "messages");
 
     resetNameHandler();
     resetEmailHandler();
