@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 import { DUMMY_PRODUCTS_HOMEPAGE } from "/dummy-products";
 
@@ -12,23 +13,25 @@ const GalleryPage = () => {
       <motion.ul
         className="flex flex-col md:flex-row gap-10"
         variants={{
-          offscreen: { opacity: 1, scale: 0 },
-          onscreen: {
+          hidden: { opacity: 1, scale: 0 },
+          visible: {
             opacity: 1,
             scale: 1,
             transition: {
-              delayChildren: 0.2,
+              delayChildren: 0.3,
               staggerChildren: 0.2,
             },
           },
         }}
+        initial="hidden"
+        animate="visible"
       >
         {DUMMY_PRODUCTS_HOMEPAGE.map((product) => (
           <motion.li
             key={product.id}
             variants={{
-              offscreen: { y: 20, opacity: 0 },
-              onscreen: {
+              hidden: { y: 20, opacity: 0 },
+              visible: {
                 y: 0,
                 opacity: 1,
               },
