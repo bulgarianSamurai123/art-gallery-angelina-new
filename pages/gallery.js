@@ -1,7 +1,6 @@
-import React from 'react'
-import Link from 'next/link'
+import React from "react";
 
-import { DUMMY_PRODUCTS_HOMEPAGE } from '/dummy-products'
+import { DUMMY_PRODUCTS_HOMEPAGE } from "/dummy-products";
 
 const GalleryPage = () => {
   return (
@@ -10,22 +9,41 @@ const GalleryPage = () => {
         Gallery Page
       </h1>
 
-      <ul className="grid grid-cols-5 gap-6 items-center">
-        {DUMMY_PRODUCTS_HOMEPAGE.map((page) => (
-          <li key={page.id}>
-            <Link className="flex flex-col" href={`/products/${page.id}`}>
-              <img
-                className="w-full max-h-80 overflow-hidden"
-                src={page.img}
-                alt={page.name}
-              />
-              <h1>{page.name}</h1>
-            </Link>
-          </li>
+      <motion.ul
+        className="flex flex-col md:flex-row gap-10"
+        variants={{
+          offscreen: { opacity: 1, scale: 0 },
+          onscreen: {
+            opacity: 1,
+            scale: 1,
+            transition: {
+              delayChildren: 0.2,
+              staggerChildren: 0.2,
+            },
+          },
+        }}
+      >
+        {DUMMY_PRODUCTS_HOMEPAGE.map((product) => (
+          <motion.li
+            key={product.id}
+            variants={{
+              offscreen: { y: 20, opacity: 0 },
+              onscreen: {
+                y: 0,
+                opacity: 1,
+              },
+            }}
+          >
+            <img
+              className="w-1/3 md:w-full md:h-full aspect-3/4"
+              src={product.img}
+              alt={product.name}
+            />
+          </motion.li>
         ))}
-      </ul>
+      </motion.ul>
     </section>
-  )
-}
+  );
+};
 
-export default GalleryPage
+export default GalleryPage;
