@@ -1,6 +1,7 @@
 import React from "react";
-import Link from "next/link";
+import { motion } from "framer-motion";
 import Image from "next/image";
+
 import CustomDropDownLink from "../ui/CustomDropDownLink";
 
 const NavBarDropdown = (props) => {
@@ -8,7 +9,16 @@ const NavBarDropdown = (props) => {
     props;
 
   return (
-    <div className="pt-4 absolute z-10 top-0 left-0 w-full h-1/2 bg-white sm:hidden">
+    <motion.div
+      className="pt-6 absolute z-10 top-0 left-0 w-full h-1/2 bg-white sm:hidden"
+      variants={{
+        hidden: { opacity: 0, y: -30 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+    >
       <div className="flex flex-row justify-between px-8">
         <h1 className="text-xl font-semibold w-[9rem] text-center">
           Angelina's Art Gallery
@@ -52,7 +62,7 @@ const NavBarDropdown = (props) => {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
