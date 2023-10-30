@@ -8,7 +8,7 @@ const Input = (props) => {
       <label
         htmlFor={props.for}
         className={`${
-          props.invalidPropHandler ? "text-red-600" : "undefined"
+          props.invalidPropHandler ? "text-red-600 font-bold" : "undefined"
         } text-base md:text-xl`}
       >
         {props.label}
