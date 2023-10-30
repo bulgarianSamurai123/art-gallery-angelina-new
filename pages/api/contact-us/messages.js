@@ -1,4 +1,4 @@
-import { connectDatabase } from "../../helpers/database-util";
+import { connectDatabase } from "../../../helpers/database-util";
 
 export default async function handler(req, res) {
   let regName = /^\b(?:[A-Z]\w+\b(?:\s*)?)+$/;

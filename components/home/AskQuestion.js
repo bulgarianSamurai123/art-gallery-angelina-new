@@ -1,6 +1,6 @@
 import React from "react";
 
-import addQuestion from "../../helpers/add-util";
+import { addMessage } from "../../helpers/add-util";
 import useInput from "../../hooks/use-input";
 import Input from "../ui/Input";
 
@@ -43,7 +43,7 @@ const AskQuestion = () => {
       question,
     };
 
-    addQuestion(newQuestion);
+    addMessage(newQuestion, "questions");
 
     resetEmailHandler();
     resetQuestionHandler();
