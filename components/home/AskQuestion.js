@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { addMessage } from "../../helpers/add-util";
 import { notificationHandler } from "../../helpers/notification-util";
 import useInput from "../../hooks/use-input";
-import Input from "../ui/form/form/Input";
+import Input from "../ui/form//Input";
 import Notification from "../ui/Notification";
 import { AnimatePresence } from "framer-motion";
 
