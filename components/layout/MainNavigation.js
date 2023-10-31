@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import NavLinks from "../navigation/NavLinks";
 import CustomLink from "../ui/navigation/CustomLink";
 import NavBarDropdown from "../navigation/NavDropdown";
-import { navigationLinks } from "/navigationLinks";
+import { navigationLinks } from "../../navigationLinks";
 
 const MainNavigation = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -37,7 +37,7 @@ const MainNavigation = () => {
       <div className="flex flex-row gap-5 items-center">
         {!isLoggedIn && (
           <CustomLink dest="/log-in" isActive={router.asPath === "/log-in"}>
-            Sign in
+            Влез
           </CustomLink>
         )}
 
@@ -47,10 +47,10 @@ const MainNavigation = () => {
               destination="/"
               isActive={router.asPath === "/sign-out"}
             >
-              Sign out
+              Излез
             </CustomLink>
             <CustomLink href="admin" isActive={router.asPath === "/admin"}>
-              Admin Page
+              Админ страница
             </CustomLink>
           </div>
         )}
