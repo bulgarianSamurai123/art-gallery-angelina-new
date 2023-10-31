@@ -19,9 +19,9 @@ const MainNavigation = () => {
 
   return (
     <nav className="flex justify-between items-center my-6 mx-8 sm:mx-14 md:mx-32">
-      <h1 className={`text-xl font-semibold w-[9rem] text-center`}>
+      <Link className={`text-xl font-semibold w-[9rem] text-center`} href='/'>
         Angelina's Art Gallery
-      </h1>
+      </Link>
 
       <ul className="hidden sm:flex flex-row gap-5">
         {navigationLinks.map((link) => (
