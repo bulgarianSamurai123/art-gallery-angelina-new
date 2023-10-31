@@ -2,7 +2,7 @@ import React from "react";
 
 import { addMessage } from "../../helpers/add-util";
 import useInput from "../../hooks/use-input";
-import Input from "../ui/Input";
+import Input from "../ui/form/Input";
 
 const AskQuestion = () => {
   const {

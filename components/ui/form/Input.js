@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAnimate } from "framer-motion";
 
-import InputContainer from "/components/ui/InputContainer";
+import InputContainer from './InputContainer';
 
 const Input = (props) => {
   const [scope, animate] = useAnimate();
