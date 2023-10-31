@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Button from "../ui/Button";
 
 const CustomPainting = () => {
-    const router = useRouter()
+  const router = useRouter();
 
   return (
     <div className="flex md:flex-row flex-col gap-10 md:gap-24">

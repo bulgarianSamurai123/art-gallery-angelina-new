@@ -1,16 +1,24 @@
-import React from "react";
+import React, { Fragment } from "react";
 
-import ContactForm from "/components/contact-us/ContactForm";
+import ContactForm from "/components/pages/contact-us/ContactForm";
+import Section from "../components/layout/Section";
+import Head from "next/head";
 
 const ContactusPage = () => {
   return (
-    <section className="mx-8 lg:mx-20 xl:mx-32 mb-52">
-      <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-        Contact us Page
-      </h1>
+    <Fragment>
+      <Head>
+        <title>Angelina's Art Gallery - Contact us</title>
+        <meta name="description" content="Contact us for any information or to make a porachka." />
+      </Head>
+      <Section>
+        <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
+          Contact us Page
+        </h1>
 
-      <ContactForm />
-    </section>
+        <ContactForm />
+      </Section>
+    </Fragment>
   );
 };
 

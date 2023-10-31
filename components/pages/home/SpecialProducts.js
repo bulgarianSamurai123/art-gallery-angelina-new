@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 import { DUMMY_PRODUCTS_HOMEPAGE } from "/dummy-products";
-import FeaturedProducts from "../products/FeaturedProducts";
+import FeaturedProducts from "../pages/products/FeaturedProducts";
 
 const SpecialProducts = () => {
   return (

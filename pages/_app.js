@@ -6,7 +6,10 @@ import Head from "next/head";
 export default function App({ Component, pageProps }) {
   return (
     <Layout>
-      <Head></Head>
+      <Head>
+        <title>Angelina's Art Gallery</title>
+        <meta name="description" content="" />
+      </Head>
       <Component {...pageProps} />
     </Layout>
   );

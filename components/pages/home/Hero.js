@@ -4,7 +4,7 @@ import Button from "../ui/Button";
 import { useRouter } from "next/router";
 
 const Hero = () => {
-    const router = useRouter()
+  const router = useRouter();
 
   return (
     <div className="h-screen flex flex-col items-center justify-center pb-20">

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 
-import useInput from "../../hooks/use-input";
-import { addMessage } from "../../helpers/add-util";
-import { notificationHandler } from "../../helpers/notification-util";
+import useInput from "../../../hooks/use-input";
+import { addMessage } from "../../../helpers/add-util";
+import { notificationHandler } from "../../../helpers/notification-util";
 import Input from "/components/ui/form/Input";
-import Notification from "../ui/Notification";
+import Notification from "../../ui/Notification";
 
 const ContactForm = () => {
   let regTel =

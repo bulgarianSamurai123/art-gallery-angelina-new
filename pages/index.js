@@ -13,7 +13,6 @@ const HomePage = () => {
   return (
     <Fragment>
       <Head>
-        <title>Angelina's Art Gallery</title>
         <meta name="description" content="Textured. Minimalistic. Art." />
       </Head>
       <Section>
