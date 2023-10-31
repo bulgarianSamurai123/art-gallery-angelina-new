@@ -80,13 +80,13 @@ const AskQuestion = () => {
   return (
     <div className="my-32">
       <h1 className="pb-8 text-xl md:text-3xl font-normal text-left">
-        Ask us a question
+        Задайте ни въпрос
       </h1>
       <form onSubmit={submitHandler}>
         <Input
           for="email"
           invalidPropHandler={invalidEmailHandler}
-          label="Email"
+          label="Имейл"
           type="email"
           val={email}
           inputHandler={emailInputHandler}
@@ -96,7 +96,7 @@ const AskQuestion = () => {
         <Input
           for="question"
           invalidPropHandler={invalidQuestionHandler}
-          label="Question"
+          label="Въпрос"
           type="text"
           val={question}
           inputHandler={questionInputHandler}
@@ -109,7 +109,7 @@ const AskQuestion = () => {
             type="submit"
             disabled={!formIsValid}
           >
-            Submit
+            Изпрати
           </button>
         </div>
       </form>

@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
+import Head from "next/head";
 
 import GalleryList from "../components/pages/gallery/GalleryList";
 import Section from "../components/layout/Section";
-import Head from "next/head";
 
 const GalleryPage = () => {
   return (

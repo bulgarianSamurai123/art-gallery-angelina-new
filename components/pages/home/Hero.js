@@ -9,9 +9,9 @@ const Hero = () => {
   return (
     <div className="h-screen flex flex-col items-center justify-center pb-20">
       <div className="absolute w-full h-[85%] right-0 top-28 bg-background-home bg-cover bg-no-repeat -z-10" />
-      <h1 className="text-3xl font-bold text-white">Home Page</h1>
-      <p className="text-xl text-white">Some more text</p>
-      <Button onClick={() => router.push("/products")}>Go to Shop</Button>
+      <h1 className="text-3xl text-white font-brittany">Angelina's Art Gallery</h1>
+      <p className="text-xl text-white">Текстуриран. Минималистичен. Изкуство.</p>
+      <Button onClick={() => router.push("/products")}>Пазарувай</Button>
     </div>
   );
 };

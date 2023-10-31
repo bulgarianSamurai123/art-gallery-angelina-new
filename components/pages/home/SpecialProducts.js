@@ -13,7 +13,7 @@ const SpecialProducts = () => {
       viewport={{ once: true, amount: 0.8 }}
     >
       <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-        Special Products
+        Специални Продукти
       </h1>
       <FeaturedProducts products={DUMMY_PRODUCTS_HOMEPAGE} motion={motion} />
     </motion.div>

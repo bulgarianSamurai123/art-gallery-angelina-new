@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
-
-import ContactForm from "/components/pages/contact-us/ContactForm";
-import Section from "../components/layout/Section";
 import Head from "next/head";
+
+import ContactForm from "../components/pages/contact-us/ContactForm";
+import Section from "../components/layout/Section";
 
 const ContactusPage = () => {
   return (

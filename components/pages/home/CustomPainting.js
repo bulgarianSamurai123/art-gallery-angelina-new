@@ -10,7 +10,7 @@ const CustomPainting = () => {
     <div className="flex md:flex-row flex-col gap-10 md:gap-24">
       <div className="flex flex-col justify-center md:order-first order-last">
         <h1 className="pb-5 text-xl md:text-3xl font-normal">
-          Custom Paintings
+          Картини по поръчка
         </h1>
         <p className="text-base md:text-2xl font-light leading-relaxed">
           Lorem ipsum dolor sit amet consectetur. Proin pellentesque at
@@ -20,7 +20,7 @@ const CustomPainting = () => {
           diam vitae eu. Hendrerit ullamcorper tristique ipsum.
         </p>
         <div>
-          <Button onClick={() => router.push("/contact-us")}>Contact us</Button>
+          <Button onClick={() => router.push("/contact-us")}>Свържете се с нас</Button>
         </div>
       </div>
       <img

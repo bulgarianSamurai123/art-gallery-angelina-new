@@ -9,7 +9,7 @@ const ForPainter = () => {
         alt="For Painter Image"
       />
       <div className="flex flex-col justify-center">
-        <h1 className="pb-5 text-xl md:text-3xl font-normal">For Painter</h1>
+        <h1 className="pb-5 text-xl md:text-3xl font-normal">За художника</h1>
         <p className="text-base md:text-2xl font-normal md:font-light leading-relaxed">
           Lorem ipsum dolor sit amet consectetur. Quis feugiat phasellus
           faucibus egestas scelerisque sed enim. Urna lorem aliquam risus

@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import { signIn } from "next-auth/react";
 
-import InputContainer from "/components/ui/form/InputContainer";
-import Button from "/components/ui/Button";
+import InputContainer from "../components/ui/form/InputContainer";
+import Button from "../components/ui/Button";
 
 const LogInPage = () => {
   const [isLogin, setIsLogin] = useState(true)
