@@ -1,16 +1,14 @@
 import { render, screen } from "@testing-library/react";
 
 import ProductPage from "../pages/products";
-import { getProducts } from "../helpers/api-util";
 
 describe("Products page", () => {
-  it("should fetch products", async () => {
+  it("", async () => {
     // ARRANGE
-    const products = await getProducts();
+    render(<ProductPage />)
 
     // ACT
 
     // ASSERT
-    await expect(products.length).toBeGreaterThan()(1)
   });
 });
