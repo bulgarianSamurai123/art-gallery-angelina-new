@@ -6,10 +6,9 @@ const FeaturedProducts = ({products, motion}) => {
     <motion.ul
         className="flex flex-col md:flex-row gap-10"
         variants={{
-          offscreen: { opacity: 1, scale: 0 },
+          offscreen: { opacity: 1 },
           onscreen: {
             opacity: 1,
-            scale: 1,
             transition: {
               delayChildren: 0.2,
               staggerChildren: 0.2,

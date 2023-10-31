@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
 
 import useInput from "../../hooks/use-input";
 import { addMessage } from "../../helpers/add-util";
@@ -163,13 +164,15 @@ const ContactForm = () => {
           </button>
         </div>
       </form>
-      {notification && (
-        <Notification
-          title={notification.title}
-          message={notification.message}
-          status={notification.status}
-        />
-      )}
+      <AnimatePresence>
+        {notification && (
+          <Notification
+            title={notification.title}
+            message={notification.message}
+            status={notification.status}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 };

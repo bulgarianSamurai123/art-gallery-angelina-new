@@ -5,6 +5,7 @@ import { notificationHandler } from "../../helpers/notification-util";
 import useInput from "../../hooks/use-input";
 import Input from "../ui/form/Input";
 import Notification from "../ui/Notification";
+import { AnimatePresence } from "framer-motion";
 
 const AskQuestion = () => {
   const {
@@ -113,11 +114,13 @@ const AskQuestion = () => {
         </div>
       </form>
       {notification && (
-        <Notification
-          title={notification.title}
-          message={notification.message}
-          status={notification.status}
-        />
+        <AnimatePresence>
+          <Notification
+            title={notification.title}
+            message={notification.message}
+            status={notification.status}
+          />
+        </AnimatePresence>
       )}
     </div>
   );
