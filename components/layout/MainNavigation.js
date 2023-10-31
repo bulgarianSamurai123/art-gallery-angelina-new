@@ -19,7 +19,7 @@ const MainNavigation = () => {
 
   return (
     <nav className="flex justify-between items-center my-6 mx-8 sm:mx-14 md:mx-32">
-      <Link className={`text-xl font-semibold w-[9rem] text-center`} href='/'>
+      <Link className="text-2xl w-[9rem] text-center font-brittany" href="/">
         Angelina's Art Gallery
       </Link>
 

@@ -3,3 +3,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'brittany';
+    src: url('../public/fonts/BrittanySignature.ttf');
+}

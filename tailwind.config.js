@@ -33,6 +33,7 @@ module.exports = {
     },
     fontFamily: {
       sans: ["Poppins", "sans-serif"],
+      brittany: ['brittany', 'sans']
     },
     extend: {
       backgroundImage: {
