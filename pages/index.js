@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
 
 import Section from "/components/layout/Section";
-import Hero from "/components/home/Hero";
-import SpecialProducts from "/components/home/SpecialProducts";
-import ForPainter from "/components/home/ForPainter";
-import CustomPainting from "/components/home/CustomPainting";
-import Testimonials from "/components/home/Testimonials";
-import AskQuestion from "/components/home/AskQuestion";
+import Hero from "/components/pages/home/Hero";
+import SpecialProducts from "/components/pages/home/SpecialProducts";
+import ForPainter from "/components/pages/home/ForPainter";
+import CustomPainting from "/components/pages/home/CustomPainting";
+import Testimonials from "/components/pages/home/Testimonials";
+import AskQuestion from "/components/pages/home/AskQuestion";
 import Head from "next/head";
 
 const HomePage = () => {

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { signIn } from "next-auth/react";
 
-import InputContainer from "/components/ui/InputContainer";
+import InputContainer from "/components/ui/form/InputContainer";
 import Button from "/components/ui/Button";
 
 const LogInPage = () => {

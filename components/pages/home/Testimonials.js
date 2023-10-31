@@ -1,6 +1,6 @@
 import React from "react";
 
-import Testimonial from "../ui/Testimonial";
+import Testimonial from "../../ui/Testimonial";
 
 const Testimonials = () => {
   return (

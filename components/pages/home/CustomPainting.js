@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-import Button from "../ui/Button";
+import Button from "../../ui/Button";
 
 const CustomPainting = () => {
   const router = useRouter();
