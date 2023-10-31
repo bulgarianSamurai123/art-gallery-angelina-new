@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-import CustomDropDownLink from "../ui/CustomDropDownLink";
+import CustomDropDownLink from "../ui/navigation/CustomDropDownLink";
 
 const NavBarDropdown = (props) => {
   const { router, toggleDropdown, setToggleDropdown, isLoggedIn, links } =

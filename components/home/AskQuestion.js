@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { addMessage } from "../../helpers/add-util";
+import { notificationHandler } from "../../helpers/notification-util";
 import useInput from "../../hooks/use-input";
-import Input from "../ui/Input";
+import Input from "../ui/form/Input";
+import Notification from "../ui/Notification";
 
 const AskQuestion = () => {
   const {
@@ -22,6 +24,20 @@ const AskQuestion = () => {
     reset: resetQuestionHandler,
   } = useInput((value) => value.trim() !== "");
 
+  const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
+  const [requestError, setRequestError] = useState();
+
+  useEffect(() => {
+    if (requestStatus === "success" || requestStatus === "error") {
+      const timer = setTimeout(() => {
+        setRequestStatus(null);
+        setRequestError(null);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [requestStatus]);
+
   const date = new Date();
 
   let formIsValid = false;
@@ -33,21 +49,32 @@ const AskQuestion = () => {
   async function submitHandler(event) {
     event.preventDefault();
 
+    setRequestStatus("pending");
+
     if (!enteredEmailIsValid || !enteredQuestionIsValid) {
       return;
     }
 
-    const newQuestion = {
-      date,
-      email,
-      question,
-    };
+    try {
+      const newQuestion = {
+        date,
+        email,
+        question,
+      };
 
-    addMessage(newQuestion, "questions");
+      addMessage(newQuestion, "questions");
+      setRequestStatus("success");
 
-    resetEmailHandler();
-    resetQuestionHandler();
+      resetEmailHandler();
+      resetQuestionHandler();
+    } catch (error) {
+      setRequestError(error);
+      setRequestStatus("error");
+    }
   }
+
+  let notification;
+  notification = notificationHandler(requestStatus, notification, requestError);
 
   return (
     <div className="my-32">
@@ -85,6 +112,13 @@ const AskQuestion = () => {
           </button>
         </div>
       </form>
+      {notification && (
+        <Notification
+          title={notification.title}
+          message={notification.message}
+          status={notification.status}
+        />
+      )}
     </div>
   );
 };
