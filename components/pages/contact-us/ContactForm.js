@@ -116,42 +116,42 @@ const ContactForm = () => {
         <Input
           for="name"
           invalidPropHandler={invalidNameHandler}
-          label="Name"
+          label="Име"
           type="text"
           val={name}
           inputHandler={nameInputHandler}
           blurHandler={nameInputBlurHandler}
-          errorMessage="Entered name is invalid!"
+          errorMessage="Името не е валидно!"
         />
         <Input
           for="email"
           invalidPropHandler={invalidEmailHandler}
-          label="Email"
+          label="Имейл"
           type="email"
           val={email}
           inputHandler={emailInputHandler}
           blurHandler={emailInputBlurHandler}
-          errorMessage="Entered email is invalid!"
+          errorMessage="Имейла не е валиден!"
         />
         <Input
           for="tel"
           invalidPropHandler={invalidTelHandler}
-          label="Phone"
+          label="Телефон"
           type="tel"
           val={tel}
           inputHandler={telInputHandler}
           blurHandler={telInputBlurHandler}
-          errorMessage="Entered tel is invalid!"
+          errorMessage="Телефонът не е валиден!"
         />
         <Input
           for="message"
           invalidPropHandler={invalidMessageHandler}
-          label="Message"
+          label="Съобщение"
           type="text"
           val={message}
           inputHandler={messageInputHandler}
           blurHandler={messageInputBlurHandler}
-          errorMessage="Entered message is invalid!"
+          errorMessage="Съобщението не е валидно!"
           textarea
         />
         <div className="flex flex-row justify-end">
@@ -160,7 +160,7 @@ const ContactForm = () => {
             type="submit"
             disabled={!formIsValid}
           >
-            Submit
+            Изпрати
           </button>
         </div>
       </form>

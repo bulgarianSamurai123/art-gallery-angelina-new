@@ -16,7 +16,7 @@ const GalleryPage = () => {
       </Head>
       <Section>
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-          Gallery Page
+          Галерия
         </h1>
         <GalleryList />
       </Section>

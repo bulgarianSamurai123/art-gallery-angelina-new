@@ -13,7 +13,7 @@ const ContactusPage = () => {
       </Head>
       <Section>
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-          Contact us Page
+          Свържи се
         </h1>
 
         <ContactForm />
