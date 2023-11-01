@@ -19,18 +19,18 @@ const LogInPage = () => {
     const enteredUsername = username.current.value;
     const enteredPassword = password.current.value;
 
-    if (isLogin) {
-      // log user in
-      const result = await signIn("credentials", {
-        redirect: false,
-        username: enteredUsername,
-        password: enteredPassword,
-      });
+    // if (isLogin) {
+    //   // log user in
+    //   const result = await signIn("credentials", {
+    //     redirect: false,
+    //     username: enteredUsername,
+    //     password: enteredPassword,
+    //   });
 
-      if (!result.error) {
-        // set some auth state
-      }
-    }
+    //   if (!result.error) {
+    //     // set some auth state
+    //   }
+    // }
   }
 
   return (
@@ -44,7 +44,6 @@ const LogInPage = () => {
           <label htmlFor="username" className="text-base md:text-xl">
             Потребителско име
           </label>
-          {/* <Input type="text" id="username" /> */}
           <input
             className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
             type="text"
@@ -56,7 +55,6 @@ const LogInPage = () => {
           <label htmlFor="password" className="text-base md:text-xl">
             Парола
           </label>
-          {/* <Input type="password" id="password" /> */}
           <input
             className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
             type="password"

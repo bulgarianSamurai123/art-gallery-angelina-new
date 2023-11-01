@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
 
-import InputContainer from "/components/ui/InputContainer";
-import Input from "/components/ui/Input";
-import Button from "/components/ui/Button";
-import Section from "/components/layout/Section";
+import InputContainer from "../../../components/ui/form/InputContainer";
+import Button from "../../../components/ui/Button";
+import Section from "../../../components/layout/Section";
 
 const AddProductPage = () => {
   const nameRef = useRef();

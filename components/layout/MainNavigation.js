@@ -9,7 +9,7 @@ import NavBarDropdown from "../navigation/NavDropdown";
 import { navigationLinks } from "../../navigationLinks";
 
 const MainNavigation = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const router = useRouter();
 
@@ -44,12 +44,12 @@ const MainNavigation = () => {
         {isLoggedIn && (
           <div className="flex flex-row gap-5">
             <CustomLink
-              destination="/"
+              dest="/"
               isActive={router.asPath === "/sign-out"}
             >
               Излез
             </CustomLink>
-            <CustomLink href="admin" isActive={router.asPath === "/admin"}>
+            <CustomLink dest="/admin" isActive={router.asPath === "/admin"}>
               Админ страница
             </CustomLink>
           </div>
