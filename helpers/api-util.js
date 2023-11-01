@@ -29,7 +29,11 @@ export const sendContactForm = async (content) => {
     },
   });
 
-  const data = response.json()
+  const data = response.json();
 
-  return data
+  if (!response.ok) {
+    throw new Error(data.message || "Something went wrong!");
+  }
+
+  return data;
 };

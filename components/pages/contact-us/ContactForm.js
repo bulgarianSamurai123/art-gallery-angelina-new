@@ -95,7 +95,12 @@ const ContactForm = () => {
         message,
       };
 
-      sendContactForm(newMessage)
+      try {
+        await sendContactForm(newMessage);
+      } catch (error) {
+        console.log(error);
+        throw new Error(error.message);
+      }
 
       // addMessage(newMessage, "messages");
       setRequestStatus("success");
