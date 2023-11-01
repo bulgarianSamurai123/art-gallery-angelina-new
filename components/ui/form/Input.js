@@ -32,7 +32,7 @@ const Input = (props) => {
             props.invalidPropHandler
               ? "border-red-600 focus:border-red-600"
               : "border-gray-850 focus:border-gray-850"
-          } border-2 rounded-lg p-2 text-sm outline-none focus:border-4`}
+          } border-2 rounded-lg p-2 text-sm outline-none focus:border-4 resize-none`}
           rows={10}
           placeholder="Enter your message."
           type={props.type}
