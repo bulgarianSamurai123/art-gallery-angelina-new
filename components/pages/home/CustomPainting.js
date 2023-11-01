@@ -12,7 +12,7 @@ const CustomPainting = () => {
         <h1 className="pb-5 text-xl md:text-3xl font-normal">
           Картини по поръчка
         </h1>
-        <p className="text-base md:text-2xl font-light leading-relaxed">
+        <p className="text-base md:text-2xl font-normal md:font-light leading-relaxed">
           Lorem ipsum dolor sit amet consectetur. Proin pellentesque at
           pellentesque arcu nisi nec fermentum vel risus. Cursus maecenas vel eu
           turpis commodo ante. Risus maecenas urna aliquet egestas nisl
@@ -24,7 +24,7 @@ const CustomPainting = () => {
         </div>
       </div>
       <img
-        className="w-full lg:w-2/3 lg:h-2/3"
+        className="w-full md:w-1/3 lg:w-2/3 lg:h-2/3"
         src="/assets/custom-painting.png"
         alt="Custom Painting Image"
       />

@@ -4,7 +4,7 @@ import Link from "next/link";
 const FeaturedProducts = ({ products, motion }) => {
   return (
     <motion.ul
-      className="flex flex-col md:flex-row gap-10"
+      className="flex flex-row gap-10"
       variants={{
         offscreen: { opacity: 1 },
         onscreen: {
@@ -29,7 +29,7 @@ const FeaturedProducts = ({ products, motion }) => {
         >
           <Link className="flex flex-col" href={product.id}>
             <img
-              className="w-1/3 md:w-full md:h-full aspect-3/4"
+              className="w-1/3 w-full h-full aspect-3/4"
               src={product.img}
               alt={product.name}
             />

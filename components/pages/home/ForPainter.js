@@ -4,7 +4,7 @@ const ForPainter = () => {
   return (
     <div className="py-40 flex items-center md:flex-row flex-col gap-10 md:gap-24">
       <img
-        className="w-full lg:w-2/3 lg:h-2/3"
+        className="w-full md:w-1/3 lg:w-2/3 lg:h-2/3"
         src="/assets/for-painter.png"
         alt="For Painter Image"
       />
