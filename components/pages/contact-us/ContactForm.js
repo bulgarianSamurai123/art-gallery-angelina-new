@@ -6,7 +6,7 @@ import { addMessage } from "../../../helpers/add-util";
 import { notificationHandler } from "../../../helpers/notification-util";
 import Input from "/components/ui/form/Input";
 import Notification from "../../ui/Notification";
-import { sendForm } from "../../../helpers/api-util";
+import { sendContactForm } from "../../../helpers/api-util";
 
 const ContactForm = () => {
   let regTel =
@@ -95,7 +95,9 @@ const ContactForm = () => {
         message,
       };
 
-      addMessage(newMessage, "messages");
+      sendContactForm(newMessage)
+
+      // addMessage(newMessage, "messages");
       setRequestStatus("success");
 
       resetNameHandler();

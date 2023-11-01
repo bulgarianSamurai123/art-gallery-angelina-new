@@ -19,3 +19,17 @@ export async function getProductById(id) {
   const allProduct = await getProducts();
   return allProduct.find((product) => product.id === id);
 }
+
+export const sendContactForm = async (content) => {
+  const response = await fetch("/api/contact", {
+    method: "POST",
+    body: JSON.stringify(content),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const data = response.json()
+
+  return data
+};
