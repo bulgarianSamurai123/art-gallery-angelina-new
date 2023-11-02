@@ -15,7 +15,7 @@ const AskQuestion = () => {
     valueChangeHandler: emailInputHandler,
     inputBlurHandler: emailInputBlurHandler,
     reset: resetEmailHandler,
-  } = useInput((value) => value.trim() !== "" && value.includes("@"));
+  } = useInput((value) => value.trim() !== "" && value.includes("@"), "");
   const {
     value: question,
     invalidInput: invalidQuestionHandler,
@@ -23,7 +23,7 @@ const AskQuestion = () => {
     valueChangeHandler: questionInputHandler,
     inputBlurHandler: questionInputBlurHandler,
     reset: resetQuestionHandler,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => value.trim() !== "", "");
 
   const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
   const [requestError, setRequestError] = useState();
