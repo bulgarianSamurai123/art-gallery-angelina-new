@@ -1,3 +1,7 @@
 Contact form 
 tel field
 start telephone by default with +359 (0) and to start with 88...
+
+
+Implement testing and start playing with unit tests.
+(It can be in another application. But this app must have testing.)
