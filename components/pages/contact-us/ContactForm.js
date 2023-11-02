@@ -19,7 +19,7 @@ const ContactForm = () => {
     valueChangeHandler: nameInputHandler,
     inputBlurHandler: nameInputBlurHandler,
     reset: resetNameHandler,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => value.trim() !== "", "");
   const {
     value: email,
     invalidInput: invalidEmailHandler,
@@ -27,7 +27,7 @@ const ContactForm = () => {
     valueChangeHandler: emailInputHandler,
     inputBlurHandler: emailInputBlurHandler,
     reset: resetEmailHandler,
-  } = useInput((value) => value.trim() !== "" && value.includes("@"));
+  } = useInput((value) => value.trim() !== "" && value.includes("@"), "");
   const {
     value: tel,
     invalidInput: invalidTelHandler,
@@ -35,7 +35,7 @@ const ContactForm = () => {
     valueChangeHandler: telInputHandler,
     inputBlurHandler: telInputBlurHandler,
     reset: resetTelHandler,
-  } = useInput((value) => value.trim() !== "" && regTel.test(value));
+  } = useInput((value) => value.trim() !== "" && regTel.test(value), "+359");
   const {
     value: message,
     invalidInput: invalidMessageHandler,
@@ -43,7 +43,7 @@ const ContactForm = () => {
     valueChangeHandler: messageInputHandler,
     inputBlurHandler: messageInputBlurHandler,
     reset: resetMessageHandler,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => value.trim() !== "", "");
 
   const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
   const [requestError, setRequestError] = useState();
