@@ -63,7 +63,14 @@ const AskQuestion = () => {
         question,
       };
 
-      addMessage(newQuestion, "questions");
+      try {
+        await sendContactForm(newQuestion);
+      } catch (error) {
+        console.log(error);
+        throw new Error(error.message);
+      }
+
+      // addMessage(newQuestion, "questions");
       setRequestStatus("success");
 
       resetEmailHandler();
