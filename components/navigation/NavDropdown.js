@@ -4,10 +4,13 @@ import Image from "next/image";
 
 import CustomDropDownLink from "../ui/navigation/CustomDropDownLink";
 
-const NavBarDropdown = (props) => {
-  const { router, toggleDropdown, setToggleDropdown, isLoggedIn, links } =
-    props;
-
+const NavBarDropdown = ({
+  router,
+  toggleDropdown,
+  setToggleDropdown,
+  isLoggedIn,
+  links,
+}) => {
   return (
     <motion.div
       className="pt-6 absolute z-10 top-0 left-0 w-full h-1/2 bg-white sm:hidden"
@@ -20,7 +23,7 @@ const NavBarDropdown = (props) => {
       exit="hidden"
     >
       <div className="flex flex-row justify-between px-8">
-        <h1 className="text-xl font-semibold w-[9rem] text-center">
+        <h1 className="text-2xl w-[9rem] text-center font-brittany">
           Angelina's Art Gallery
         </h1>
 
@@ -39,7 +42,7 @@ const NavBarDropdown = (props) => {
             key={link.id}
             router={router}
             destination={link.destination}
-            closeDropdown={setToggleDropdown}
+            closeDropdown={() => setToggleDropdown(false)}
           >
             {link.title}
           </CustomDropDownLink>

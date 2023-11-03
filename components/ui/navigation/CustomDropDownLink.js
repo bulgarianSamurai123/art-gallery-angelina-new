@@ -3,7 +3,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const CustomDropDownLink = (props) => {
-  const { router, destination, children, closeDropDown } = props;
+  const { router, destination, children, closeDropdown } = props;
   const isActive = router.asPath === destination;
 
   return (
@@ -18,7 +18,7 @@ const CustomDropDownLink = (props) => {
         href={destination}
         passHref
       >
-        {children}
+        <button onClick={closeDropdown}>{children}</button>
       </Link>
     </motion.div>
   );
