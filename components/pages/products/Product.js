@@ -5,9 +5,9 @@ import Button from "/components/ui/Button";
 
 const Product = ({ product }) => {
   return (
-    <div className="flex flex-row gap-14">
+    <div className="flex flex-col md:flex-row gap-14 overflow-y-hidden ">
       <Image
-        className="w-[900px] h-[600px] object-none object-center"
+        className="w-[56em] h-[30em] md:h-[36em] object-none object-center"
         src={`/product-images/${product.image}.jpg`}
         width={500}
         height={500}

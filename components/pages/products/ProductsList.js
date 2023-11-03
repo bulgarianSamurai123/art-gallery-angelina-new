@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const ProductsList = ({ products }) => {
   return (
     <motion.ul
-      className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 items-top justify-center"
+      className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 items-top justify-center overflow-hidden"
       variants={{
         hidden: { opacity: 1, scale: 0 },
         visible: {
