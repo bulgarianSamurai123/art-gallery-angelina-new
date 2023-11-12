@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "firebase": "^10.5.2",
     "framer-motion": "^10.16.4",
     "mongodb": "^6.2.0",
     "next": "13.5.6",
@@ -17,7 +18,8 @@
     "nodemailer": "^6.9.7",
     "react": "^18",
     "react-dom": "^18.2.0",
-    "swiper": "^11.0.3"
+    "swiper": "^11.0.3",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10",

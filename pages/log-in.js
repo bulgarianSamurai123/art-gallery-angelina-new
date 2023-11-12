@@ -19,18 +19,18 @@ const LogInPage = () => {
     const enteredUsername = username.current.value;
     const enteredPassword = password.current.value;
 
-    // if (isLogin) {
-    //   // log user in
-    //   const result = await signIn("credentials", {
-    //     redirect: false,
-    //     username: enteredUsername,
-    //     password: enteredPassword,
-    //   });
+    if (isLogin) {
+      // log user in
+      const result = await signIn("credentials", {
+        redirect: false,
+        username: enteredUsername,
+        password: enteredPassword,
+      });
 
-    //   if (!result.error) {
-    //     // set some auth state
-    //   }
-    // }
+      if (!result.error) {
+        // set some auth state
+      }
+    }
   }
 
   return (

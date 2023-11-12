@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 
 import useInput from "../../../hooks/use-input";
-import { addMessage } from "../../../helpers/add-util";
 import { notificationHandler } from "../../../helpers/notification-util";
 import Input from "../../ui/form/Input";
 import Notification from "../../ui/Notification";
@@ -85,7 +84,7 @@ const AskQuestion = () => {
   notification = notificationHandler(requestStatus, notification, requestError);
 
   return (
-    <div className="my-32">
+    <div className="mt-20 mb-32">
       <h1 className="pb-8 text-xl md:text-3xl font-normal text-left">
         Задайте ни въпрос
       </h1>

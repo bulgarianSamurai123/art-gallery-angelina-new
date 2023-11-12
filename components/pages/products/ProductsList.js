@@ -34,7 +34,7 @@ const ProductsList = ({ products }) => {
           <Link className="flex flex-col" href={`/products/${product.id}`}>
             <img
               className="w-[16.25em] h-[18.125em] object-cover object-center"
-              src={`/product-images/${product.image}.jpg`}
+              src={product.coverImage}
               alt={product.name}
             />
             <h1 className="text-2xl font-normal">{product.name}</h1>

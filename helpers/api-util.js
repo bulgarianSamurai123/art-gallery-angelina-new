@@ -20,6 +20,25 @@ export async function getProductById(id) {
   return allProduct.find((product) => product.id === id);
 }
 
+export async function getGallery() {
+  const response = await fetch(
+    "https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/gallery.json"
+  );
+
+  const data = await response.json();
+
+  const galleryImages = [];
+
+  for (const key in data) {
+    galleryImages.push({
+      id: key,
+      ...data[key],
+    });
+  }
+
+  return galleryImages;
+}
+
 export const sendContactForm = async (content) => {
   const response = await fetch("/api/contact", {
     method: "POST",

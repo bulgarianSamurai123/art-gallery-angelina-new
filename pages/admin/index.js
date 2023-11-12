@@ -11,21 +11,21 @@ const AdminPage = () => {
   </Section>;
 };
 
-// export async function getServerSideProps(context) {
-//   const session = await getSession({ req: context.req });
+export async function getServerSideProps(context) {
+  const session = await getSession({ req: context.req });
 
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: "/log-in",
-//         permanent: false,
-//       },
-//     };
-//   }
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/log-in",
+        permanent: false,
+      },
+    };
+  }
 
-//   return {
-//     props: { session },
-//   };
-// }
+  return {
+    props: { session },
+  };
+}
 
 export default AdminPage;

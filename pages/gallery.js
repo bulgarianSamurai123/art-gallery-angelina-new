@@ -3,8 +3,9 @@ import Head from "next/head";
 
 import GalleryList from "../components/pages/gallery/GalleryList";
 import Section from "../components/layout/Section";
+import { getGallery } from "../helpers/api-util";
 
-const GalleryPage = () => {
+const GalleryPage = ({ galleryImages }) => {
   return (
     <Fragment>
       <Head>
@@ -18,10 +19,20 @@ const GalleryPage = () => {
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
           Галерия
         </h1>
-        <GalleryList />
+        <GalleryList galleryImages={galleryImages} />
       </Section>
     </Fragment>
   );
 };
+
+export async function getServerSideProps() {
+  const galleryImages = await getGallery();
+
+  return {
+    props: {
+      galleryImages: galleryImages,
+    },
+  };
+}
 
 export default GalleryPage;
