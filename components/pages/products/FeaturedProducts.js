@@ -30,13 +30,13 @@ const FeaturedProducts = ({ products, motion }) => {
           <Link className="flex flex-col" href={product.id}>
             <img
               className="w-[16.25em] h-[18.125em] object-cover object-center"
-              src={product.img}
+              src={product.coverImage}
               alt={product.name}
             />
             <div className="pt-4">
               <p className="text-base md:text-2xl font-bold">{product.name}</p>
               <span className="text-sm md:text-xl font-light">
-                {product.price}
+                {`${product.price}лв.`}
               </span>
             </div>
           </Link>

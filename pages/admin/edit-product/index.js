@@ -1,29 +1,39 @@
-import React from 'react'
+import React from "react";
+import { useRouter } from "next/router";
 import { getSession } from "next-auth/react";
 
-const EditProductPage = () => {
+import { getProducts } from "../../../helpers/api-util";
+import Section from "../../../components/layout/Section";
+import Table from "../../../components/ui/Table";
+import AddButton from "../../../components/ui/Buttons/AddButton";
+
+const EditProductPage = ({ products }) => {
+  const router = useRouter();
+
+  const navigateHandler = (url) => {
+    router.push(url);
+  };
+
   return (
-    <div>
-      Edit Product Page
-    </div>
-  )
-}
+    <Section>
+      <div className="flex flex-row justify-end pb-10">
+        <AddButton navigate={navigateHandler} />
+      </div>
 
-export async function getServerSideProps(context) {
-  const session = await getSession({ req: context.req });
+      {/* Table */}
+      <Table products={products} />
+    </Section>
+  );
+};
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/log-in",
-        permanent: false,
-      },
-    };
-  }
+export async function getServerSideProps() {
+  const products = await getProducts();
 
   return {
-    props: { session },
+    props: {
+      products: products,
+    },
   };
 }
 
-export default EditProductPage
+export default EditProductPage;

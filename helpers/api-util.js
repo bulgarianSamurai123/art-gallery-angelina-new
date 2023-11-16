@@ -15,6 +15,11 @@ export async function getProducts() {
   return products;
 }
 
+export async function getFeaturedProducts() {
+  const allProducts = await getProducts();
+  return allProducts.filter((product) => product.isFeatured);
+}
+
 export async function getProductById(id) {
   const allProduct = await getProducts();
   return allProduct.find((product) => product.id === id);

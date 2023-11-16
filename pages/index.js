@@ -1,6 +1,7 @@
  import React, { Fragment } from "react";
 import Head from "next/head";
 
+import { getFeaturedProducts } from "../helpers/api-util";
 import Section from "../components/layout/Section";
 import Hero from "../components/pages/home/Hero";
 import SpecialProducts from "../components/pages/home/SpecialProducts";
@@ -9,7 +10,7 @@ import CustomPainting from "../components/pages/home/CustomPainting";
 import Testimonials from "../components/pages/home/Testimonials";
 import AskQuestion from "../components/pages/home/AskQuestion";
 
-const HomePage = () => {
+const HomePage = ({ products }) => {
   return (
     <Fragment>
       <Head>
@@ -17,7 +18,7 @@ const HomePage = () => {
       </Head>
       <Section>
         <Hero />
-        <SpecialProducts />
+        <SpecialProducts products={products} />
         <ForPainter />
         <CustomPainting />
         <Testimonials />
@@ -26,5 +27,16 @@ const HomePage = () => {
     </Fragment>
   );
 };
+
+export async function getStaticProps() {
+  const featuredProducts = await getFeaturedProducts();
+
+  return {
+    props: {
+      products: featuredProducts,
+    },
+    revalidate: 1800,
+  };
+}
 
 export default HomePage;

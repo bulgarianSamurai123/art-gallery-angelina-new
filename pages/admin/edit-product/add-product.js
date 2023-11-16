@@ -2,10 +2,11 @@ import React, { useRef, useState } from "react";
 import { getSession } from "next-auth/react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
-import { storage } from "../../helpers/firebase";
-import InputContainer from "../../components/ui/form/InputContainer";
-import Button from "../../components/ui/Button";
-import Section from "../../components/layout/Section";
+import { storage } from "../../../helpers/firebase";
+import InputContainer from "../../../components/ui/form/InputContainer";
+import Button from "../../../components/ui/Button";
+import Section from "../../../components/layout/Section";
+import BackButton from "../../../components/ui/Buttons/BackButton";
 
 const AddProductPage = () => {
   const nameRef = useRef();
@@ -14,8 +15,16 @@ const AddProductPage = () => {
   const [price, setPrice] = useState();
   const [description, setDescription] = useState();
   const [image, setImage] = useState(null);
+  const [isFeatured, setIsFeatured] = useState(false);
 
-  async function responseHandler(id, name, price, description, imageUrl) {
+  async function responseHandler(
+    id,
+    name,
+    price,
+    description,
+    imageUrl,
+    isFeatured
+  ) {
     const response = await fetch(
       "https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/products.json",
       {
@@ -26,6 +35,7 @@ const AddProductPage = () => {
           price,
           description,
           coverImage: imageUrl,
+          isFeatured,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -55,7 +65,14 @@ const AddProductPage = () => {
       },
       () => {
         getDownloadURL(uploadImage.snapshot.ref).then(async (downloadURL) => {
-          responseHandler(id, name, price, description, downloadURL);
+          responseHandler(
+            id,
+            name,
+            price,
+            description,
+            downloadURL,
+            isFeatured
+          );
         });
       }
     );
@@ -63,6 +80,10 @@ const AddProductPage = () => {
 
   return (
     <Section>
+      <div className="flex flex-row w-full items-start">
+        <BackButton />
+      </div>
+
       <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
         Add Product
       </h1>
@@ -125,6 +146,18 @@ const AddProductPage = () => {
             }}
           />
         </InputContainer>
+        <InputContainer className="flex flex-row gap-2 items-center">
+          <input
+            className="accent-gray-490 border-gray-850 w-4 h-4"
+            type="checkbox"
+            id="featured"
+            checked={isFeatured}
+            onChange={() => {
+              setIsFeatured(!isFeatured);
+            }}
+          />
+          <label htmlFor="featured">Is Featured</label>
+        </InputContainer>
         <div>
           <Button type="submit">Submit</Button>
         </div>
@@ -133,21 +166,21 @@ const AddProductPage = () => {
   );
 };
 
-export async function getServerSideProps(context) {
-  const session = await getSession({ req: context.req });
+// export async function getServerSideProps(context) {
+//   const session = await getSession({ req: context.req });
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/log-in",
-        permanent: false,
-      },
-    };
-  }
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: "/log-in",
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return {
-    props: { session },
-  };
-}
+//   return {
+//     props: { session },
+//   };
+// }
 
 export default AddProductPage;
