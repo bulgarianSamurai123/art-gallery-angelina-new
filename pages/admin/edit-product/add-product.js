@@ -1,12 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { getSession } from "next-auth/react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 import { storage } from "../../../helpers/firebase";
+import { notificationHandler } from "../../../helpers/notification-util";
 import InputContainer from "../../../components/ui/form/InputContainer";
 import Button from "../../../components/ui/Button";
 import Section from "../../../components/layout/Section";
 import BackButton from "../../../components/ui/Buttons/BackButton";
+import Notification from "../../../components/ui/Notification";
 
 const AddProductPage = () => {
   const nameRef = useRef();
@@ -16,6 +18,20 @@ const AddProductPage = () => {
   const [description, setDescription] = useState();
   const [image, setImage] = useState(null);
   const [isFeatured, setIsFeatured] = useState(false);
+
+  const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
+  const [requestError, setRequestError] = useState();
+
+  useEffect(() => {
+    if (requestStatus === "success" || requestStatus === "error") {
+      const timer = setTimeout(() => {
+        setRequestStatus(null);
+        setRequestError(null);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [requestStatus]);
 
   async function responseHandler(
     id,
@@ -50,33 +66,46 @@ const AddProductPage = () => {
   async function submitHandler(event) {
     event.preventDefault();
 
+    setRequestStatus("pending");
+
     const name = nameRef.current.value;
 
     const imageRef = ref(storage, `images/${id}/${image.name}`);
     const uploadImage = uploadBytesResumable(imageRef, image);
 
-    uploadImage.on(
-      "state_changed",
-      (snapshot) => {
-        console.log(snapshot);
-      },
-      (error) => {
-        alert(error);
-      },
-      () => {
-        getDownloadURL(uploadImage.snapshot.ref).then(async (downloadURL) => {
-          responseHandler(
-            id,
-            name,
-            price,
-            description,
-            downloadURL,
-            isFeatured
-          );
-        });
-      }
-    );
+    try {
+      uploadImage.on(
+        "state_changed",
+        (snapshot) => {
+          console.log(snapshot);
+        },
+        (error) => {
+          alert(error);
+        },
+        () => {
+          getDownloadURL(uploadImage.snapshot.ref).then(async (downloadURL) => {
+            responseHandler(
+              id,
+              name,
+              price,
+              description,
+              downloadURL,
+              isFeatured
+            );
+          });
+        }
+      );
+
+      setRequestStatus("success");
+    } catch (error) {
+      setRequestStatus("error");
+      setRequestError(error);
+    }
   }
+
+  let notification;
+
+  notification = notificationHandler(requestStatus, notification, requestError);
 
   return (
     <Section>
@@ -162,6 +191,13 @@ const AddProductPage = () => {
           <Button type="submit">Submit</Button>
         </div>
       </form>
+      {notification && (
+        <Notification
+          title={notification.title}
+          message={notification.message}
+          status={notification.status}
+        />
+      )}
     </Section>
   );
 };

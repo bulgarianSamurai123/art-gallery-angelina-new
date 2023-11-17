@@ -1,8 +1,6 @@
 import React from "react";
-import Image from "next/image";
 
 import Button from "/components/ui/Button";
-import ImageSwiper from "./ImageSwiper";
 
 const Product = ({ product }) => {
   return (

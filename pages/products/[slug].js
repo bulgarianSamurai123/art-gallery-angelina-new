@@ -3,12 +3,12 @@ import Head from "next/head";
 import { motion } from "framer-motion";
 
 import { getProductById, getProducts } from "/helpers/api-util";
-import { DUMMY_PRODUCTS_HOMEPAGE } from "../../dummy-products";
 import Section from "../../components/layout/Section";
 import Product from "../../components/pages/products/Product";
 import FeaturedProducts from "../../components/pages/products/FeaturedProducts";
+import { getFeaturedProducts } from "../../helpers/api-util";
 
-const ProductDetailPage = ({ selectedProduct }) => {
+const ProductDetailPage = ({ selectedProduct, featuredProducts }) => {
   const product = selectedProduct;
 
   return (
@@ -26,10 +26,7 @@ const ProductDetailPage = ({ selectedProduct }) => {
           viewport={{ once: true, amount: 0.8 }}
         >
           <h1 className="text-2xl">Може също така да харесате</h1>
-          <FeaturedProducts
-            products={DUMMY_PRODUCTS_HOMEPAGE}
-            motion={motion}
-          />
+          <FeaturedProducts products={featuredProducts} motion={motion} />
         </motion.div>
       </Section>
     </Fragment>
@@ -39,10 +36,12 @@ const ProductDetailPage = ({ selectedProduct }) => {
 export async function getStaticProps(context) {
   const productID = context.params.slug;
   const product = await getProductById(productID);
+  const featuredProducts = await getFeaturedProducts()
 
   return {
     props: {
       selectedProduct: product,
+      featuredProducts: featuredProducts,
     },
     revalidate: 30,
   };
