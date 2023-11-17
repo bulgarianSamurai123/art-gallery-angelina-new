@@ -1,11 +1,11 @@
 import React from "react";
 
-import RemoveButton from "./RemoveButton";
-import EditButton from "./EditButton";
+import RemoveButton from "./Buttons/RemoveButton";
+import EditButton from "./Buttons/EditButton";
 
-const Table = ({ products }) => {
+const Table = ({ products, productID }) => {
   return (
-    <table>
+    <table className="table-auto border-separate border-spacing-y-3 border-spacing-x-5">
       <thead>
         <tr>
           <th>Снимка</th>
@@ -23,8 +23,8 @@ const Table = ({ products }) => {
             </td>
             <td>{product.name}</td>
             <td>{product.price}лв.</td>
-            <td className="w-auto">{product.description}</td>
-            <td className="flex flex-row">
+            <td>{product.description}</td>
+            <td className="flex flex-row gap-2">
               <RemoveButton />
               <EditButton />
             </td>

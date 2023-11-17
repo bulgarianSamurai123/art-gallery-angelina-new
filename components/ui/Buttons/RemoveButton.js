@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 const RemoveButton = () => {
   return (
     <motion.button
-      className="flex flex-row gap-1 border-red-rosso-corsa border-2 px-5 py-2 rounded-xl text-red-rosso-corsa "
-      onClick={() => navigateHandler("/admin/edit-product/add-product")}
-      whileHover={{ backgroundColor: '#D10000', color: 'white' }}
+      className="flex flex-row gap-1 border-red-rosso-corsa border-2 px-5 py-2 rounded-xl text-red-rosso-corsa"
+      // onClick={removeProduct}
+      whileHover={{ backgroundColor: "#D10000", color: "white" }}
     >
       <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg">
         <path
