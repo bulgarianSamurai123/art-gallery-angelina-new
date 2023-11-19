@@ -20,6 +20,8 @@ const AddProductPage = () => {
   const [description, setDescription] = useState();
   const [isFeatured, setIsFeatured] = useState(false);
 
+  const [tags, setTags] = useState(["faces"]);
+
   const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
   const [requestError, setRequestError] = useState();
 
@@ -34,13 +36,25 @@ const AddProductPage = () => {
     }
   }, [requestStatus]);
 
+  const addTags = (event) => {
+    if (event.target.value === " " || event.target.value === "") {
+      return;
+    }
+    setTags([...tags, event.target.value]);
+  };
+
+  const removeTags = (indexToRemove) => {
+    setTags(tags.filter((_, index) => index !== indexToRemove));
+  };
+
   async function responseHandler(
     id,
     name,
     price,
     description,
     imageUrl,
-    isFeatured
+    isFeatured,
+    tags
   ) {
     const response = await fetch(
       `https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/products/${id}.json`,
@@ -53,6 +67,7 @@ const AddProductPage = () => {
           description,
           coverImage: imageUrl,
           isFeatured,
+          tags
         }),
         headers: {
           "Content-Type": "application/json",
@@ -65,6 +80,10 @@ const AddProductPage = () => {
   }
 
   async function submitHandler(event) {
+    if (event.key === "Enter") {
+      return;
+    }
+
     event.preventDefault();
 
     setRequestStatus("pending");
@@ -91,7 +110,8 @@ const AddProductPage = () => {
               price,
               description,
               downloadURL,
-              isFeatured
+              isFeatured,
+              tags
             );
             setRequestStatus("success");
           });
@@ -109,7 +129,7 @@ const AddProductPage = () => {
     requestStatus,
     notification,
     requestError,
-    'add'
+    "add"
   );
 
   return (
@@ -144,6 +164,44 @@ const AddProductPage = () => {
               setId(event.target.value);
             }}
           />
+        </InputContainer>
+        <InputContainer>
+          <label htmlFor="product-tags">Enter Tags:</label>
+          <div className="flex items-start flex-wrap w-full border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850">
+            <ul className="flex flex-row justify-center">
+              {tags.map((tag, index) => (
+                <li
+                  key={index}
+                  className="mr-3 flex flex-row justify-center items-center bg-gray-300 text-white py-2 px-4 rounded-md"
+                >
+                  <span>{tag}</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 32 32"
+                    className="ml-1 h-4 w-4"
+                    onClick={() => {
+                      removeTags(index);
+                    }}
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2zm5.4 21L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4l-1.6 1.6z"
+                    />
+                  </svg>
+                </li>
+              ))}
+            </ul>
+            <input
+              className="p-2 text-sm border-none outline-none"
+              id="product-tags"
+              type="text"
+              placeholder="Please enter to add tags"
+              onKeyDown={(event) => {
+                return event.key != "Enter";
+              }}
+              onBlur={addTags}
+            />
+          </div>
         </InputContainer>
         <InputContainer>
           <label htmlFor="price">Enter Product Price</label>
