@@ -3,9 +3,10 @@ import { useRouter } from "next/router";
 import { getSession } from "next-auth/react";
 
 import { getProducts } from "../../../helpers/api-util";
+import AddButton from "../../../components/ui/Buttons/AddButton";
+import BackButton from "../../../components/ui/Buttons/BackButton";
 import Section from "../../../components/layout/Section";
 import Table from "../../../components/ui/Table";
-import AddButton from "../../../components/ui/Buttons/AddButton";
 
 const EditProductPage = ({ products }) => {
   const router = useRouter();
@@ -16,8 +17,9 @@ const EditProductPage = ({ products }) => {
 
   return (
     <Section>
-      <div className="flex flex-row justify-end pb-10">
-        <AddButton navigate={navigateHandler} />
+      <div className="flex flex-row justify-between pb-10">
+        <BackButton link='/admin' />
+        <AddButton navigate={navigateHandler} buttonType='product' />
       </div>
 
       {/* Table */}

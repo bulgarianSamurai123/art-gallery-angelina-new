@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
-import { storage } from "../../helpers/firebase";
-import Section from "../../components/layout/Section";
-import InputContainer from "../../components/ui/form/InputContainer";
-import Button from "../../components/ui/Button";
+import { storage } from "../../../helpers/firebase";
+import Section from "../../../components/layout/Section";
+import InputContainer from "../../../components/ui/form/InputContainer";
+import Button from "../../../components/ui/Button";
 
 const AddGallery = () => {
   const [image, setImage] = useState(null);

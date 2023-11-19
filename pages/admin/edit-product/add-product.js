@@ -110,7 +110,7 @@ const AddProductPage = () => {
   return (
     <Section>
       <div className="flex flex-row w-full items-start">
-        <BackButton />
+        <BackButton link='/admin/edit-product/' />
       </div>
 
       <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">

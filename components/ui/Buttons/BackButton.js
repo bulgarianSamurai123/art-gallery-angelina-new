@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 
-const BackButton = () => {
+const BackButton = ({ link }) => {
   const router = useRouter();
 
   const navigateHandler = (url) => {
@@ -12,7 +12,7 @@ const BackButton = () => {
   return (
     <motion.button
       className="flex flex-row gap-1 border-gray-380 border-2 px-5 py-2 rounded-xl text-gray-380"
-      onClick={() => navigateHandler("/admin/edit-product/")}
+      onClick={() => navigateHandler(link)}
       whileHover={{ backgroundColor: "#626262", color: "white" }}
     >
       <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg">

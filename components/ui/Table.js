@@ -25,8 +25,8 @@ const Table = ({ products, productID }) => {
             <td>{product.price}лв.</td>
             <td>{product.description}</td>
             <td className="flex flex-row gap-2">
-              <RemoveButton />
-              <EditButton />
+              <RemoveButton buttonType='product' />
+              <EditButton buttonType='product' />
             </td>
           </tr>
         ))}
