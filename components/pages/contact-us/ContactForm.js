@@ -115,7 +115,12 @@ const ContactForm = () => {
   }
 
   let notification;
-  notification = notificationHandler(requestStatus, notification, requestError);
+  notification = notificationHandler(
+    requestStatus,
+    notification,
+    requestError,
+    "contact"
+  );
 
   return (
     <>

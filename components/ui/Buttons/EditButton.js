@@ -1,12 +1,19 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
-const EditButton = ({ buttonType }) => {
+const EditButton = ({ buttonType, link }) => {
+  const router = useRouter()
+
+  function navigateHandler(url) {
+    router.push(url)
+  }
+
   return (
     <motion.button
       className="flex flex-row gap-1 border-orange-tiger border-2 px-5 py-2 rounded-xl text-orange-tiger"
-      onClick={() => navigateHandler("/admin/edit-product/add-product")}
-      whileHover={{ backgroundColor: "#FC6A03", color: "white" }}
+      onClick={() => navigateHandler(link)}
+      whileHover={{ backgroundColor: "#FC6A03", color: "#FFF" }}
     >
       <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg">
         <path

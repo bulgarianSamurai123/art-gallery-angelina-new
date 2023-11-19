@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const GalleryList = ({galleryImages}) => {
+const GalleryList = ({ galleryImages }) => {
   return (
     <motion.ul
       className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 items-top justify-center overflow-hidden"
@@ -40,7 +40,5 @@ const GalleryList = ({galleryImages}) => {
     </motion.ul>
   );
 };
-
-
 
 export default GalleryList;

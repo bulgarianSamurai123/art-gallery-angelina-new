@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { getSession } from "next-auth/react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { set } from "firebase/database";
 
 import { storage } from "../../../helpers/firebase";
 import { notificationHandler } from "../../../helpers/notification-util";
@@ -9,14 +10,14 @@ import Button from "../../../components/ui/Button";
 import Section from "../../../components/layout/Section";
 import BackButton from "../../../components/ui/Buttons/BackButton";
 import Notification from "../../../components/ui/Notification";
+import useImage from "../../../hooks/use-image";
 
 const AddProductPage = () => {
-  const nameRef = useRef();
+  const { image, setImage, nameRef } = useImage();
 
   const [id, setId] = useState();
   const [price, setPrice] = useState();
   const [description, setDescription] = useState();
-  const [image, setImage] = useState(null);
   const [isFeatured, setIsFeatured] = useState(false);
 
   const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
@@ -42,9 +43,9 @@ const AddProductPage = () => {
     isFeatured
   ) {
     const response = await fetch(
-      "https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/products.json",
+      `https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/products/${id}.json`,
       {
-        method: "POST",
+        method: "PUT",
         body: JSON.stringify({
           id,
           name,
@@ -92,11 +93,10 @@ const AddProductPage = () => {
               downloadURL,
               isFeatured
             );
+            setRequestStatus("success");
           });
         }
       );
-
-      setRequestStatus("success");
     } catch (error) {
       setRequestStatus("error");
       setRequestError(error);
@@ -105,12 +105,17 @@ const AddProductPage = () => {
 
   let notification;
 
-  notification = notificationHandler(requestStatus, notification, requestError);
+  notification = notificationHandler(
+    requestStatus,
+    notification,
+    requestError,
+    'add'
+  );
 
   return (
     <Section>
       <div className="flex flex-row w-full items-start">
-        <BackButton link='/admin/edit-product/' />
+        <BackButton link="/admin/edit-product/" />
       </div>
 
       <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">

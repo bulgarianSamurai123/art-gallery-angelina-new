@@ -9,9 +9,9 @@ import Button from "../../../components/ui/Button";
 const AddGallery = () => {
   const [image, setImage] = useState(null);
 
-  async function responseHandler(imageUrl) {
+  async function responseHandler(imageUrl, ) {
     const response = await fetch(
-      "https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/gallery.json",
+      `https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/gallery/${id}.json`,
       {
         method: "POST",
         body: JSON.stringify({

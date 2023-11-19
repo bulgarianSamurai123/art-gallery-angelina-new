@@ -13,7 +13,7 @@ const BackButton = ({ link }) => {
     <motion.button
       className="flex flex-row gap-1 border-gray-380 border-2 px-5 py-2 rounded-xl text-gray-380"
       onClick={() => navigateHandler(link)}
-      whileHover={{ backgroundColor: "#626262", color: "white" }}
+      whileHover={{ backgroundColor: "#626262", color: "#FFF" }}
     >
       <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg">
         <path

@@ -1,11 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const RemoveButton = ({ buttonType }) => {
+const RemoveButton = ({ buttonType, handlerDeleteItem, productID }) => {
   return (
     <motion.button
       className="flex flex-row gap-1 border-red-rosso-corsa border-2 px-5 py-2 rounded-xl text-red-rosso-corsa"
-      whileHover={{ backgroundColor: "#D10000", color: "white" }}
+      onClick={() => handlerDeleteItem(productID)}
+      whileHover={{ backgroundColor: "#D10000", color: "#FFF" }}
     >
       <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg">
         <path
