@@ -55,6 +55,23 @@ export function notificationHandler(
       };
     }
   }
+  if (operation === 'edit') {
+    if (requestStatus === "pending") {
+      notification = {
+        status: "pending",
+        title: "Editing product...",
+        message: "Product is being edited!",
+      };
+    }
+
+    if (requestStatus === "success") {
+      notification = {
+        status: "success",
+        title: "Product Edited!",
+        message: "Product was edited successfuly!",
+      };
+    }
+  }
 
   if (requestStatus === "error") {
     notification = {
