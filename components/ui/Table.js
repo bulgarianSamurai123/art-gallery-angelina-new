@@ -63,6 +63,7 @@ const Table = ({ products, setRequestStatus, setRequestError }) => {
           <th>Име на продукт</th>
           <th>Цена</th>
           <th>Описание</th>
+          <th>Специален продукт</th>
           <th>Други опций</th>
         </tr>
       </thead>
@@ -75,6 +76,7 @@ const Table = ({ products, setRequestStatus, setRequestError }) => {
             <td>{product.name}</td>
             <td>{product.price}лв.</td>
             <td>{product.description}</td>
+            <td className="text-sm">{product.isFeatured ? 'Специален' : 'Не е специален'}</td>
             <td className="flex flex-row gap-2">
               <RemoveButton
                 buttonType="product"
@@ -83,7 +85,10 @@ const Table = ({ products, setRequestStatus, setRequestError }) => {
                 }}
                 productID={product.id}
               />
-              <EditButton buttonType="product" link={`/admin/edit-product/${product.id}`} />
+              <EditButton
+                buttonType="product"
+                link={`/admin/edit-product/${product.id}`}
+              />
             </td>
           </tr>
         ))}

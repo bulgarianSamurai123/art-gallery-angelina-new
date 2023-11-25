@@ -1,14 +1,23 @@
-import { useRef, useState } from "react";
+import { useState, useRef, useEffect } from 'react';
 
-function useImage() {
-  const [image, setImage] = useState(null);
-  const nameRef = useRef()
+const useImage = (initialImage = null) => {
+  const [image, setImage] = useState(initialImage);
+  const imageRef = useRef();
 
-  return {
-    image,
-    setImage,
-    nameRef
-  }
-}
+  useEffect(() => {
+    if (initialImage) {
+      setImage(initialImage);
+    }
+  }, [initialImage]);
+
+  const clearImage = () => {
+    setImage(null);
+    if (imageRef.current) {
+      imageRef.current.value = null;
+    }
+  };
+
+  return { image, setImage, imageRef, clearImage };
+};
 
 export default useImage;

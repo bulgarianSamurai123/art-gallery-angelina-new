@@ -1,18 +1,25 @@
 export async function getProducts() {
-  const response = await fetch(process.env.FIREBASE_URL);
+  const response = await fetch(
+    "https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/products.json"
+  );
 
   const data = await response.json();
 
   const products = [];
-
+  
   for (const key in data) {
+    const product = data[key]
+    const dateObject = new Date(product.date)
     products.push({
       id: key,
       ...data[key],
+      timestamp: dateObject.getTime()
     });
   }
+  
+  const sortedData = products.sort((a, b) => b.timestamp - a.timestamp);
 
-  return products;
+  return sortedData;
 }
 
 export async function getFeaturedProducts() {

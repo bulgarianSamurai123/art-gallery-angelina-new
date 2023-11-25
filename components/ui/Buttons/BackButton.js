@@ -25,7 +25,7 @@ const BackButton = ({ link }) => {
           d="m5 12l6-6m-6 6l6 6m-6-6h14"
         />
       </svg>
-      Back
+      Назад
     </motion.button>
   );
 };

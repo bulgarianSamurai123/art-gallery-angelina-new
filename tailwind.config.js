@@ -14,7 +14,8 @@ module.exports = {
       "2xl": "1536px",
     },
     colors: {
-      'white': "#FFF",
+      "white": "#FFF",
+      "black": "#000",
       "gray-250": "#3D3D3D",
       "gray-300": "#505050",
       "gray-380": "#626262",
@@ -28,11 +29,11 @@ module.exports = {
       "red-100": "#f1ACC9",
       "red-500": "#A10C4A",
       "red-600": "#FF3333",
-      "red-rosso-corsa": '#D10000',
+      "red-rosso-corsa": "#D10000",
       "green-100": "#A2F0BC",
       "green-500": "#12BD4B",
       "forest-green": "#228B22",
-      "orange-tiger": '#FC6A03',
+      "orange-tiger": "#FC6A03",
     },
     fontFamily: {
       sans: ["Poppins", "sans-serif"],
