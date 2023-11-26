@@ -5,32 +5,19 @@ import InputContainer from "../components/ui/form/InputContainer";
 import Button from "../components/ui/Button";
 
 const LogInPage = () => {
-  const [isLogin, setIsLogin] = useState(true)
-  const username = useRef();
-  const password = useRef();
-
-  function switchAuthModeHandler() {
-    setIsLogin((prevState) => !prevState);
-  }
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   async function submitHandler(event) {
     event.preventDefault();
 
-    const enteredUsername = username.current.value;
-    const enteredPassword = password.current.value;
+    const result = await signIn("credentials", {
+      redirect: false,
+      username,
+      hashedPassword: password,
+    });
 
-    if (isLogin) {
-      // log user in
-      const result = await signIn("credentials", {
-        redirect: false,
-        username: enteredUsername,
-        password: enteredPassword,
-      });
-
-      if (!result.error) {
-        // set some auth state
-      }
-    }
+    console.log(result);
   }
 
   return (
@@ -48,7 +35,10 @@ const LogInPage = () => {
             className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
             type="text"
             id="username"
-            ref={username}
+            value={username}
+            onChange={(event) => {
+              setUsername(event.target.value);
+            }}
           />
         </InputContainer>
         <InputContainer>
@@ -59,11 +49,14 @@ const LogInPage = () => {
             className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
             type="password"
             id="password"
-            ref={password}
+            value={password}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
           />
         </InputContainer>
         <div className="flex justify-end">
-          <Button type="submit" onClick={switchAuthModeHandler}>Sign in</Button>
+          <Button type="submit">Sign in</Button>
         </div>
       </form>
     </section>

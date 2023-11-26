@@ -9,7 +9,7 @@ import NavBarDropdown from "../navigation/NavDropdown";
 import { navigationLinks } from "../../navigationLinks";
 
 const MainNavigation = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const router = useRouter();
 
