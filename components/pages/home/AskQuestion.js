@@ -5,6 +5,7 @@ import useInput from "../../../hooks/use-input";
 import { notificationHandler } from "../../../helpers/notification-util";
 import Input from "../../ui/form/Input";
 import Notification from "../../ui/Notification";
+import { sendContactForm } from "../../../helpers/api-util";
 
 const AskQuestion = () => {
   const {
@@ -81,7 +82,12 @@ const AskQuestion = () => {
   }
 
   let notification;
-  notification = notificationHandler(requestStatus, notification, requestError);
+  notification = notificationHandler(
+    requestStatus,
+    notification,
+    requestError,
+    "contact"
+  );
 
   return (
     <div className="mt-20 mb-32">
