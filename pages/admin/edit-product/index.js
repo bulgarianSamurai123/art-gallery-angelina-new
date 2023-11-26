@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useRouter } from "next/router";
-import { getSession } from "next-auth/react";
 
 import { getProducts } from "../../../helpers/api-util";
 import { notificationHandler } from "../../../helpers/notification-util";

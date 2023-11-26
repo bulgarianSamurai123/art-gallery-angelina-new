@@ -1,7 +1,5 @@
-import React, { useRef, useState, useEffect, Fragment } from "react";
-import { getSession } from "next-auth/react";
+import React, { useState, useEffect, Fragment } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { set } from "firebase/database";
 
 import { storage } from "../../../helpers/firebase";
 import { notificationHandler } from "../../../helpers/notification-util";
@@ -14,7 +12,7 @@ import useImage from "../../../hooks/use-image";
 import Head from "next/head";
 
 const AddProductPage = () => {
-  const { image, setImage, nameRef } = useImage();
+  const { image, setImage, imageRef: nameRef } = useImage();
 
   const [id, setId] = useState();
   const [price, setPrice] = useState();
@@ -227,22 +225,5 @@ const AddProductPage = () => {
     </Fragment>
   );
 };
-
-// export async function getServerSideProps(context) {
-//   const session = await getSession({ req: context.req });
-
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: "/log-in",
-//         permanent: false,
-//       },
-//     };
-//   }
-
-//   return {
-//     props: { session },
-//   };
-// }
 
 export default AddProductPage;

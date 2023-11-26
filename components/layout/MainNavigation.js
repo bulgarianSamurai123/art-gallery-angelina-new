@@ -18,12 +18,12 @@ const MainNavigation = () => {
   };
 
   return (
-    <nav className="flex justify-between items-center my-6 mx-8 sm:mx-14 md:mx-32">
+    <nav className="flex justify-between items-center my-6 mx-8 md:mx-14 lg:mx-32">
       <Link className="text-2xl w-[9rem] text-center font-brittany" href="/">
         Angelina's Art Gallery
       </Link>
 
-      <ul className="hidden sm:flex flex-row gap-5">
+      <ul className="hidden md:flex flex-row gap-5">
         {navigationLinks.map((link) => (
           <NavLinks
             key={link.id}
@@ -56,7 +56,7 @@ const MainNavigation = () => {
         )}
 
         <Image
-          className={`block w-8 h-auto sm:hidden ${
+          className={`block w-8 h-auto md:hidden ${
             toggleDropdown ? "hidden" : "block"
           }`}
           src="/assets/menu.svg"

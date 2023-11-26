@@ -8,16 +8,16 @@ export function notificationHandler(
     if (requestStatus === "pending") {
       notification = {
         status: "pending",
-        title: "Sending message...",
-        message: "Your message is on its way!",
+        title: "Изпращаме съобщението...",
+        message: "Съобщението ви пътува!",
       };
     }
 
     if (requestStatus === "success") {
       notification = {
         status: "success",
-        title: "Delivered!",
-        message: "Your message was delivered successfuly!",
+        title: "Пристигна!",
+        message: "Съобщението ви пристигна успешно!",
       };
     }
   }
@@ -25,16 +25,16 @@ export function notificationHandler(
     if (requestStatus === "pending") {
       notification = {
         status: "pending",
-        title: "Adding product...",
-        message: "Product is being added!",
+        title: "Добавяне на продукт...",
+        message: "Продуктът се добавя!",
       };
     }
 
     if (requestStatus === "success") {
       notification = {
         status: "success",
-        title: "Product Added!",
-        message: "Product was added successfuly!",
+        title: "Продуктът добавен!",
+        message: "Продуктът бе добавен успешно!",
       };
     }
   }
@@ -42,16 +42,16 @@ export function notificationHandler(
     if (requestStatus === "pending") {
       notification = {
         status: "pending",
-        title: "Removing product...",
-        message: "Product is being removed!",
+        title: "Премахване на продукт...",
+        message: "Трием информация за продукта!",
       };
     }
 
     if (requestStatus === "success") {
       notification = {
         status: "success",
-        title: "Product Removed!",
-        message: "Product was removed successfuly!",
+        title: "Премахване на продукт!",
+        message: "Продуктът бе премахнат успешно!",
       };
     }
   }
@@ -59,16 +59,16 @@ export function notificationHandler(
     if (requestStatus === "pending") {
       notification = {
         status: "pending",
-        title: "Editing product...",
-        message: "Product is being edited!",
+        title: "Коригиране на продукт...",
+        message: "Продуктът се коригира!",
       };
     }
 
     if (requestStatus === "success") {
       notification = {
         status: "success",
-        title: "Product Edited!",
-        message: "Product was edited successfuly!",
+        title: "Продуктът бе коригиран!",
+        message: "Продуктът бе коригиран успешно!",
       };
     }
   }
@@ -76,7 +76,7 @@ export function notificationHandler(
   if (requestStatus === "error") {
     notification = {
       status: "error",
-      title: "Error occured!",
+      title: "Грешка!",
       message: error,
     };
   }

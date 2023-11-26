@@ -1,7 +1,5 @@
-import React, { useRef, useState, useEffect, Fragment } from "react";
-import { getSession } from "next-auth/react";
+import React, { useState, useEffect, Fragment } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { set } from "firebase/database";
 
 import { storage } from "../../../helpers/firebase";
 import { notificationHandler } from "../../../helpers/notification-util";
