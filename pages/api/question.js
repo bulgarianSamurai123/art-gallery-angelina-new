@@ -3,7 +3,7 @@ import { transporter, mailOptions } from "../../config/nodemailer";
 const CONTACT_QUESTION_FIELDS = {
   date: 'Date',
   name: "Name",
-  question: "question",
+  question: "Question",
 };
 
 const generateEmailContent = (data) => {
@@ -27,9 +27,9 @@ const generateEmailContent = (data) => {
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const { name, email, tel, message, date } = req.body;
+    const { email, message, date } = req.body;
 
-    if (!name || !email || !tel || !message) {
+    if (!email || !message) {
       res.status(400).json({ message: "Form inputs cannot be empty!" });
       return;
     }

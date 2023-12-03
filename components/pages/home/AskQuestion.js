@@ -5,7 +5,7 @@ import useInput from "../../../hooks/use-input";
 import { notificationHandler } from "../../../helpers/notification-util";
 import Input from "../../ui/form/Input";
 import Notification from "../../ui/Notification";
-import { sendContactForm } from "../../../helpers/api-util";
+import { sendForm } from "../../../helpers/api-util";
 
 const AskQuestion = () => {
   const {
@@ -64,7 +64,7 @@ const AskQuestion = () => {
       };
 
       try {
-        await sendContactForm(newQuestion);
+        await sendForm(newQuestion, 'home');
       } catch (error) {
         console.log(error);
         throw new Error(error.message);

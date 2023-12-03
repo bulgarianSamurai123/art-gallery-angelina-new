@@ -5,7 +5,7 @@ import useInput from "../../../hooks/use-input";
 import { notificationHandler } from "../../../helpers/notification-util";
 import Input from "/components/ui/form/Input";
 import Notification from "../../ui/Notification";
-import { sendContactForm } from "../../../helpers/api-util";
+import { sendForm } from "../../../helpers/api-util";
 
 const ContactForm = () => {
   let regTel =
@@ -95,7 +95,7 @@ const ContactForm = () => {
       };
 
       try {
-        await sendContactForm(newMessage);
+        await sendForm(newMessage, 'contact');
       } catch (error) {
         console.log(error);
         throw new Error(error.message);

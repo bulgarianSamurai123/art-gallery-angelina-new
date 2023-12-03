@@ -51,8 +51,16 @@ export async function getGallery() {
   return galleryImages;
 }
 
-export const sendContactForm = async (content) => {
-  const response = await fetch("/api/contact", {
+export const sendForm = async (content, method) => {
+  let apiLink
+
+  if (method === 'contact') {
+    apiLink = "/api/contact"
+  } else if (method === 'home') {
+    apiLink = "/api/question"
+  }
+
+  const response = await fetch(apiLink, {
     method: "POST",
     body: JSON.stringify(content),
     headers: {
