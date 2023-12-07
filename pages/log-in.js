@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
-import { signIn } from "next-auth/react";
+import React, { useState } from "react";
+import { signIn, signin } from "next-auth/client";
 
 import InputContainer from "../components/ui/form/InputContainer";
 import Button from "../components/ui/Button";
+import { createUser } from "../helpers/dummy-comp";
 
 const LogInPage = () => {
   const [username, setUsername] = useState("");
@@ -11,12 +12,18 @@ const LogInPage = () => {
   async function submitHandler(event) {
     event.preventDefault();
 
+    // try {
+    //   const result = await createUser(username, password)
+    //   console.log(result);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
     const result = await signIn("credentials", {
       redirect: false,
-      username,
-      hashedPassword: password,
+      username: username,
+      password: password,
     });
-
     console.log(result);
   }
 
