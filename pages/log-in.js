@@ -1,23 +1,18 @@
 import React, { useState } from "react";
-import { signIn, signin } from "next-auth/client";
+import { getSession, signIn } from "next-auth/client";
+import { useRouter } from "next/router";
 
 import InputContainer from "../components/ui/form/InputContainer";
 import Button from "../components/ui/Button";
-import { createUser } from "../helpers/dummy-comp";
 
 const LogInPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const router = useRouter()
+
   async function submitHandler(event) {
     event.preventDefault();
-
-    // try {
-    //   const result = await createUser(username, password)
-    //   console.log(result);
-    // } catch (error) {
-    //   console.log(error);
-    // }
 
     const result = await signIn("credentials", {
       redirect: false,
@@ -25,6 +20,10 @@ const LogInPage = () => {
       password: password,
     });
     console.log(result);
+
+    if (!result.error) {
+      router.replace('/admin')
+    }
   }
 
   return (
@@ -69,5 +68,22 @@ const LogInPage = () => {
     </section>
   );
 };
+
+export async function getServerSideProps(context) {
+  const session = await getSession({ req: context.req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+}
 
 export default LogInPage;

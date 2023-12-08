@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useRouter } from "next/router";
+import { getSession } from "next-auth/client";
 
 import { getProducts } from "../../../helpers/api-util";
 import { notificationHandler } from "../../../helpers/notification-util";
@@ -70,12 +71,23 @@ const EditProductPage = ({ products }) => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   const products = await getProducts();
+  const session = await getSession({req: context.req})
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/log-in",
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {
       products: products,
+      session
     },
   };
 }

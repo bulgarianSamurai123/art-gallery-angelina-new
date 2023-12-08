@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { getSession } from "next-auth/client";
 
 import { getGallery } from "../../../helpers/api-util";
 import AddButton from "../../../components/ui/Buttons/AddButton";
@@ -49,12 +50,23 @@ const EditGallery = ({ galleryImages }) => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   const galleryImages = await getGallery();
+  const session = await getSession({ req: context.req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/log-in",
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {
       galleryImages: galleryImages,
+      session,
     },
   };
 }

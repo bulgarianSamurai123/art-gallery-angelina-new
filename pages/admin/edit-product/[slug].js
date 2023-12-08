@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { getSession } from "next-auth/client";
 
 import { storage } from "../../../helpers/firebase";
 import { notificationHandler } from "../../../helpers/notification-util";
@@ -255,6 +256,25 @@ export async function getStaticPaths() {
   return {
     paths: paths,
     fallback: true,
+  };
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession({ req: context.req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/log-in",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
   };
 }
 

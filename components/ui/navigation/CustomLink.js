@@ -3,7 +3,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const CustomLink = (props) => {
-  const { dest, isActive, children, className } = props;
+  const { dest, isActive, children, className, onClick } = props;
 
   return (
     <motion.li
@@ -17,6 +17,7 @@ const CustomLink = (props) => {
       <Link
         href={`${dest}`}
         className={`${isActive ? "font-bold" : "undefined"}`}
+        onClick={onClick}
         passHref
       >
         {children}
