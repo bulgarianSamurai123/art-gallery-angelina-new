@@ -27,7 +27,7 @@ const FeaturedProducts = ({ products, motion }) => {
             },
           }}
         >
-          <Link className="flex flex-col" href={product.id}>
+          <Link className="flex flex-col" href={`/products/${product.id}`}>
             <img
               className="w-[16.25em] h-[18.125em] object-cover object-center"
               src={product.coverImage}
