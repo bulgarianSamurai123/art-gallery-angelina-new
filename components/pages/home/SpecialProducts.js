@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 import FeaturedProducts from "../../pages/products/FeaturedProducts";
 
-const SpecialProducts = ({products}) => {
+const SpecialProducts = ({ products }) => {
   return (
     <motion.div
       className="flex flex-col"
@@ -14,7 +14,9 @@ const SpecialProducts = ({products}) => {
       <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
         Специални Продукти
       </h1>
-      <FeaturedProducts products={products} motion={motion} />
+
+      {products.length < 1 && <p>Няма продукти</p>}
+      {products.length > 0 && <FeaturedProducts products={products} motion={motion} />}
     </motion.div>
   );
 };

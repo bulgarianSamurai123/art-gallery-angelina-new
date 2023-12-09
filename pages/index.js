@@ -8,7 +8,6 @@ import SpecialProducts from "../components/pages/home/SpecialProducts";
 import ForPainter from "../components/pages/home/ForPainter";
 import CustomPainting from "../components/pages/home/CustomPainting";
 import Testimonials from "../components/pages/home/Testimonials";
-import AskQuestion from "../components/pages/home/AskQuestion";
 
 const HomePage = ({ products }) => {
   return (

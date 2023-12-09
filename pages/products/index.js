@@ -22,7 +22,8 @@ const ProductPage = ({ products }) => {
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
           Магазин
         </h1>
-        <ProductsList products={products} />
+        {products.length < 1 && <p>Няма продукти</p>}
+        {products.length > 1 && <ProductsList products={products} />}
       </Section>
     </Fragment>
   );

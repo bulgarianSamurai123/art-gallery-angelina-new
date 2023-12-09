@@ -11,7 +11,7 @@ import MobileTestimonials from "../../testimonials/MobileTestimonials";
 const Testimonials = () => {
   return (
     <Fragment>
-      <div className="mt-32 hidden sm:flex gap-10 items-center justify-center">
+      <div className="mt-32 hidden sm:flex gap-10 items-center justify-center mb-20">
           <Testimonial name="- Име">
             Lorem ipsum dolor sit amet consectetur. Congue mi cras egestas
             egestas molestie condimentum. Non posuere posuere tempor venenatis
