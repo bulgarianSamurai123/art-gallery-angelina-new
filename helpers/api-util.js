@@ -6,17 +6,17 @@ export async function getProducts() {
   const data = await response.json();
 
   const products = [];
-  
+
   for (const key in data) {
-    const product = data[key]
-    const dateObject = new Date(product.date)
+    const product = data[key];
+    const dateObject = new Date(product.date);
     products.push({
       id: key,
       ...data[key],
-      timestamp: dateObject.getTime()
+      timestamp: dateObject.getTime(),
     });
   }
-  
+
   const sortedData = products.sort((a, b) => b.timestamp - a.timestamp);
 
   return sortedData;
@@ -51,16 +51,8 @@ export async function getGallery() {
   return galleryImages;
 }
 
-export const sendForm = async (content, method) => {
-  let apiLink
-
-  if (method === 'contact') {
-    apiLink = "/api/contact"
-  } else if (method === 'home') {
-    apiLink = "/api/question"
-  }
-
-  const response = await fetch(apiLink, {
+export const sendForm = async (content) => {
+  const response = await fetch("/api/contact", {
     method: "POST",
     body: JSON.stringify(content),
     headers: {

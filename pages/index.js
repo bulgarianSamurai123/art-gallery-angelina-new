@@ -22,7 +22,6 @@ const HomePage = ({ products }) => {
         <ForPainter />
         <CustomPainting />
         <Testimonials />
-        <AskQuestion />
       </Section>
     </Fragment>
   );

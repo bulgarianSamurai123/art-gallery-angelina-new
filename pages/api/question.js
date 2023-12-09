@@ -38,7 +38,7 @@ export default async function handler(req, res) {
       await transporter.sendMail({
         ...mailOptions,
         ...generateEmailContent(req.body),
-        subject: `Angelina's Art Gallery new message from ${name}`,
+        subject: `Angelina's Art Gallery new message in Home page`,
       });
     } catch (error) {
       console.log(error);
