@@ -34,6 +34,7 @@ module.exports = {
       "green-500": "#12BD4B",
       "forest-green": "#228B22",
       "orange-tiger": "#FC6A03",
+      "link-blue": '#0000FF'
     },
     fontFamily: {
       sans: ["Poppins", "sans-serif"],

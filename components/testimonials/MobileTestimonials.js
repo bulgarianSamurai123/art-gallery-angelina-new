@@ -18,24 +18,24 @@ const MobileTestimonials = () => {
         className="w-full h-full"
       >
         <SwiperSlide className="flex items-center justify-center mb-12">
-          <Testimonial name="- Име">
-            Lorem ipsum dolor sit amet consectetur. Congue mi cras egestas
-            egestas molestie condimentum. Non posuere posuere tempor venenatis
-            amet augue dolor.
+          <Testimonial name="- Мария, София">
+            Просто невероятни произведения на изкуството! Картините, които
+            закупих от вашия сайт, преобразиха напълно стаята ми. Благодаря ви
+            за това уникално изживяване и за професионализма ви!
           </Testimonial>
         </SwiperSlide>
         <SwiperSlide>
-          <Testimonial name="- Име">
-            Lorem ipsum dolor sit amet consectetur. Congue mi cras egestas
-            egestas molestie condimentum. Non posuere posuere tempor venenatis
-            amet augue dolor.
+          <Testimonial name="- Петър, Варна">
+            Истинско удоволствие да пазарувам от вас! Изборът от картини е
+            изключителен, а качеството на изпълнение - безупречно. Ще се върна
+            отново за още!
           </Testimonial>
         </SwiperSlide>
         <SwiperSlide>
-          <Testimonial name="- Име">
-            Lorem ipsum dolor sit amet consectetur. Congue mi cras egestas
-            egestas molestie condimentum. Non posuere posuere tempor venenatis
-            amet augue dolor.
+          <Testimonial name="- Елена, Пловдив">
+            Благодаря ви за вдъхновяващата колекция от картини! Те не само
+            украсяват дома ми, но и ми доставят радост всеки ден. Вашите творби
+            са истинско изкуство!
           </Testimonial>
         </SwiperSlide>
       </Swiper>

@@ -5,7 +5,7 @@ import { getFeaturedProducts } from "../helpers/api-util";
 import Section from "../components/layout/Section";
 import Hero from "../components/pages/home/Hero";
 import SpecialProducts from "../components/pages/home/SpecialProducts";
-import ForPainter from "../components/pages/home/ForPainter";
+import MyMission from "../components/pages/home/MyMission";
 import CustomPainting from "../components/pages/home/CustomPainting";
 import Testimonials from "../components/pages/home/Testimonials";
 
@@ -18,7 +18,7 @@ const HomePage = ({ products }) => {
       <Section>
         <Hero />
         <SpecialProducts products={products} />
-        <ForPainter />
+        <MyMission />
         <CustomPainting />
         <Testimonials />
       </Section>
