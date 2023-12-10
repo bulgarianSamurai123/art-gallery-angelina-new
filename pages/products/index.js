@@ -6,12 +6,6 @@ import Section from "../../components/layout/Section";
 import ProductsList from "../../components/pages/products/ProductsList";
 
 const ProductPage = ({ products }) => {
-  const [filterIsClicked, setFilterIsClicked] = useState(false);
-
-  function filterHandler() {
-    setFilterIsClicked(!filterIsClicked);
-  }
-
   return (
     <Fragment>
       <Head>

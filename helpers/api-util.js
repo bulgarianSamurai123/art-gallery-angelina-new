@@ -1,7 +1,6 @@
 export async function getProducts() {
-  const response = await fetch(
-    "https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/products.json"
-  );
+  const connectionString = `${process.env.firebase_url}/products.json`;
+  const response = await fetch(connectionString);
 
   const data = await response.json();
 
@@ -33,9 +32,8 @@ export async function getProductById(id) {
 }
 
 export async function getGallery() {
-  const response = await fetch(
-    "https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/gallery.json"
-  );
+  const connectionString = `${process.env.firebase_url}/gallery.json`;
+  const response = await fetch(connectionString);
 
   const data = await response.json();
 
