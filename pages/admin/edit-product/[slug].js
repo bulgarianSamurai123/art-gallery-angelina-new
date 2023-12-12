@@ -19,10 +19,6 @@ const EditProductData = ({ selectedProduct }) => {
     selectedProduct.coverImage
   );
 
-  useEffect(() => {
-    console.log("Image state:", image);
-  }, [image]);
-
   const [name, setName] = useState(selectedProduct.name);
   const [id, setId] = useState(selectedProduct.id);
   const [price, setPrice] = useState(selectedProduct.price);
@@ -32,7 +28,23 @@ const EditProductData = ({ selectedProduct }) => {
   const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
   const [requestError, setRequestError] = useState();
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const router = useRouter();
+
+  useEffect(() => {
+    getSession().then((session) => {
+      if (!session) {
+        window.location.href = "/log-in";
+      } else {
+        setIsLoading(false)
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log("Image state:", image);
+  }, [image]);
 
   useEffect(() => {
     if (requestStatus === "success" || requestStatus === "error") {
@@ -128,6 +140,10 @@ const EditProductData = ({ selectedProduct }) => {
     requestError,
     "update"
   );
+
+  if (isLoading) {
+    return <p className="flex flex-row justify-center my-60">Loading...</p>;
+  }
 
   return (
     <Fragment>
@@ -256,25 +272,6 @@ export async function getStaticPaths() {
   return {
     paths: paths,
     fallback: true,
-  };
-}
-
-export async function getServerSideProps(context) {
-  const session = await getSession({ req: context.req });
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/log-in",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {
-      session,
-    },
   };
 }
 
