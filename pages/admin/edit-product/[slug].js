@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 const EditProductData = ({ selectedProduct }) => {
-  const { image, setImage, nameRef, clearImage } = useImage(
+  const { image, setImage, nameRef } = useImage(
     selectedProduct.coverImage
   );
 
@@ -62,7 +62,7 @@ const EditProductData = ({ selectedProduct }) => {
     name,
     price,
     description,
-    imageUrl,
+    coverImage,
     isFeatured,
     date
   ) {
@@ -71,13 +71,13 @@ const EditProductData = ({ selectedProduct }) => {
       {
         method: "PUT",
         body: JSON.stringify({
-          id,
-          name,
-          price,
-          description,
-          coverImage: imageUrl,
-          isFeatured,
-          date,
+          id: id,
+          name: name,
+          price: price,
+          description: description,
+          coverImage: coverImage,
+          isFeatured: isFeatured,
+          date: date,
         }),
         headers: {
           "Content-Type": "application/json",

@@ -5,7 +5,6 @@ import Button from "/components/ui/Button";
 const Product = ({ product }) => {
   return (
     <div className="flex flex-col md:flex-row gap-14 overflow-y-hidden ">
-      {/* <ImageSwiper product={product} /> */}
       <img
         className="w-[56em] h-[30em] md:h-[36em] object-none object-center"
         src={product.coverImage}
