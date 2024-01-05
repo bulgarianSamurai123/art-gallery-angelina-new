@@ -13,7 +13,7 @@ const Footer = () => {
           <h1 className="text-xl md:text-2xl text-gray-300">Полезни линкове</h1>
           <ul className="pt-4">
             <li className="text-gray-380">
-              <Link href="/contact-us">Свържи се с нас</Link>
+              <Link href="/gallery">Галерия</Link>
             </li>
             <li className="text-gray-380">
               <Link href="/contact-us">Поръчай картина</Link>
