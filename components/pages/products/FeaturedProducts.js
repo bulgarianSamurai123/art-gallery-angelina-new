@@ -16,32 +16,36 @@ const FeaturedProducts = ({ products, motion }) => {
         },
       }}
     >
-      {products.map((product) => (
-        <motion.li
-          key={product.id}
-          variants={{
-            offscreen: { y: 20, opacity: 0 },
-            onscreen: {
-              y: 0,
-              opacity: 1,
-            },
-          }}
-        >
-          <Link className="flex flex-col" href={`/products/${product.id}`}>
-            <img
-              className="w-[16.25em] h-[18.125em] object-cover object-center"
-              src={product.coverImage}
-              alt={product.name}
-            />
-            <div className="pt-4">
-              <p className="text-base md:text-2xl font-bold">{product.name}</p>
-              <span className="text-sm md:text-xl font-light">
-                {`${product.price}лв.`}
-              </span>
-            </div>
-          </Link>
-        </motion.li>
-      ))}
+      {products
+        ? products.map((product) => (
+            <motion.li
+              key={product.id}
+              variants={{
+                offscreen: { y: 20, opacity: 0 },
+                onscreen: {
+                  y: 0,
+                  opacity: 1,
+                },
+              }}
+            >
+              <Link className="flex flex-col" href={`/products/${product.id}`}>
+                <img
+                  className="w-[16.25em] h-[18.125em] object-cover object-center"
+                  src={product.coverImage}
+                  alt={product.name}
+                />
+                <div className="pt-4">
+                  <p className="text-base md:text-2xl font-bold">
+                    {product.name}
+                  </p>
+                  <span className="text-sm md:text-xl font-light">
+                    {`${product.price}лв.`}
+                  </span>
+                </div>
+              </Link>
+            </motion.li>
+          ))
+        : []}
     </motion.ul>
   );
 };

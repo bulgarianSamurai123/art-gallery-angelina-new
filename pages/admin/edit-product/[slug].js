@@ -16,14 +16,14 @@ import Head from "next/head";
 
 const EditProductData = ({ selectedProduct }) => {
   const { image, setImage, nameRef } = useImage(
-    selectedProduct.coverImage
+    selectedProduct ? selectedProduct.coverImage : null
   );
 
-  const [name, setName] = useState(selectedProduct.name);
-  const [id, setId] = useState(selectedProduct.id);
-  const [price, setPrice] = useState(selectedProduct.price);
-  const [description, setDescription] = useState(selectedProduct.description);
-  const [isFeatured, setIsFeatured] = useState(selectedProduct.isFeatured);
+  const [name, setName] = useState(selectedProduct ? selectedProduct.name : null);
+  const [id, setId] = useState(selectedProduct ? selectedProduct.id : null);
+  const [price, setPrice] = useState(selectedProduct ? selectedProduct.price : null);
+  const [description, setDescription] = useState(selectedProduct ? selectedProduct.description : null);
+  const [isFeatured, setIsFeatured] = useState(selectedProduct ? selectedProduct.isFeatured : null);
 
   const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
   const [requestError, setRequestError] = useState();

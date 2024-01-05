@@ -14,8 +14,12 @@ const ProductDetailPage = ({ selectedProduct, featuredProducts }) => {
   return (
     <Fragment>
       <Head>
-        <title>Angelina's Art Gallery - {product.name}</title>
-        <meta name="description" content={product.description} />
+        {product ? (
+          <title>Angelina's Art Gallery - {product.name}</title>
+        ) : null}
+        {product ? (
+          <meta name="description" content={product.description} />
+        ) : null}
       </Head>
       <Section>
         <Product product={product} />
@@ -36,7 +40,7 @@ const ProductDetailPage = ({ selectedProduct, featuredProducts }) => {
 export async function getStaticProps(context) {
   const productID = context.params.slug;
   const product = await getProductById(productID);
-  const featuredProducts = await getFeaturedProducts()
+  const featuredProducts = await getFeaturedProducts();
 
   return {
     props: {
