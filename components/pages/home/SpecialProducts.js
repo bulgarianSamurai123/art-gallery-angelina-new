@@ -5,11 +5,8 @@ import FeaturedProducts from "../../pages/products/FeaturedProducts";
 
 const SpecialProducts = ({ products }) => {
   return (
-    <motion.div
+    <div
       className="flex flex-col"
-      initial="offscreen"
-      whileInView="onscreen"
-      viewport={{ once: true, amount: 0.8 }}
     >
       <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
         Специални Продукти
@@ -17,7 +14,7 @@ const SpecialProducts = ({ products }) => {
 
       {products.length < 1 && <p>Няма продукти</p>}
       {products.length > 0 && <FeaturedProducts products={products} motion={motion} />}
-    </motion.div>
+    </div>
   );
 };
 

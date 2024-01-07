@@ -38,7 +38,11 @@ const ProductsList = ({ products }) => {
               alt={product.name}
             />
             <h1 className="text-2xl font-normal">{product.name}</h1>
-            <p className="text-xl font-light">{`${product.price}лв.`}</p>
+            <p className="text-xl font-light">
+              {product.price === "не е налична"
+                ? product.price
+                : `${product.price}лв.`}
+            </p>
           </Link>
         </motion.li>
       ))}

@@ -3,30 +3,13 @@ import Link from "next/link";
 
 const FeaturedProducts = ({ products, motion }) => {
   return (
-    <motion.ul
+    <ul
       className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 md:gap-10 justify-center"
-      variants={{
-        offscreen: { opacity: 1 },
-        onscreen: {
-          opacity: 1,
-          transition: {
-            delayChildren: 0.2,
-            staggerChildren: 0.2,
-          },
-        },
-      }}
     >
       {products
         ? products.map((product) => (
-            <motion.li
+            <li
               key={product.id}
-              variants={{
-                offscreen: { y: 20, opacity: 0 },
-                onscreen: {
-                  y: 0,
-                  opacity: 1,
-                },
-              }}
             >
               <Link className="flex flex-col" href={`/products/${product.id}`}>
                 <img
@@ -43,10 +26,10 @@ const FeaturedProducts = ({ products, motion }) => {
                   </span>
                 </div>
               </Link>
-            </motion.li>
+            </li>
           ))
         : []}
-    </motion.ul>
+    </ul>
   );
 };
 
