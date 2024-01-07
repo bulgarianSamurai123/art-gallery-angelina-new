@@ -168,7 +168,7 @@ const AddProductPage = () => {
             <label htmlFor="price">Въведи цена на продукта: </label>
             <input
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
-              type="number"
+              type="text"
               id="price"
               onChange={(event) => {
                 setPrice(event.target.value);
