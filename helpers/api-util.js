@@ -40,13 +40,18 @@ export async function getGallery() {
   const galleryImages = [];
 
   for (const key in data) {
+    const gallery = data[key];
+    const dateObject = new Date(gallery.date);
     galleryImages.push({
       id: key,
       ...data[key],
+      timestamp: dateObject.getTime(),
     });
   }
 
-  return galleryImages;
+  const sortedData = galleryImages.sort((a, b) => b.timestamp - a.timestamp);
+
+  return sortedData;
 }
 
 export const sendForm = async (content) => {

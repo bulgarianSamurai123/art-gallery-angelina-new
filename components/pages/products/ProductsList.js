@@ -39,9 +39,9 @@ const ProductsList = ({ products }) => {
             />
             <h1 className="text-2xl font-normal">{product.name}</h1>
             <p className="text-xl font-light">
-              {product.price === "не е налична"
-                ? product.price
-                : `${product.price}лв.`}
+              {product.price === new RegExp("^[1-9]", "g")
+                ? `${product.price}лв.`
+                : product.price}
             </p>
           </Link>
         </motion.li>
