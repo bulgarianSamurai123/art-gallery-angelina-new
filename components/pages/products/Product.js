@@ -14,11 +14,13 @@ const Product = ({ product }) => {
 
       <div>
         <h1 className="text-3xl">{product ? product.name : null}</h1>
-        <span className="text-xl font-light">
-          {product.price === new RegExp("^[1-9]", "g")
-            ? `${product.price}лв.`
-            : product.price}
-        </span>
+        {product ? (
+          <span className="text-xl font-light">
+            {product.price === new RegExp("^[1-9]", "g")
+              ? `${product.price}лв.`
+              : product.price}
+          </span>
+        ) : null}
         <p className="text-base font-light text-gray-250">
           {product ? product.description : null}
         </p>

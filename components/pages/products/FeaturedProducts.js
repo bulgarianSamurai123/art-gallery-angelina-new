@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const FeaturedProducts = ({ products, motion }) => {
+const FeaturedProducts = ({ products }) => {
   return (
     <ul className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 md:gap-10 justify-center">
       {products
@@ -17,11 +17,13 @@ const FeaturedProducts = ({ products, motion }) => {
                   <p className="text-base md:text-2xl font-bold">
                     {product.name}
                   </p>
-                  <span className="text-sm md:text-xl font-light">
-                    {product.price === new RegExp("^[1-9]", "g")
-                      ? `${product.price}лв.`
-                      : product.price}
-                  </span>
+                  {product ? (
+                    <span className="text-sm md:text-xl font-light">
+                      {product.price === new RegExp("^[1-9]", "g")
+                        ? `${product.price}лв.`
+                        : product.price}
+                    </span>
+                  ) : null}
                 </div>
               </Link>
             </li>
