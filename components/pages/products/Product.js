@@ -6,7 +6,7 @@ const Product = ({ product }) => {
   return (
     <div className="flex flex-col md:flex-row gap-14 overflow-y-hidden">
       <img
-      // w-[56em] h-[30em]
+        // w-[56em] h-[30em]
         className="w-[56em] h-[30em] md:h-[36em] object-cover object-center"
         src={product ? product.coverImage : null}
         alt={product ? product.name : null}
@@ -14,7 +14,11 @@ const Product = ({ product }) => {
 
       <div>
         <h1 className="text-3xl">{product ? product.name : null}</h1>
-        <span className="text-xl font-light">{product ? product.price : null}лв.</span>
+        <span className="text-xl font-light">
+          {product.price === new RegExp("^[1-9]", "g")
+            ? `${product.price}лв.`
+            : product.price}
+        </span>
         <p className="text-base font-light text-gray-250">
           {product ? product.description : null}
         </p>

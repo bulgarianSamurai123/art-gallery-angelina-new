@@ -1,9 +1,9 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Head from "next/head";
 
+import { getGallery } from "../helpers/api-util";
 import GalleryList from "../components/pages/gallery/GalleryList";
 import Section from "../components/layout/Section";
-import { getGallery } from "../helpers/api-util";
 
 const GalleryPage = ({ galleryImages }) => {
   return (

@@ -47,7 +47,9 @@ const NavBarDropdown = ({
             {link.title}
           </CustomDropDownLink>
         ))}
-        <div className="block m-5">
+
+        
+        {/* <div className="block m-5">
           {!isLoggedIn && (
             <CustomDropDownLink router={router} destination="/sign-in">
               Влез в акаунт
@@ -63,7 +65,7 @@ const NavBarDropdown = ({
               </CustomDropDownLink>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </motion.div>
   );

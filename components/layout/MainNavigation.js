@@ -41,7 +41,7 @@ const MainNavigation = () => {
       </ul>
 
       <div className="flex flex-row gap-5 items-center">
-        {!session && !loading && (
+        {/* {!session && !loading && (
           <CustomLink dest="/log-in" isActive={router.asPath === "/log-in"}>
             Влез
           </CustomLink>
@@ -60,7 +60,7 @@ const MainNavigation = () => {
               Админ страница
             </CustomLink>
           </div>
-        )}
+        )} */}
 
         <Image
           className={`block w-8 h-auto md:hidden ${

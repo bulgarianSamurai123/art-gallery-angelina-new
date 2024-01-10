@@ -3,14 +3,10 @@ import Link from "next/link";
 
 const FeaturedProducts = ({ products, motion }) => {
   return (
-    <ul
-      className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 md:gap-10 justify-center"
-    >
+    <ul className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 md:gap-10 justify-center">
       {products
         ? products.map((product) => (
-            <li
-              key={product.id}
-            >
+            <li key={product.id}>
               <Link className="flex flex-col" href={`/products/${product.id}`}>
                 <img
                   className="w-[16.25em] h-[18.125em] object-cover object-center"
@@ -22,7 +18,9 @@ const FeaturedProducts = ({ products, motion }) => {
                     {product.name}
                   </p>
                   <span className="text-sm md:text-xl font-light">
-                    {`${product.price}лв.`}
+                    {product.price === new RegExp("^[1-9]", "g")
+                      ? `${product.price}лв.`
+                      : product.price}
                   </span>
                 </div>
               </Link>

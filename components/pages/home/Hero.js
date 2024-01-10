@@ -6,6 +6,10 @@ import { useRouter } from "next/router";
 const Hero = () => {
   const router = useRouter();
 
+  const navigationHandler = () => {
+    router.push("/products") 
+  }
+
   return (
     <div className="pb-36">
       <div className="absolute w-full h-[85%] right-0 top-28 bg-background-home bg-cover bg-no-repeat -z-10" />
@@ -16,7 +20,7 @@ const Hero = () => {
         <p className="pb-5 text-sm sm:text-xl text-white">
           Текстуриран. Минималистичен. Изкуство.
         </p>
-        <Button onClick={() => router.push("/products")}>Пазарувай</Button>
+        <Button onClick={navigationHandler}>Пазарувай</Button>
       </div>
     </div>
   );

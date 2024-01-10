@@ -19,7 +19,6 @@ const LogInPage = () => {
       username: username,
       password: password,
     });
-    console.log(result);
 
     if (!result.error) {
       router.replace('/admin')
