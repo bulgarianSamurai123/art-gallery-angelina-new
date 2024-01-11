@@ -1,4 +1,4 @@
- import React, { Fragment } from "react";
+import React, { Fragment } from "react";
 import Head from "next/head";
 
 import { getFeaturedProducts } from "../helpers/api-util";
@@ -14,6 +14,10 @@ const HomePage = ({ products }) => {
     <Fragment>
       <Head>
         <meta name="description" content="Textured. Minimalistic. Art." />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </Head>
       <Section>
         <Hero />

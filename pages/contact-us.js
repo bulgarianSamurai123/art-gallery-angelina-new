@@ -9,7 +9,14 @@ const ContactusPage = () => {
     <Fragment>
       <Head>
         <title>Angelina's Art Gallery - Contact us</title>
-        <meta name="description" content="Contact us for any information or to make a porachka." />
+        <meta
+          name="description"
+          content="Contact us for any information or to make a porachka."
+        />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </Head>
       <Section>
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">

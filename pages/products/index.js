@@ -11,6 +11,10 @@ const ProductPage = ({ products }) => {
       <Head>
         <title>Angelina's Art Gallery - Products</title>
         <meta name="description" content="The best paintings you will find." />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </Head>
       <Section>
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
