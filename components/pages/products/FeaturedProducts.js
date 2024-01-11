@@ -17,13 +17,11 @@ const FeaturedProducts = ({ products }) => {
                   <p className="text-base md:text-2xl font-bold">
                     {product.name}
                   </p>
-                  {product ? (
-                    <span className="text-sm md:text-xl font-light">
-                      {product.price === new RegExp("^[1-9]", "g")
-                        ? `${product.price}лв.`
-                        : product.price}
-                    </span>
-                  ) : null}
+                  <span className="text-sm md:text-xl font-light">
+                    {product.price === new RegExp("^[1-9]", "g")
+                      ? `${product.price}лв.`
+                      : product.price}
+                  </span>
                 </div>
               </Link>
             </li>
