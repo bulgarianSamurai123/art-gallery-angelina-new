@@ -1,6 +1,4 @@
 import React, { Fragment } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -25,7 +23,7 @@ const Testimonials = () => {
         <Testimonial name="- Елена, Пловдив">
           Благодаря ви за вдъхновяващата колекция от картини! Те не само
           украсяват дома ми, но и ми доставят радост всеки ден. Вашите творби са
-          истинско изкуство!
+          истинско чудо!
         </Testimonial>
       </div>
 
@@ -35,21 +33,3 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
-
-{
-  /* <Testimonial name="- Име" className="hidden lg:block">
-        Lorem ipsum dolor sit amet consectetur. Congue mi cras egestas egestas
-        molestie condimentum. Non posuere posuere tempor venenatis amet augue
-        dolor.
-      </Testimonial>
-      <Testimonial name="- Име">
-        Lorem ipsum dolor sit amet consectetur. Congue mi cras egestas egestas
-        molestie condimentum. Non posuere posuere tempor venenatis amet augue
-        dolor.
-      </Testimonial>
-      <Testimonial name="- Име" className="hidden md:block">
-        Lorem ipsum dolor sit amet consectetur. Congue mi cras egestas egestas
-        molestie condimentum. Non posuere posuere tempor venenatis amet augue
-        dolor.
-      </Testimonial>  */
-}

@@ -10,14 +10,7 @@ const useImage = (initialImage = null) => {
     }
   }, [initialImage]);
 
-  const clearImage = () => {
-    setImage(null);
-    if (imageRef.current) {
-      imageRef.current.value = null;
-    }
-  };
-
-  return { image, setImage, imageRef, clearImage };
+  return { image, setImage, imageRef };
 };
 
 export default useImage;

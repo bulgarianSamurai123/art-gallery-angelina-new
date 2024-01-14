@@ -20,7 +20,7 @@ const ContactusPage = () => {
       </Head>
       <Section>
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-          Свържи се
+          Свържи се с мен
         </h1>
 
         <ContactForm />

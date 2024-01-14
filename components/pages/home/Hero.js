@@ -7,8 +7,8 @@ const Hero = () => {
   const router = useRouter();
 
   const navigationHandler = () => {
-    router.push("/products") 
-  }
+    router.push("/products");
+  };
 
   return (
     <div className="pb-36">
@@ -18,7 +18,7 @@ const Hero = () => {
           Angelina's Art Gallery
         </h1>
         <p className="pb-5 text-sm sm:text-xl text-white">
-          Текстуриран. Минималистичен. Изкуство.
+          Абстракционизъм, Поп Арт, Минимализъм
         </p>
         <Button onClick={navigationHandler}>Пазарувай</Button>
       </div>

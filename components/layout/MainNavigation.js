@@ -41,27 +41,6 @@ const MainNavigation = () => {
       </ul>
 
       <div className="flex flex-row gap-5 items-center">
-        {/* {!session && !loading && (
-          <CustomLink dest="/log-in" isActive={router.asPath === "/log-in"}>
-            Влез
-          </CustomLink>
-        )}
-
-        {session && (
-          <div className="flex flex-row gap-5">
-            <CustomLink
-              dest="/"
-              isActive={router.asPath === "/sign-out"}
-              onClick={logoutHandler}
-            >
-              Излез
-            </CustomLink>
-            <CustomLink dest="/admin" isActive={router.asPath === "/admin"}>
-              Админ страница
-            </CustomLink>
-          </div>
-        )} */}
-
         <Image
           className={`block w-8 h-auto md:hidden ${
             toggleDropdown ? "hidden" : "block"

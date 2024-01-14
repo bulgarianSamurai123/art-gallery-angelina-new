@@ -47,25 +47,6 @@ const NavBarDropdown = ({
             {link.title}
           </CustomDropDownLink>
         ))}
-
-        
-        {/* <div className="block m-5">
-          {!isLoggedIn && (
-            <CustomDropDownLink router={router} destination="/sign-in">
-              Влез в акаунт
-            </CustomDropDownLink>
-          )}
-          {isLoggedIn && (
-            <div className="flex flex-col gap-2">
-              <CustomDropDownLink router={router} destination="/admin">
-                Админ Страница
-              </CustomDropDownLink>
-              <CustomDropDownLink router={router} destination="/">
-                Излез
-              </CustomDropDownLink>
-            </div>
-          )}
-        </div> */}
       </div>
     </motion.div>
   );

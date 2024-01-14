@@ -74,9 +74,15 @@ const Table = ({ products, setRequestStatus, setRequestError }) => {
               <img src={product.coverImage} alt={product.name} />
             </td>
             <td>{product.name}</td>
-            <td>{product.price}лв.</td>
+            <td>
+              {product.price === new RegExp("^[1-9]", "g")
+                ? `${product.price}лв.`
+                : product.price}
+            </td>
             <td>{product.description}</td>
-            <td className="text-sm">{product.isFeatured ? 'Специален' : 'Не е специален'}</td>
+            <td className="text-sm">
+              {product.isFeatured ? "Специален" : "Не е специален"}
+            </td>
             <td className="flex flex-row gap-2">
               <RemoveButton
                 buttonType="product"

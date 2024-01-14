@@ -19,11 +19,19 @@ const EditProductData = ({ selectedProduct }) => {
     selectedProduct ? selectedProduct.coverImage : null
   );
 
-  const [name, setName] = useState(selectedProduct ? selectedProduct.name : null);
+  const [name, setName] = useState(
+    selectedProduct ? selectedProduct.name : null
+  );
   const [id, setId] = useState(selectedProduct ? selectedProduct.id : null);
-  const [price, setPrice] = useState(selectedProduct ? selectedProduct.price : null);
-  const [description, setDescription] = useState(selectedProduct ? selectedProduct.description : null);
-  const [isFeatured, setIsFeatured] = useState(selectedProduct ? selectedProduct.isFeatured : null);
+  const [price, setPrice] = useState(
+    selectedProduct ? selectedProduct.price : null
+  );
+  const [description, setDescription] = useState(
+    selectedProduct ? selectedProduct.description : null
+  );
+  const [isFeatured, setIsFeatured] = useState(
+    selectedProduct ? selectedProduct.isFeatured : null
+  );
 
   const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
   const [requestError, setRequestError] = useState();
@@ -37,7 +45,7 @@ const EditProductData = ({ selectedProduct }) => {
       if (!session) {
         window.location.href = "/log-in";
       } else {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     });
   }, []);
@@ -93,8 +101,6 @@ const EditProductData = ({ selectedProduct }) => {
     event.preventDefault();
 
     setRequestStatus("pending");
-
-    const name = nameRef.current.value;
 
     const imageRef = ref(storage, `images/${id}/${image.name}`);
     const uploadImage = uploadBytesResumable(imageRef, image);
@@ -189,7 +195,7 @@ const EditProductData = ({ selectedProduct }) => {
             <label htmlFor="price">Enter Product Price</label>
             <input
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
-              type="number"
+              type="text"
               id="price"
               value={price}
               onChange={(event) => {
