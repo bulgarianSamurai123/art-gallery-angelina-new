@@ -5,7 +5,7 @@ const MyMission = () => {
     <div className="py-40 flex items-center md:flex-row flex-col gap-10 md:gap-24">
       <img
         className="w-full md:w-1/3 lg:w-2/3 lg:h-2/3"
-        src="/assets/for-painter.png"
+        src="/assets/for-painter.jpg"
         alt="For Painter Image"
       />
       <div className="flex flex-col justify-center">

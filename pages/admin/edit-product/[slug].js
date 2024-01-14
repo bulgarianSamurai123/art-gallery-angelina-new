@@ -5,6 +5,7 @@ import { getSession } from "next-auth/client";
 import { storage } from "../../../helpers/firebase";
 import { notificationHandler } from "../../../helpers/notification-util";
 import { getProductById, getProducts } from "../../../helpers/api-util";
+import { responseHandler } from "../../../helpers/edit-product";
 import InputContainer from "../../../components/ui/form/InputContainer";
 import Button from "../../../components/ui/Button";
 import Section from "../../../components/layout/Section";
@@ -51,10 +52,6 @@ const EditProductData = ({ selectedProduct }) => {
   }, []);
 
   useEffect(() => {
-    console.log("Image state:", image);
-  }, [image]);
-
-  useEffect(() => {
     if (requestStatus === "success" || requestStatus === "error") {
       const timer = setTimeout(() => {
         setRequestStatus(null);
@@ -64,38 +61,6 @@ const EditProductData = ({ selectedProduct }) => {
       return () => clearTimeout(timer);
     }
   }, [requestStatus]);
-
-  async function responseHandler(
-    id,
-    name,
-    price,
-    description,
-    coverImage,
-    isFeatured,
-    date
-  ) {
-    const response = await fetch(
-      `https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/products/${id}.json`,
-      {
-        method: "PUT",
-        body: JSON.stringify({
-          id: id,
-          name: name,
-          price: price,
-          description: description,
-          coverImage: coverImage,
-          isFeatured: isFeatured,
-          date: date,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const data = await response.json();
-    console.log(data);
-  }
 
   async function submitHandler(event) {
     event.preventDefault();

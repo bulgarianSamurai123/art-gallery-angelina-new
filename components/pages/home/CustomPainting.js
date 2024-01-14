@@ -34,7 +34,7 @@ const CustomPainting = () => {
       </div>
       <img
         className="w-full md:w-1/3 lg:w-2/3 lg:h-2/3"
-        src="/assets/custom-painting.png"
+        src="/assets/custom-painting.jpeg"
         alt="Custom Painting Image"
       />
     </div>
