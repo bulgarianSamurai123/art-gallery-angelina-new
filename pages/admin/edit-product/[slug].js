@@ -90,7 +90,7 @@ const EditProductData = ({ selectedProduct }) => {
               description,
               downloadURL,
               isFeatured,
-              editDate
+              // editDate
             );
             setRequestStatus("success");
             router.push("/admin/edit-product");
