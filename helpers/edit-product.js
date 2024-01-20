@@ -18,6 +18,7 @@ export async function responseHandler(
         description: description,
         coverImage: coverImage,
         isFeatured: isFeatured,
+        date: date,
       }),
       headers: {
         "Content-Type": "application/json",
