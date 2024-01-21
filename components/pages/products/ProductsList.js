@@ -31,7 +31,7 @@ const ProductsList = ({ products }) => {
             },
           }}
         >
-          <Link className="flex flex-col" href={`/products/${product.id}`}>
+          <Link className="flex flex-col" href={`/${process.env.firebase_product_db_name}/${product.id}`}>
             <img
               className="w-[16.25em] h-[18.125em] object-cover object-center"
               src={product.coverImage}

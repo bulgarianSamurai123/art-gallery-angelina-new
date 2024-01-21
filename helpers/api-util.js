@@ -1,5 +1,5 @@
 export async function getProducts() {
-  const connectionString = `${process.env.firebase_url}/products.json`;
+  const connectionString = `${process.env.firebase_products_url}.json`;
   const response = await fetch(connectionString);
 
   const data = await response.json();

@@ -44,7 +44,7 @@ const AddProductPage = () => {
     date
   ) {
     const response = await fetch(
-      `https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/products/${id}.json`,
+      `${process.env.firebase_products_url}/${id}.json`,
       {
         method: "PUT",
         body: JSON.stringify({
@@ -77,7 +77,7 @@ const AddProductPage = () => {
 
     const name = nameRef.current.value;
 
-    const imageRef = ref(storage, `images/${id}/${image.name}`);
+    const imageRef = ref(storage, `${process.env.firebase_storage}/${id}/${image.name}`);
     const uploadImage = uploadBytesResumable(imageRef, image);
 
     const insertedDate = new Date();

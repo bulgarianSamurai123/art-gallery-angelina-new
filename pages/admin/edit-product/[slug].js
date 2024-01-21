@@ -67,10 +67,10 @@ const EditProductData = ({ selectedProduct }) => {
 
     setRequestStatus("pending");
 
-    const imageRef = ref(storage, `images/${id}/${image.name}`);
+    const imageRef = ref(storage, `${process.env.firebase_storage}/${id}/${image.name}`);
     const uploadImage = uploadBytesResumable(imageRef, image);
 
-    const editDate = new Date();
+    const editDate = selectedProduct.date
 
     try {
       uploadImage.on(

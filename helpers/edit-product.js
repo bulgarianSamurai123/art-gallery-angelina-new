@@ -8,7 +8,7 @@ export async function responseHandler(
   date
 ) {
   const response = await fetch(
-    `https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/products/${id}.json`,
+    `${process.env.firebase_products_url}/${id}.json`,
     {
       method: "PUT",
       body: JSON.stringify({

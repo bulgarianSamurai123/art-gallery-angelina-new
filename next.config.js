@@ -11,8 +11,12 @@ const nextConfig = (phase) => {
         mongodb_database: "art-gallery-angelina",
         firebase_url:
           "https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app",
+        firebase_products_url:
+          "https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/products_dev",
         email: "mark.petar.petrov@gmail.com",
         email_pass: "najg wlhm dosd zkxl",
+        firebase_storage: "dev",
+        firebase_product_db_name: "products_dev"
       },
     };
   }
@@ -25,8 +29,12 @@ const nextConfig = (phase) => {
       mongodb_database: "art-gallery-angelina",
       firebase_url:
         "https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app",
+      firebase_products_url:
+        "https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/products",
       email: "artgalleryangelina@gmail.com",
       email_pass: "xogx raxn cshe hblh",
+      firebase_storage: "images",
+      firebase_product_db_name: "products"
     },
   };
 };
