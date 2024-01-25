@@ -8,6 +8,7 @@ import SpecialProducts from "../components/pages/home/SpecialProducts";
 import MyMission from "../components/pages/home/MyMission";
 import CustomPainting from "../components/pages/home/CustomPainting";
 import Testimonials from "../components/pages/home/Testimonials";
+import ThreeImages from "../components/pages/home/ThreeImages";
 
 const HomePage = ({ products }) => {
   return (
@@ -26,11 +27,12 @@ const HomePage = ({ products }) => {
         <CustomPainting />
         <Testimonials />
       </Section>
+      <ThreeImages />
     </Fragment>
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const featuredProducts = await getFeaturedProducts();
 
   return {

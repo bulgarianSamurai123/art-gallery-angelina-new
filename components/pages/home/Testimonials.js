@@ -9,7 +9,7 @@ import MobileTestimonials from "../../testimonials/MobileTestimonials";
 const Testimonials = () => {
   return (
     <Fragment>
-      <div className="mt-32 hidden sm:flex gap-10 items-center justify-center mb-20">
+      <div className="mt-32 hidden sm:flex gap-10 items-center justify-center">
         <Testimonial name="- Мария, София">
           Просто невероятни произведения на изкуството! Картините, които закупих
           от вашия сайт, преобразиха напълно стаята ми. Благодаря ви за това

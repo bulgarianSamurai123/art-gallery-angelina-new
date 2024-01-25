@@ -1,8 +1,15 @@
 import React from "react";
+import { useRouter } from "next/router";
 
-import Button from "/components/ui/Button";
+import Button from "../../ui/Button";
 
 const Product = ({ product }) => {
+  const router = useRouter()
+
+  const navigationHandler = () => {
+    router.push('/contact-us') 
+  }
+
   return (
     <div className="flex flex-col md:flex-row gap-14 overflow-y-hidden">
       <img
@@ -24,7 +31,7 @@ const Product = ({ product }) => {
         <p className="text-base font-light text-gray-250">
           {product ? product.description : null}
         </p>
-        <Button>Поръчай</Button>
+        <Button onClick={navigationHandler}>Поръчай</Button>
       </div>
     </div>
   );
