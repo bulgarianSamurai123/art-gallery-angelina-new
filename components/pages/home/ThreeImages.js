@@ -11,13 +11,13 @@ const ThreeImages = () => {
         />
         <img
           className="h-full w-full"
-          src="/assets/summer_2.jpg"
-          alt="Summer 1"
+          src="/assets/brochure_3.jpg"
+          alt="Brochure 3"
         />
         <img
           className="h-full w-full"
-          src="/assets/brochure_3.jpg"
-          alt="Summer 1"
+          src="/assets/summer_2.jpg"
+          alt="Summer 2"
         />
       </div>
     </div>
