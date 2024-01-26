@@ -17,9 +17,18 @@ const ProductDetailPage = ({ selectedProduct, featuredProducts }) => {
         {product ? (
           <title>Angelina's Art Gallery - {product.name}</title>
         ) : null}
+        {product ? <meta name="og:title" content={product.name} /> : null}
         {product ? (
-          <meta name="description" content={product.description} />
+          <meta name="og:description" content={product.description} />
         ) : null}
+        {product ? <meta name="og:image" content={product.coverImage} /> : null}
+        {product ? (
+          <meta
+            name="og:url"
+            content={`http://angelinartgallery.com/products/${product.id}`}
+          />
+        ) : null}
+
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
