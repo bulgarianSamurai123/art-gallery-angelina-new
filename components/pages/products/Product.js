@@ -13,7 +13,6 @@ const Product = ({ product }) => {
   return (
     <div className="flex flex-col md:flex-row gap-14 overflow-y-hidden">
       <img
-        // w-[56em] h-[30em]
         className="w-[56em] h-[30em] md:h-[36em] object-cover object-center"
         src={product ? product.coverImage : null}
         alt={product ? product.name : null}
