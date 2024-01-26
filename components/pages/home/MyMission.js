@@ -10,7 +10,7 @@ const MyMission = () => {
       />
       <div className="flex flex-col justify-center">
         <h1 className="pb-5 text-xl md:text-3xl font-normal">Моята мисия</h1>
-        <p className="text-base md:text-2xl font-normal md:font-light leading-relaxed">
+        <p className="text-base md:text-xl font-normal md:font-light leading-relaxed">
           Името ми е Ангелина и като творец на модерно изкуство се стремя към
           иновации и експериментирам с нови техники, материали и концепции.
           Искам да предизвикам традиционните норми и да Ви предложа нещо ново и

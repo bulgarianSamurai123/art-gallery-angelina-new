@@ -13,7 +13,7 @@ const CustomPainting = () => {
         <h1 className="pb-5 text-xl md:text-3xl font-normal">
           Пана по поръчка
         </h1>
-        <p className="text-base md:text-2xl font-normal md:font-light leading-relaxed">
+        <p className="text-base md:text-xl font-normal md:font-light leading-relaxed">
           Независимо дали преобразувате търговско пространство, проектирате офис
           или обновявате собственият си дом, Angelina’s Art gallery пана са
           достъпен и лесен начин да направите всяка стена модерна, отличителна и

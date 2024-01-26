@@ -9,6 +9,7 @@ import MyMission from "../components/pages/home/MyMission";
 import CustomPainting from "../components/pages/home/CustomPainting";
 import Testimonials from "../components/pages/home/Testimonials";
 import ThreeImages from "../components/pages/home/ThreeImages";
+import ThreeImagesOne from "../components/pages/home/ThreeImagesOne";
 
 const HomePage = ({ products }) => {
   return (
@@ -24,6 +25,7 @@ const HomePage = ({ products }) => {
         <Hero />
         <SpecialProducts products={products} />
         <MyMission />
+        <ThreeImagesOne />
         <CustomPainting />
         <Testimonials />
       </Section>
