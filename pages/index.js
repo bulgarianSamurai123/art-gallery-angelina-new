@@ -15,7 +15,28 @@ const HomePage = ({ products }) => {
   return (
     <Fragment>
       <Head>
-        <meta name="description" content="Textured. Minimalistic. Art." />
+        <meta
+          name="title"
+          property="og:title"
+          content="Angelina's Art Gallery"
+        />
+        <meta
+          name="description"
+          property="og:description"
+          content="Textured. Minimalistic. Art."
+        />
+        <meta
+          name="url"
+          property="og:url"
+          content="http://www.angelinartgallery.com"
+        />
+        {products ? (
+          <meta
+            name="image"
+            property="og:image"
+            content={products[0].coverImage}
+          />
+        ) : null}
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"

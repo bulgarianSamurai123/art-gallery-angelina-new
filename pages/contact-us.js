@@ -11,7 +11,7 @@ const ContactusPage = () => {
         <title>Angelina's Art Gallery - Contact us</title>
         <meta
           name="description"
-          content="Contact us for any information or to make a porachka."
+          content="Contact us for any information or to make a order."
         />
         <meta
           name="viewport"

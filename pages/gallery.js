@@ -11,8 +11,24 @@ const GalleryPage = ({ galleryImages }) => {
       <Head>
         <title>Angelina's Art Gallery - Gallery</title>
         <meta
+          name="title"
+          property="og:title"
+          content="Angelina's Art Gallery - Gallery"
+        />
+        <meta
           name="description"
+          property="og:description"
           content="Check out beautifully placed paintings in the homes of hondreds of clients."
+        />
+        <meta
+          name="url"
+          property="og:url"
+          content="http://www.angelinartgallery.com/gallery"
+        />
+        <meta
+          name="image"
+          property="og:image"
+          content={galleryImages[0].image}
         />
         <meta
           name="viewport"
