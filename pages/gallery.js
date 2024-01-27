@@ -25,11 +25,13 @@ const GalleryPage = ({ galleryImages }) => {
           property="og:url"
           content="http://www.angelinartgallery.com/gallery"
         />
-        <meta
-          name="image"
-          property="og:image"
-          content={galleryImages[0].image}
-        />
+        {galleryImages ? (
+          <meta
+            name="image"
+            property="og:image"
+            content={galleryImages[0].image}
+          />
+        ) : null}
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
