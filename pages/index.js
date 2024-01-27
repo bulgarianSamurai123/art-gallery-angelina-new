@@ -32,7 +32,7 @@ const HomePage = ({ products }) => {
         <meta
           name="url"
           property="og:url"
-          content="http://angelinartgallery.com"
+          content="http://angelinartgallery.com/"
         />
         {products ? (
           <meta

@@ -11,6 +11,10 @@ const GalleryPage = ({ galleryImages }) => {
       <Head>
         <title>Angelina's Art Gallery - Gallery</title>
         <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <meta
           name="title"
           property="og:title"
           content="Angelina's Art Gallery - Gallery"
@@ -25,17 +29,13 @@ const GalleryPage = ({ galleryImages }) => {
           property="og:url"
           content="http://angelinartgallery.com/gallery"
         />
-        {galleryImages ? (
+        {products ? (
           <meta
             name="image"
             property="og:image"
             content={galleryImages[0].image}
           />
         ) : null}
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
       </Head>
       <Section>
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
