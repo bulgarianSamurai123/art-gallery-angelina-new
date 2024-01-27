@@ -10,11 +10,32 @@ const ProductPage = ({ products }) => {
     <Fragment>
       <Head>
         <title>Angelina's Art Gallery - Products</title>
-        <meta name="description" content="The best paintings you will find." />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
+        <meta
+          name="title"
+          property="og:title"
+          content="Angelina's Art Gallery - Products"
+        />
+        <meta
+          name="description"
+          property="og:description"
+          content="The best paintings you will find."
+        />
+        <meta
+          name="url"
+          property="og:url"
+          content="http://angelinartgallery.com/products"
+        />
+        {products ? (
+          <meta
+            name="image"
+            property="og:image"
+            content={products[0].coverImage}
+          />
+        ) : null}
       </Head>
       <Section>
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
@@ -22,6 +43,7 @@ const ProductPage = ({ products }) => {
         </h1>
         {products.length < 1 && <p>Няма продукти</p>}
         {products.length > 1 && <ProductsList products={products} />}
+        {console.log(products[0].coverImage)}
       </Section>
     </Fragment>
   );
