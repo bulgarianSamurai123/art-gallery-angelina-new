@@ -29,7 +29,7 @@ const GalleryPage = ({ galleryImages }) => {
           property="og:url"
           content="http://angelinartgallery.com/gallery"
         />
-        {products ? (
+        {galleryImages ? (
           <meta
             name="image"
             property="og:image"

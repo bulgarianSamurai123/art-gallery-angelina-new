@@ -33,6 +33,7 @@ export default function App({ Component, pageProps }) {
           <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#89939e" />
           <meta name="msapplication-TileColor" content="#89939e" />
           <meta name="theme-color" content="#ffffff" />
+          <meta property="og:site_name" content="AngelinaArtGallery" />
         </Head>
         <Component {...pageProps} />
       </Layout>
