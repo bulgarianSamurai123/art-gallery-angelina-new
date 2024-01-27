@@ -16,6 +16,10 @@ const HomePage = ({ products }) => {
     <Fragment>
       <Head>
         <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <meta
           name="title"
           property="og:title"
           content="Angelina's Art Gallery"
@@ -28,7 +32,7 @@ const HomePage = ({ products }) => {
         <meta
           name="url"
           property="og:url"
-          content="http://www.angelinartgallery.com"
+          content="http://angelinartgallery.com"
         />
         {products ? (
           <meta
@@ -37,10 +41,6 @@ const HomePage = ({ products }) => {
             content={products[0].coverImage}
           />
         ) : null}
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
       </Head>
       <Section>
         <Hero />

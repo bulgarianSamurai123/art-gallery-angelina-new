@@ -23,7 +23,7 @@ const GalleryPage = ({ galleryImages }) => {
         <meta
           name="url"
           property="og:url"
-          content="http://www.angelinartgallery.com/gallery"
+          content="http://angelinartgallery.com/gallery"
         />
         {galleryImages ? (
           <meta
