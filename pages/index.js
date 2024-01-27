@@ -20,23 +20,19 @@ const HomePage = ({ products }) => {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
         <meta
-          name="title"
           property="og:title"
           content="Angelina's Art Gallery"
         />
         <meta
-          name="description"
           property="og:description"
           content="Textured. Minimalistic. Art."
         />
         <meta
-          name="url"
           property="og:url"
           content="http://angelinartgallery.com/"
         />
         {products ? (
           <meta
-            name="image"
             property="og:image"
             content={products[0].coverImage}
           />
