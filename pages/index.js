@@ -19,24 +19,13 @@ const HomePage = ({ products }) => {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
-        <meta
-          property="og:title"
-          content="Angelina's Art Gallery"
-        />
+        <meta property="og:title" content="Angelina's Art Gallery" />
         <meta
           property="og:description"
           content="Textured. Minimalistic. Art."
         />
-        <meta
-          property="og:url"
-          content="http://angelinartgallery.com/"
-        />
-        {products ? (
-          <meta
-            property="og:image"
-            content={products[0].coverImage}
-          />
-        ) : null}
+        <meta property="og:url" content="http://angelinartgallery.com/" />
+        <meta property="og:image" content="/assets/image_home.png" />
       </Head>
       <Section>
         <Hero />
