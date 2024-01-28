@@ -1,10 +1,13 @@
 import Link from "next/link";
 import React from "react";
 
+import localFont from "next/font/local";
+const myFont = localFont({ src: "../../public/fonts/BrittanySignature.ttf" });
+
 const Footer = () => {
   return (
     <footer className="flex flex-col md:flex-row justify-between items-start md:items-center gap-10 md:gap-20 xl:gap-80 bg-gray-820 py-16 px-10 md:px-32">
-      <Link className="text-4xl w-[15rem] text-center font-brittany" href="/">
+      <Link className={`text-4xl w-[15rem] text-center ${myFont.className}`} href="/">
         Angelina's Art Gallery
       </Link>
 

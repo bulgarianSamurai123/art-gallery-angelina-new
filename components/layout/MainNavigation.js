@@ -9,6 +9,9 @@ import CustomLink from "../ui/navigation/CustomLink";
 import NavBarDropdown from "../navigation/NavDropdown";
 import { navigationLinks } from "../../navigationLinks";
 
+import localFont from "next/font/local";
+const myFont = localFont({ src: "../../public/fonts/BrittanySignature.ttf" });
+
 const MainNavigation = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const router = useRouter();
@@ -25,7 +28,7 @@ const MainNavigation = () => {
 
   return (
     <nav className="flex justify-between items-center my-6 mx-8 md:mx-14 lg:mx-32">
-      <Link className="text-2xl w-[9rem] text-center font-brittany" href="/">
+      <Link className={`text-2xl w-[9rem] text-center ${myFont.className}`} href="/">
         Angelina's Art Gallery
       </Link>
 
