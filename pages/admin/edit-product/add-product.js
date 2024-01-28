@@ -13,7 +13,9 @@ import useImage from "../../../hooks/use-image";
 import Head from "next/head";
 
 const AddProductPage = () => {
-  const { image, setImage, imageRef: nameRef } = useImage();
+  const { imageRef: nameRef } = useImage();
+
+  const [images, setImages] = useState([]);
 
   const [id, setId] = useState();
   const [price, setPrice] = useState();
@@ -39,7 +41,7 @@ const AddProductPage = () => {
     name,
     price,
     description,
-    imageUrl,
+    imageUrls,
     isFeatured,
     date
   ) {
@@ -52,7 +54,7 @@ const AddProductPage = () => {
           name,
           price,
           description,
-          coverImage: imageUrl,
+          coverImage: imageUrls,
           isFeatured,
           date,
         }),
@@ -76,39 +78,49 @@ const AddProductPage = () => {
     setRequestStatus("pending");
 
     const name = nameRef.current.value;
-
-    const imageRef = ref(storage, `${process.env.firebase_storage}/${id}/${image.name}`);
-    const uploadImage = uploadBytesResumable(imageRef, image);
-
     const insertedDate = new Date();
+    const urls = new Array();
 
-    try {
-      uploadImage.on(
-        "state_changed",
-        (snapshot) => {
-          console.log(snapshot);
-        },
-        (error) => {
-          alert(error);
-        },
-        () => {
-          getDownloadURL(uploadImage.snapshot.ref).then(async (downloadURL) => {
-            responseHandler(
-              id,
-              name,
-              price,
-              description,
-              downloadURL,
-              isFeatured,
-              insertedDate
-            );
-            setRequestStatus("success");
-          });
-        }
+    for (const image of images) {
+      const imageRef = ref(
+        storage,
+        `${process.env.firebase_storage}/${id}/${image.name}`
       );
-    } catch (error) {
-      setRequestStatus("error");
-      setRequestError(error);
+      const uploadImage = uploadBytesResumable(imageRef, image);
+
+      try {
+        uploadImage.on(
+          "state_changed",
+          (snapshot) => {
+            console.log(snapshot);
+          },
+          (error) => {
+            alert(error);
+          },
+          () => {
+            getDownloadURL(uploadImage.snapshot.ref).then(
+              async (downloadURL) => {
+                urls.push(downloadURL);
+                if (urls.length === 3) {
+                  responseHandler(
+                    id,
+                    name,
+                    price,
+                    description,
+                    urls,
+                    isFeatured,
+                    insertedDate
+                  );
+                  setRequestStatus("success");
+                }
+              }
+            );
+          }
+        );
+      } catch (error) {
+        setRequestStatus("error");
+        setRequestError(error);
+      }
     }
   }
 
@@ -137,7 +149,7 @@ const AddProductPage = () => {
 
         <form encType="multipart/form-data" onSubmit={submitHandler}>
           <InputContainer>
-            <label htmlFor="name">Въведи име на продукт: </label> 
+            <label htmlFor="name">Въведи име на продукт: </label>
             <input
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
               type="text"
@@ -172,12 +184,13 @@ const AddProductPage = () => {
           <InputContainer>
             <label htmlFor="cover-img">Въведи корица на продукта: </label>
             <input
+              multiple
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
               type="file"
               id="cover-img"
               name="cover-img"
               onChange={(event) => {
-                setImage(event.target.files[0]);
+                setImages(event.target.files);
               }}
             />
           </InputContainer>

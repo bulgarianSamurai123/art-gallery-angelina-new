@@ -1,22 +1,43 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation"
 
 import Button from "../../ui/Button";
 
 const Product = ({ product }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   const navigationHandler = () => {
-    router.push('/contact-us') 
-  }
+    router.push("/contact-us");
+  };
 
   return (
     <div className="flex flex-col md:flex-row gap-14 overflow-y-hidden">
-      <img
-        className="w-[56em] h-[30em] md:h-[36em] object-cover object-center"
-        src={product ? product.coverImage : null}
-        alt={product ? product.name : null}
-      />
+      {product && product.coverImage.length === 3 ? (
+        <Swiper
+          pagination={{ clickable: true }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+          className="w-full h-[20em] xsm:h-[30em] md:h-[36em] object-cover object-center"
+        >
+          {product.coverImage.map((image) => (
+            <SwiperSlide>
+              <img src={image} alt={product.name} className="h-full w-full" />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      ) : (
+        <img
+          className="w-[56em] h-[30em] md:h-[36em] object-cover object-center"
+          src={product ? product.coverImage : null}
+          alt={product ? product.name : null}
+        />
+      )}
 
       <div>
         <h1 className="text-3xl">{product ? product.name : null}</h1>

@@ -20,6 +20,10 @@ const EditProductData = ({ selectedProduct }) => {
     selectedProduct ? selectedProduct.coverImage : null
   );
 
+  const [images, setImages] = useState(
+    selectedProduct ? selectedProduct.coverImage : null
+  );
+
   const [name, setName] = useState(
     selectedProduct ? selectedProduct.name : null
   );
@@ -67,39 +71,51 @@ const EditProductData = ({ selectedProduct }) => {
 
     setRequestStatus("pending");
 
-    const imageRef = ref(storage, `${process.env.firebase_storage}/${id}/${image.name}`);
-    const uploadImage = uploadBytesResumable(imageRef, image);
+    const editDate = selectedProduct.date;
+    const urls = new Array();
 
-    const editDate = selectedProduct.date
-
-    try {
-      uploadImage.on(
-        "state_changed",
-        (snapshot) => {
-          console.log(snapshot);
-        },
-        (error) => {
-          alert(error);
-        },
-        () => {
-          getDownloadURL(uploadImage.snapshot.ref).then(async (downloadURL) => {
-            responseHandler(
-              id,
-              name,
-              price,
-              description,
-              downloadURL,
-              isFeatured,
-              editDate
-            );
-            setRequestStatus("success");
-            router.push("/admin/edit-product");
-          });
-        }
+    for (const image of images) {
+      const imageRef = ref(
+        storage,
+        `${process.env.firebase_storage}/${id}/${image.name}`
       );
-    } catch (error) {
-      setRequestStatus("error");
-      setRequestError(error);
+      const uploadImage = uploadBytesResumable(imageRef, image);
+
+      try {
+        uploadImage.on(
+          "state_changed",
+          (snapshot) => {
+            console.log(snapshot);
+          },
+          (error) => {
+            alert(error);
+          },
+          () => {
+            getDownloadURL(uploadImage.snapshot.ref).then(
+              async (downloadURL) => {
+                urls.push(downloadURL);
+
+                if (urls.length === 3) {
+                  responseHandler(
+                    id,
+                    name,
+                    price,
+                    description,
+                    urls,
+                    isFeatured,
+                    editDate
+                  );
+                  setRequestStatus("success");
+                  router.push("/admin/edit-product");
+                }
+              }
+            );
+          }
+        );
+      } catch (error) {
+        setRequestStatus("error");
+        setRequestError(error);
+      }
     }
   }
 
@@ -171,12 +187,13 @@ const EditProductData = ({ selectedProduct }) => {
           <InputContainer>
             <label htmlFor="cover-img">Enter Cover Image: </label>
             <input
+              multiple
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
               type="file"
               id="cover-img"
               name="cover-img"
               onChange={(event) => {
-                setImage(event.target.files[0]);
+                setImages(event.target.files);
               }}
             />
           </InputContainer>
