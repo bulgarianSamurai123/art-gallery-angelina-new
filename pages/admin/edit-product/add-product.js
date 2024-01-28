@@ -112,12 +112,6 @@ const AddProductPage = () => {
     }
   }
 
-  function handlerKeyDown(event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-    }
-  }
-
   let notification;
 
   notification = notificationHandler(
