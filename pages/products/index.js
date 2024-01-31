@@ -43,7 +43,6 @@ const ProductPage = ({ products }) => {
         </h1>
         {products.length < 1 && <p>Няма продукти</p>}
         {products.length > 1 && <ProductsList products={products} />}
-        {console.log(products[0].coverImage)}
       </Section>
     </Fragment>
   );
