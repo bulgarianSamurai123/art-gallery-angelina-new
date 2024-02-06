@@ -5,7 +5,7 @@ import { Pagination, Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation"
+import "swiper/css/navigation";
 
 import Button from "../../ui/Button";
 
@@ -18,7 +18,7 @@ const Product = ({ product }) => {
 
   return (
     <div className="flex flex-col md:flex-row gap-14 overflow-y-hidden">
-      {product && product.coverImage.length === 3 ? (
+      {product && product.coverImage.length < 100 ? (
         <Swiper
           pagination={{ clickable: true }}
           navigation={true}

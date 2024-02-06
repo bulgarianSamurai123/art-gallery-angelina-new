@@ -95,7 +95,7 @@ const EditProductData = ({ selectedProduct }) => {
               async (downloadURL) => {
                 urls.push(downloadURL);
 
-                if (urls.length === 3) {
+                if (urls.length >= 3) {
                   responseHandler(
                     id,
                     name,

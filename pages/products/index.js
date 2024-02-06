@@ -4,8 +4,55 @@ import Head from "next/head";
 import { getProducts } from "../../helpers/api-util";
 import Section from "../../components/layout/Section";
 import ProductsList from "../../components/pages/products/ProductsList";
+import FilterButton from "../../components/ui/Buttons/FilterButton";
+import DropDown from "../../components/ui/DropDown";
+import useCheck from "../../hooks/useCheck";
+import { applyFilters } from "../../helpers/filter-util";
 
 const ProductPage = ({ products }) => {
+  const [toggle, setToggle] = useState(false);
+
+  const { check: abstractChecked, toggleCheck: toggleAbstractCheck } =
+    useCheck();
+  const { check: faceChecked, toggleCheck: toggleFaceCheck } = useCheck();
+  const { check: winterChecked, toggleCheck: toggleWinterCheck } = useCheck();
+  const { check: summerChecked, toggleCheck: toggleSummerCheck } = useCheck();
+
+  const toggleHandler = () => {
+    setToggle(!toggle);
+  };
+
+  const filters = [
+    {
+      name: "Абстракций",
+      check: abstractChecked,
+      toggleCheck: toggleAbstractCheck,
+    },
+    {
+      name: "Лица",
+      check: faceChecked,
+      toggleCheck: toggleFaceCheck,
+    },
+    {
+      name: "Зима",
+      check: winterChecked,
+      toggleCheck: toggleWinterCheck,
+    },
+    {
+      name: "Лято",
+      check: summerChecked,
+      toggleCheck: toggleSummerCheck,
+    },
+  ];
+
+  const filteredProducts = applyFilters(
+    abstractChecked,
+    faceChecked,
+    winterChecked,
+    summerChecked,
+    products
+  );
+
   return (
     <Fragment>
       <Head>
@@ -38,11 +85,16 @@ const ProductPage = ({ products }) => {
         ) : null}
       </Head>
       <Section>
+        <div className="flex flex-row justify-end">
+          <FilterButton toggle={toggle} toggleHandler={toggleHandler} />
+        </div>
+        {toggle && <DropDown filters={filters} />}
+
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
           Магазин
         </h1>
         {products.length < 1 && <p>Няма продукти</p>}
-        {products.length > 1 && <ProductsList products={products} />}
+        {products.length >= 1 && <ProductsList products={filteredProducts} />}
       </Section>
     </Fragment>
   );
