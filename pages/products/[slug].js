@@ -7,6 +7,7 @@ import Section from "../../components/layout/Section";
 import Product from "../../components/pages/products/Product";
 import FeaturedProducts from "../../components/pages/products/FeaturedProducts";
 import { getFeaturedProducts } from "../../helpers/api-util";
+import BackButton from "../../components/ui/Buttons/BackButton";
 
 const ProductDetailPage = ({ selectedProduct, featuredProducts }) => {
   const product = selectedProduct;
@@ -17,11 +18,19 @@ const ProductDetailPage = ({ selectedProduct, featuredProducts }) => {
         {product ? (
           <title>Angelina's Art Gallery - {product.name}</title>
         ) : null}
-        {product ? <meta name="title" property="og:title" content={product.name} /> : null}
         {product ? (
-          <meta name="description" property="og:description" content={product.description} />
+          <meta name="title" property="og:title" content={product.name} />
         ) : null}
-        {product ? <meta name="image" property="og:image" content={product.coverImage} /> : null}
+        {product ? (
+          <meta
+            name="description"
+            property="og:description"
+            content={product.description}
+          />
+        ) : null}
+        {product ? (
+          <meta name="image" property="og:image" content={product.coverImage} />
+        ) : null}
         {product ? (
           <meta
             name="url"
@@ -36,6 +45,9 @@ const ProductDetailPage = ({ selectedProduct, featuredProducts }) => {
         />
       </Head>
       <Section>
+        <div className="pb-10">
+          <BackButton link={"/products"} />
+        </div>
         <Product product={product} />
         <motion.div
           className="mt-20 flex flex-col items-center gap-10"
