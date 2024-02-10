@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
@@ -8,15 +8,18 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import Button from "../../ui/Button";
+import DataContext from "../../../context/DataCotext";
 import ProductModal from "../../layout/ProductModal";
 
 const Product = ({ product }) => {
   const [isPopup, setIsPopup] = useState(false);
   const [selectedImages, setSelectedImages] = useState(product.coverImage);
   const [selectedImage, setSelectedImage] = useState();
+  const { updateSharedData } = useContext(DataContext);
   const router = useRouter();
 
   const navigationHandler = () => {
+    updateSharedData(product.id);
     router.push("/contact-us");
   };
 

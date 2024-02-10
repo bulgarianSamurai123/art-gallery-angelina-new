@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { AnimatePresence } from "framer-motion";
 
 import useInput from "../../../hooks/use-input";
@@ -6,8 +6,11 @@ import { notificationHandler } from "../../../helpers/notification-util";
 import Input from "/components/ui/form/Input";
 import Notification from "../../ui/Notification";
 import { sendForm } from "../../../helpers/api-util";
+import DataContext from "../../../context/DataCotext";
 
 const ContactForm = () => {
+  const { sharedData } = useContext(DataContext);
+
   let regTel =
     /(?:([+]\d{1,4})[-.\s]?)?(?:[(](\d{1,3})[)][-.\s]?)?(\d{1,4})[-.\s]?(\d{1,4})[-.\s]?(\d{1,9})/;
 
@@ -87,6 +90,7 @@ const ContactForm = () => {
 
     try {
       const newMessage = {
+        sharedData,
         date,
         name,
         email,

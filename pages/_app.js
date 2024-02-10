@@ -4,6 +4,7 @@ import { Provider } from "next-auth/client";
 import "/styles/globals.css";
 
 import Layout from "../components/layout/Layout";
+import { DataProvider } from "../context/DataCotext";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -36,7 +37,9 @@ export default function App({ Component, pageProps }) {
           <meta property="og:site_name" content="AngelinaArtGallery" />
         </Head>
         <main>
-          <Component {...pageProps} />
+          <DataProvider>
+            <Component {...pageProps} />
+          </DataProvider>
         </main>
       </Layout>
     </Provider>
