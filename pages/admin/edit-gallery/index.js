@@ -7,10 +7,10 @@ import { storage } from "../../../helpers/firebase";
 import { getGallery } from "../../../helpers/api-util";
 import { notificationHandler } from "../../../helpers/notification-util";
 import Notification from "../../../components/ui/Notification";
-import AddButton from "../../../components/ui/Buttons/AddButton";
-import RemoveButton from "../../../components/ui/Buttons/RemoveButton";
+import AddButton from "../../../components/ui/buttons/AddButton";
+import RemoveButton from "../../../components/ui/buttons/RemoveButton";
 import Section from "../../../components/layout/Section";
-import BackButton from "../../../components/ui/Buttons/BackButton";
+import BackButton from "../../../components/ui/buttons/BackButton";
 
 const EditGallery = ({ galleryImages }) => {
   const router = useRouter();

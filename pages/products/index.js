@@ -4,7 +4,7 @@ import Head from "next/head";
 import { getProducts } from "../../helpers/api-util";
 import Section from "../../components/layout/Section";
 import ProductsList from "../../components/pages/products/ProductsList";
-import FilterButton from "../../components/ui/Buttons/FilterButton";
+import FilterButton from "../../components/ui/buttons/FilterButton";
 import DropDown from "../../components/ui/DropDown";
 import useCheck from "../../hooks/useCheck";
 import { applyFilters } from "../../helpers/filter-util";

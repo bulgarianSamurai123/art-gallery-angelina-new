@@ -9,7 +9,7 @@ import { responseHandler } from "../../../helpers/edit-product";
 import InputContainer from "../../../components/ui/form/InputContainer";
 import Button from "../../../components/ui/Button";
 import Section from "../../../components/layout/Section";
-import BackButton from "../../../components/ui/Buttons/BackButton";
+import BackButton from "../../../components/ui/buttons/BackButton";
 import Notification from "../../../components/ui/Notification";
 import useImage from "../../../hooks/use-image";
 import { useRouter } from "next/router";

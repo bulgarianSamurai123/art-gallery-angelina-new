@@ -4,8 +4,8 @@ import { getSession } from "next-auth/client";
 
 import { getProducts } from "../../../helpers/api-util";
 import { notificationHandler } from "../../../helpers/notification-util";
-import AddButton from "../../../components/ui/Buttons/AddButton";
-import BackButton from "../../../components/ui/Buttons/BackButton";
+import AddButton from "../../../components/ui/buttons/AddButton";
+import BackButton from "../../../components/ui/buttons/BackButton";
 import Section from "../../../components/layout/Section";
 import Table from "../../../components/ui/Table";
 import Notification from "../../../components/ui/Notification";

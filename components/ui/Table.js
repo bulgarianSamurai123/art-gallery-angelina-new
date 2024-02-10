@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { deleteObject, ref } from "firebase/storage";
 
 import { storage } from "../../helpers/firebase";
-import RemoveButton from "./Buttons/RemoveButton";
-import EditButton from "./Buttons/EditButton";
+import RemoveButton from "./buttons/RemoveButton";
+import EditButton from "./buttons/EditButton";
 
 const Table = ({ products, setRequestStatus, setRequestError }) => {
   const [productList, setProductList] = useState(products);

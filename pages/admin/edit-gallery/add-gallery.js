@@ -7,7 +7,7 @@ import { notificationHandler } from "../../../helpers/notification-util";
 import useImage from "../../../hooks/use-image";
 import Section from "../../../components/layout/Section";
 import InputContainer from "../../../components/ui/form/InputContainer";
-import BackButton from "../../../components/ui/Buttons/BackButton";
+import BackButton from "../../../components/ui/buttons/BackButton";
 import Button from "../../../components/ui/Button";
 import Notification from "../../../components/ui/Notification";
 

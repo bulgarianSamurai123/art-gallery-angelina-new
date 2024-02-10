@@ -7,7 +7,7 @@ import Section from "../../components/layout/Section";
 import Product from "../../components/pages/products/Product";
 import FeaturedProducts from "../../components/pages/products/FeaturedProducts";
 import { getFeaturedProducts } from "../../helpers/api-util";
-import BackButton from "../../components/ui/Buttons/BackButton";
+import BackButton from "../../components/ui/buttons/BackButton";
 
 const ProductDetailPage = ({ selectedProduct, featuredProducts }) => {
   const product = selectedProduct;
