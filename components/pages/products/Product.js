@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
@@ -8,11 +8,14 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import Button from "../../ui/Button";
+import DataContext from "../../../context/DataCotext";
 
 const Product = ({ product }) => {
+  const { updateSharedData } = useContext(DataContext);
   const router = useRouter();
 
   const navigationHandler = () => {
+    updateSharedData(product.id);
     router.push("/contact-us");
   };
 

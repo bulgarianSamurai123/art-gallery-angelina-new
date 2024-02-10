@@ -1,6 +1,7 @@
 import { transporter, mailOptions } from "../../config/nodemailer";
 
 const CONTACT_MESSAGE_FIELDS = {
+  sharedData: 'Product Id',
   date: 'Date',
   name: "Name",
   email: "Email",
