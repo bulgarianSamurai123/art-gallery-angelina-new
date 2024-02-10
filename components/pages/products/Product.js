@@ -13,7 +13,9 @@ import ProductModal from "../../layout/ProductModal";
 
 const Product = ({ product }) => {
   const [isPopup, setIsPopup] = useState(false);
-  const [selectedImages, setSelectedImages] = useState(product.coverImage);
+  const [selectedImages, setSelectedImages] = useState(
+    product ? product.coverImage : null
+  );
   const [selectedImage, setSelectedImage] = useState();
   const { updateSharedData } = useContext(DataContext);
   const router = useRouter();
@@ -55,7 +57,11 @@ const Product = ({ product }) => {
             ))}
           </Swiper>
         ) : (
-          <button onClick={() => openPopupHandler(product.coverImage)}>
+          <button
+            onClick={() =>
+              openPopupHandler(product ? product.coverImage : null)
+            }
+          >
             <img
               className="w-[56em] h-[30em] md:h-[36em] object-cover object-center"
               src={product ? product.coverImage : null}
