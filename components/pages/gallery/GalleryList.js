@@ -58,8 +58,9 @@ const GalleryList = ({ galleryImages }) => {
       {isPopupOpen && (
         <Modal
           onClose={closePopupHandler}
-          image={selectedImage.image}
+          images={selectedImage.image}
           text={selectedImage.name}
+          type="gallery"
         />
       )}
     </Fragment>
