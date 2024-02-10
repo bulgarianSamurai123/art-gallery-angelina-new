@@ -58,7 +58,7 @@ const GalleryList = ({ galleryImages }) => {
       {isPopupOpen && (
         <Modal
           onClose={closePopupHandler}
-          images={selectedImage.image}
+          image={selectedImage.image}
           text={selectedImage.name}
           type="gallery"
         />

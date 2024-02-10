@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ZoomImage from "./ZoomImage";
 
 const ProductModal = ({ images, onClose, selectedImage }) => {
   const [currentlySelectedImage, setCurrentlySelectedImage] =
@@ -20,13 +21,13 @@ const ProductModal = ({ images, onClose, selectedImage }) => {
             <img src="/assets/close.svg" alt="Close Btn" />
           </button>
         </div>
-        <div className="flex flex-col-reverse sm:flex-row sm:gap-20 items-center ">
+        <div className="flex flex-col-reverse sm:flex-row gap-10 sm:gap-20 items-center ">
           <ul className="flex flex-row sm:grid sm:grid-cols-2 gap-2">
             {images.map((image) => (
               <li key={image}>
                 <button onClick={() => changeCurrentImageHandler(image)}>
                   <img
-                    className={`w-20 h-20 sm:w-36 sm:h-40 rounded-sm ${
+                    className={`w-20 h-20 md:w-28 md:h-28 lg:w-36 lg:h-40 rounded-sm ${
                       image === currentlySelectedImage
                         ? "border-4 border-gray-250"
                         : "border-2 border-gray-380"
@@ -39,11 +40,7 @@ const ProductModal = ({ images, onClose, selectedImage }) => {
             ))}
           </ul>
           <div>
-            <img
-              className="w-96 h-[30em] object-contain rounded-sm"
-              src={currentlySelectedImage}
-              alt="Selected Image"
-            />
+            <ZoomImage imageSrc={currentlySelectedImage} alt="Image" />
           </div>
         </div>
       </div>
