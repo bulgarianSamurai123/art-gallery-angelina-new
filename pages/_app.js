@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Script from "next/script";
 import { Provider } from "next-auth/client";
 
 import "/styles/globals.css";
@@ -10,6 +11,19 @@ export default function App({ Component, pageProps }) {
   return (
     <Provider session={pageProps.session}>
       <Layout>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
+        `}
+        </Script>
         <Head>
           <title>Angelina's Art Gallery</title>
           <meta name="description" content="" />
