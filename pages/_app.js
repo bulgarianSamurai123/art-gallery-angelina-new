@@ -1,13 +1,14 @@
 import Head from "next/head";
 import Script from "next/script";
 import { Provider } from "next-auth/client";
+import { appWithTranslation } from "next-i18next";
 
 import "/styles/globals.css";
 
 import Layout from "../components/layout/Layout";
 import { DataProvider } from "../context/DataCotext";
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
     <Provider session={pageProps.session}>
       <Layout>
@@ -59,3 +60,5 @@ export default function App({ Component, pageProps }) {
     </Provider>
   );
 }
+
+export default appWithTranslation(App)

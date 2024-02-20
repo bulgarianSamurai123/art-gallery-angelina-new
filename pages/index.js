@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 import Head from "next/head";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { getFeaturedProducts } from "../helpers/api-util";
 import Section from "../components/layout/Section";
@@ -12,6 +14,8 @@ import ThreeImages from "../components/pages/home/ThreeImages";
 import ThreeImagesOne from "../components/pages/home/ThreeImagesOne";
 
 const HomePage = ({ products }) => {
+  const { t } = useTranslation();
+
   return (
     <Fragment>
       <Head>
@@ -28,23 +32,24 @@ const HomePage = ({ products }) => {
         <meta property="og:image" content="/assets/image_home.png" />
       </Head>
       <Section>
-        <Hero />
-        <SpecialProducts products={products} />
-        <MyMission />
+        <Hero translation={t} />
+        <SpecialProducts products={products} translation={t} />
+        <MyMission translation={t} />
         <ThreeImagesOne />
-        <CustomPainting />
-        <Testimonials />
+        <CustomPainting translation={t} />
+        <Testimonials translation={t} />
       </Section>
       <ThreeImages />
     </Fragment>
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ locale }) {
   const featuredProducts = await getFeaturedProducts();
 
   return {
     props: {
+      ...(await serverSideTranslations(locale)),
       products: featuredProducts,
     },
   };

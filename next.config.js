@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
 const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
+const {i18n} = require("./next-i18next.config")
 
 const nextConfig = (phase) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
+      i18n,
       env: {
         mongodb_username: "markpetarpetrov",
         mongodb_password: "srt1fYxnHZp7jQ3v",
@@ -23,6 +25,7 @@ const nextConfig = (phase) => {
   }
 
   return {
+    i18n,
     env: {
       mongodb_username: "markpetarpetrov",
       mongodb_password: "srt1fYxnHZp7jQ3v",

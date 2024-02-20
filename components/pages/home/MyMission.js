@@ -1,6 +1,6 @@
 import React from "react";
 
-const MyMission = () => {
+const MyMission = ({ translation }) => {
   return (
     <div className="py-40 flex items-center md:flex-row flex-col gap-10 md:gap-24">
       <img
@@ -9,18 +9,11 @@ const MyMission = () => {
         alt="For Painter Image"
       />
       <div className="flex flex-col justify-center">
-        <h1 className="pb-5 text-xl md:text-3xl font-normal">Моята мисия</h1>
+        <h1 className="pb-5 text-xl md:text-3xl font-normal">
+          {translation("home.my-mission.title")}
+        </h1>
         <p className="text-base md:text-xl font-normal md:font-light leading-relaxed">
-          Името ми е Ангелина и като творец на модерно изкуство се стремя към
-          иновации и експериментирам с нови техники, материали и концепции.
-          Искам да предизвикам традиционните норми и да Ви предложа нещо ново и
-          свежо, което вдъхновява, стимулира и обогатява както духовният Ви
-          свят, така и се вписва хармонично в общата композиция на интериорното
-          Ви пространство. Обичам да изследвам идеи и концепции като ги
-          изразявам чрез абстракционизъм, поп арт, минимализъм и не само.
-          Фокусирам се върху съдържанието и символиката в творбите си, често с
-          цел да предизвикам умовете на зрителите както и техните сетива,
-          емоции, спомени.
+          {translation("home.my-mission.text")}
         </p>
       </div>
     </div>

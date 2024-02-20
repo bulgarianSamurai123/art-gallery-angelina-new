@@ -1,0 +1,37 @@
+{
+  "home": {
+    "hero": {
+      "subtext": "Abstractionism, Pop Art, Minimalism",
+      "button": "Shop now"
+    },
+    "special-products": {
+      "title": "Special Products",
+      "no-products": "No products"
+    },
+    "my-mission": {
+      "title": "My mission",
+      "text": "My name is Angelina and as a modern art creator I strive to innovate and experiment with new techniques, materials and concepts. I want to challenge traditional norms and offer you something new and fresh that inspires, stimulates and enriches both your spiritual world and fits harmoniously into the overall composition of your interior space. I like to explore ideas and concepts by expressing them through abstractionism, pop art, minimalism and more. I focus on content and symbolism in my works, often with the aim of challenging the minds of the viewers as well as their senses, emotions, memories."
+    },
+    "custom-painting": {
+      "title": "Custom paintings",
+      "text-01": "Whether you're converting a commercial space, designing an office or renovating your own home, Angelina's Art gallery panels are an affordable and easy way to make any wall modern, distinctive and unique. Check out the artwork in the Shop section, choose the perfect texture and colors, give me your size requirements and tell a story with a massive and unique custom panel. Click the button below to fill out a form and contact me. Be sure to also visit the ",
+      "gallery-link": "Ready Projects Gallery",
+      "text-02": "section, to get a perfect guide for when you have already found your wonderful home and your unique place in it and get inspired to travel, dream, dare and make it happen! Be blessed!",
+      "button": "Contact us"
+    },
+    "testimonials": {
+      "testimonial-01": {
+        "name": "- Maria, Sofia",
+        "text": "Just amazing artwork! The paintings I purchased from your site completely transformed my room. Thank you for this unique experience and your professionalism!"
+      },
+      "testimonial-02": {
+        "name": "- Petar, Varna",
+        "text": "A real pleasure to shop with you! The selection of paintings is outstanding and the quality of execution impeccable. I will be back again for more!"
+      },
+      "testimonial-03": {
+        "name": "- Elena, Plovdiv",
+        "text": "Thank you for the inspiring collection of paintings! They not only decorate my home, but also bring me joy every day. Your works are a real miracle!"
+      }
+    }
+  }
+}

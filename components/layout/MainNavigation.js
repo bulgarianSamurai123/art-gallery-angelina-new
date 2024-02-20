@@ -10,6 +10,7 @@ import NavBarDropdown from "../navigation/NavDropdown";
 import { navigationLinks } from "../../navigationLinks";
 
 import localFont from "next/font/local";
+import LanguageSwitcher from "../ui/LanguageSwitcher";
 const myFont = localFont({ src: "../../public/fonts/BrittanySignature.ttf" });
 
 const MainNavigation = () => {
@@ -22,13 +23,17 @@ const MainNavigation = () => {
     setToggleDropdown(!toggleDropdown);
   };
 
-  function logoutHandler() {
-    signOut();
-  }
+  const languageChangeHandler = (event) => {
+    const locale = event.target.value;
+    router.push("/", "/", { locale });
+  };
 
   return (
     <nav className="flex justify-between items-center my-6 mx-8 md:mx-14 lg:mx-32">
-      <Link className={`text-2xl w-[9rem] text-center ${myFont.className}`} href="/">
+      <Link
+        className={`text-2xl w-[9rem] text-center ${myFont.className}`}
+        href="/"
+      >
         Angelina's Art Gallery
       </Link>
 
@@ -54,6 +59,8 @@ const MainNavigation = () => {
           height={30}
           onClick={dropdownHandler}
         />
+
+        <LanguageSwitcher />
       </div>
 
       {toggleDropdown && (
