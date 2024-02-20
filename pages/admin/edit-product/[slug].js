@@ -23,6 +23,7 @@ const EditProductData = ({ selectedProduct }) => {
   const [images, setImages] = useState(
     selectedProduct ? selectedProduct.coverImage : null
   );
+  const [imageIsChanged, setImageIsChanged] = useState(false);
 
   const [name, setName] = useState(
     selectedProduct ? selectedProduct.name : null
@@ -74,48 +75,62 @@ const EditProductData = ({ selectedProduct }) => {
     const editDate = selectedProduct.date;
     const urls = new Array();
 
-    for (const image of images) {
-      const imageRef = ref(
-        storage,
-        `${process.env.firebase_storage}/${id}/${image.name}`
-      );
-      const uploadImage = uploadBytesResumable(imageRef, image);
-
-      try {
-        uploadImage.on(
-          "state_changed",
-          (snapshot) => {
-            console.log(snapshot);
-          },
-          (error) => {
-            alert(error);
-          },
-          () => {
-            getDownloadURL(uploadImage.snapshot.ref).then(
-              async (downloadURL) => {
-                urls.push(downloadURL);
-
-                if (urls.length >= 3) {
-                  responseHandler(
-                    id,
-                    name,
-                    price,
-                    description,
-                    urls,
-                    isFeatured,
-                    editDate
-                  );
-                  setRequestStatus("success");
-                  router.push("/admin/edit-product");
-                }
-              }
-            );
-          }
+    if (imageIsChanged) {
+      for (const image of images) {
+        const imageRef = ref(
+          storage,
+          `${process.env.firebase_storage}/${id}/${image.name}`
         );
-      } catch (error) {
-        setRequestStatus("error");
-        setRequestError(error);
+        const uploadImage = uploadBytesResumable(imageRef, image);
+
+        try {
+          uploadImage.on(
+            "state_changed",
+            (snapshot) => {
+              console.log(snapshot);
+            },
+            (error) => {
+              alert(error);
+            },
+            () => {
+              getDownloadURL(uploadImage.snapshot.ref).then(
+                async (downloadURL) => {
+                  urls.push(downloadURL);
+
+                  if (urls !== null) {
+                    responseHandler(
+                      id,
+                      name,
+                      price,
+                      description,
+                      urls,
+                      isFeatured,
+                      editDate
+                    );
+                    setRequestStatus("success");
+                    router.push("/admin/edit-product");
+                  }
+                }
+              );
+            }
+          );
+        } catch (error) {
+          setRequestStatus("error");
+          setRequestError(error);
+        }
       }
+    } else {
+      responseHandler(
+        id,
+        name,
+        price,
+        description,
+        images,
+        isFeatured,
+        editDate
+      );
+      setRequestStatus("success");
+      router.push("/admin/edit-product");
     }
   }
 
@@ -194,6 +209,7 @@ const EditProductData = ({ selectedProduct }) => {
               name="cover-img"
               onChange={(event) => {
                 setImages(event.target.files);
+                setImageIsChanged(true);
               }}
             />
           </InputContainer>

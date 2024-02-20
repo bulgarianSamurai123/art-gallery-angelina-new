@@ -101,7 +101,7 @@ const AddProductPage = () => {
             getDownloadURL(uploadImage.snapshot.ref).then(
               async (downloadURL) => {
                 urls.push(downloadURL);
-                if (urls.length >= 3) {
+                if (urls !== null) {
                   responseHandler(
                     id,
                     name,
