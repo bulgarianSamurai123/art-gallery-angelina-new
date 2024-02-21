@@ -1,13 +1,28 @@
+import { useEffect } from "react";
 import Head from "next/head";
 import Script from "next/script";
 import { Provider } from "next-auth/client";
+import { useRouter } from "next/router";
 
 import "/styles/globals.css";
 
 import Layout from "../components/layout/Layout";
 import { DataProvider } from "../context/DataCotext";
+import { pageview } from "../helpers/gtag";
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
     <Provider session={pageProps.session}>
       <Layout>
@@ -21,7 +36,9 @@ export default function App({ Component, pageProps }) {
           function gtag(){window.dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
+          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+            page_path: window.location.pathname,
+          });
         `}
         </Script>
         <Head>
