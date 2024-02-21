@@ -1,4 +1,12 @@
 {
+  "navigation": {
+    "title": {
+      "home": "Home",
+      "products": "Shop",
+      "contact-us": "Contact us",
+      "gallery": "Ready projects gallery"
+    }
+  },
   "home": {
     "hero": {
       "subtext": "Abstractionism, Pop Art, Minimalism",

@@ -2,12 +2,12 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
-import { useSession, signOut, signout } from "next-auth/client";
+import { useSession } from "next-auth/client";
+import { useTranslation } from "next-i18next";
 
 import NavLinks from "../navigation/NavLinks";
-import CustomLink from "../ui/navigation/CustomLink";
 import NavBarDropdown from "../navigation/NavDropdown";
-import { navigationLinks } from "../../navigationLinks";
+// import { navigationLinks } from "../../navigationLinks";
 
 import localFont from "next/font/local";
 import LanguageSwitcher from "../ui/LanguageSwitcher";
@@ -17,15 +17,35 @@ const MainNavigation = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const router = useRouter();
 
+  const { t } = useTranslation();
+
+  const navigationLinks = [
+    {
+      id: "home",
+      destination: "/",
+      title: t("navigation.title.home"),
+    },
+    {
+      id: "products",
+      destination: "/products",
+      title: t("navigation.title.products"),
+    },
+    {
+      id: "contact-us",
+      destination: "/contact-us",
+      title: t("navigation.title.contact-us"),
+    },
+    {
+      id: "gallery",
+      destination: "/gallery",
+      title: t("navigation.title.gallery"),
+    },
+  ];
+
   const [session, loading] = useSession();
 
   const dropdownHandler = () => {
     setToggleDropdown(!toggleDropdown);
-  };
-
-  const languageChangeHandler = (event) => {
-    const locale = event.target.value;
-    router.push("/", "/", { locale });
   };
 
   return (

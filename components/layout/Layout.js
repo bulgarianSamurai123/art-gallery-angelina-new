@@ -2,9 +2,7 @@ import React, { Fragment } from "react";
 import MainNavigation from "./MainNavigation";
 import Footer from "./Footer";
 
-const Layout = (props) => {
-  const { children } = props;
-
+const Layout = ({ children }) => {
   return (
     <Fragment>
       <MainNavigation />
