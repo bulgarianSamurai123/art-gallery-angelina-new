@@ -17,6 +17,7 @@ module.exports = {
     colors: {
       "white": "#FFF",
       "black": "#000",
+      "gray-190": "#BEBEBE",
       "gray-250": "#3D3D3D",
       "gray-300": "#505050",
       "gray-380": "#626262",
@@ -35,7 +36,9 @@ module.exports = {
       "green-500": "#12BD4B",
       "forest-green": "#228B22",
       "orange-tiger": "#FC6A03",
-      "link-blue": '#0000FF'
+      "link-blue": '#0000FF',
+      "purple-121": "#7949FF",
+      "purple-233": "#E9E1FF",
     },
     fontFamily: {
       sans: ["Poppins", "sans-serif"],
