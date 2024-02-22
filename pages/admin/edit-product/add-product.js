@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { getSession } from "next-auth/client";
+import { useTranslation } from "next-i18next";
 
 import { storage } from "../../../helpers/firebase";
 import { notificationHandler } from "../../../helpers/notification-util";
@@ -11,8 +12,10 @@ import BackButton from "../../../components/ui/Buttons/BackButton";
 import Notification from "../../../components/ui/Notification";
 import useImage from "../../../hooks/use-image";
 import Head from "next/head";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const AddProductPage = () => {
+  const { t } = useTranslation();
   const { imageRef: nameRef } = useImage();
 
   const [images, setImages] = useState([]);
@@ -140,16 +143,18 @@ const AddProductPage = () => {
       </Head>
       <Section>
         <div className="flex flex-row w-full items-start">
-          <BackButton link="/admin/edit-product/" />
+          <BackButton t={t} link="/admin/edit-product/" />
         </div>
 
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-          Добави продукт
+          {t("admin.add-product.title")}
         </h1>
 
         <form encType="multipart/form-data" onSubmit={submitHandler}>
           <InputContainer>
-            <label htmlFor="name">Въведи име на продукт: </label>
+            <label htmlFor="name">
+              {t("admin.add-product.table.product-name")}
+            </label>
             <input
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
               type="text"
@@ -159,7 +164,7 @@ const AddProductPage = () => {
           </InputContainer>
           <InputContainer>
             <label htmlFor="product-id">
-              Въведи id на продъкта (как ще бъде показано в search bar):{" "}
+              {t("admin.add-product.table.product-id")}
             </label>
             <input
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
@@ -171,7 +176,7 @@ const AddProductPage = () => {
             />
           </InputContainer>
           <InputContainer>
-            <label htmlFor="price">Въведи цена на продукта: </label>
+            <label htmlFor="price">{t("admin.add-product.table.product-price")}</label>
             <input
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
               type="text"
@@ -182,7 +187,7 @@ const AddProductPage = () => {
             />
           </InputContainer>
           <InputContainer>
-            <label htmlFor="cover-img">Въведи корица на продукта: </label>
+            <label htmlFor="cover-img">{t("admin.add-product.table.product-images")}</label>
             <input
               multiple
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
@@ -195,7 +200,7 @@ const AddProductPage = () => {
             />
           </InputContainer>
           <InputContainer>
-            <label htmlFor="description">Въведи описание: </label>
+            <label htmlFor="description">{t("admin.add-product.table.product-description")}</label>
             <textarea
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
               rows={10}
@@ -219,7 +224,7 @@ const AddProductPage = () => {
             <label htmlFor="featured">Is Featured</label>
           </InputContainer>
           <div>
-            <Button type="submit">Submit</Button>
+            <Button type="submit">{t("admin.add-product.table.product-submit")}</Button>
           </div>
         </form>
         {notification && (
@@ -234,8 +239,8 @@ const AddProductPage = () => {
   );
 };
 
-export async function getServerSideProps(context) {
-  const session = await getSession({ req: context.req });
+export async function getServerSideProps({ req, locale }) {
+  const session = await getSession({ req });
 
   if (!session) {
     return {
@@ -249,6 +254,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       session,
+      ...(await serverSideTranslations(locale)),
     },
   };
 }

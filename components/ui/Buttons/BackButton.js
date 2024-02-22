@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 
-const BackButton = ({ link }) => {
+const BackButton = ({ link, t }) => {
   const router = useRouter();
 
   const navigateHandler = (url) => {
@@ -25,7 +25,7 @@ const BackButton = ({ link }) => {
           d="m5 12l6-6m-6 6l6 6m-6-6h14"
         />
       </svg>
-      Назад
+      {t('admin.buttons.back')}
     </motion.button>
   );
 };

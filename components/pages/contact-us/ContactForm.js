@@ -8,7 +8,7 @@ import Notification from "../../ui/Notification";
 import { sendForm } from "../../../helpers/api-util";
 import DataContext from "../../../context/DataCotext";
 
-const ContactForm = () => {
+const ContactForm = ({ t }) => {
   const { sharedData } = useContext(DataContext);
 
   let regTel =
@@ -123,7 +123,7 @@ const ContactForm = () => {
     requestStatus,
     notification,
     requestError,
-    "contact"
+    "contact",
   );
 
   return (
@@ -132,7 +132,7 @@ const ContactForm = () => {
         <Input
           for="name"
           invalidPropHandler={invalidNameHandler}
-          label="Име"
+          label={t("contact-us.form.name")}
           type="text"
           val={name}
           inputHandler={nameInputHandler}
@@ -142,7 +142,7 @@ const ContactForm = () => {
         <Input
           for="email"
           invalidPropHandler={invalidEmailHandler}
-          label="Имейл"
+          label={t("contact-us.form.email")}
           type="email"
           val={email}
           inputHandler={emailInputHandler}
@@ -152,7 +152,7 @@ const ContactForm = () => {
         <Input
           for="tel"
           invalidPropHandler={invalidTelHandler}
-          label="Телефон"
+          label={t("contact-us.form.phone")}
           type="tel"
           val={tel}
           inputHandler={telInputHandler}
@@ -162,7 +162,7 @@ const ContactForm = () => {
         <Input
           for="message"
           invalidPropHandler={invalidMessageHandler}
-          label="Съобщение"
+          label={t("contact-us.form.message")}
           type="text"
           val={message}
           inputHandler={messageInputHandler}
@@ -176,7 +176,7 @@ const ContactForm = () => {
             type="submit"
             disabled={!formIsValid}
           >
-            Изпрати
+            {t("contact-us.form.send")}
           </button>
         </div>
       </form>

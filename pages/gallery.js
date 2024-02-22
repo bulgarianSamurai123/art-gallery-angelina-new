@@ -1,11 +1,15 @@
 import React, { Fragment, useState } from "react";
 import Head from "next/head";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 import { getGallery } from "../helpers/api-util";
 import GalleryList from "../components/pages/gallery/GalleryList";
 import Section from "../components/layout/Section";
 
 const GalleryPage = ({ galleryImages }) => {
+  const { t } = useTranslation();
+
   return (
     <Fragment>
       <Head>
@@ -39,7 +43,7 @@ const GalleryPage = ({ galleryImages }) => {
       </Head>
       <Section>
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-          Галерия
+          {t("gallery.title")}
         </h1>
         <GalleryList galleryImages={galleryImages} />
       </Section>
@@ -47,11 +51,12 @@ const GalleryPage = ({ galleryImages }) => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ locale }) {
   const galleryImages = await getGallery();
 
   return {
     props: {
+      ...(await serverSideTranslations(locale)),
       galleryImages: galleryImages,
     },
   };

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { getSession } from "next-auth/client";
 import { deleteObject, ref } from "firebase/storage";
+import { useTranslation } from "next-i18next";
 
 import { storage } from "../../../helpers/firebase";
 import { getGallery } from "../../../helpers/api-util";
@@ -11,8 +12,10 @@ import AddButton from "../../../components/ui/Buttons/AddButton";
 import RemoveButton from "../../../components/ui/Buttons/RemoveButton";
 import Section from "../../../components/layout/Section";
 import BackButton from "../../../components/ui/Buttons/BackButton";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const EditGallery = ({ galleryImages }) => {
+  const { t } = useTranslation();
   const router = useRouter();
 
   const [galleryList, setGalleryList] = useState(galleryImages);
@@ -94,16 +97,16 @@ const EditGallery = ({ galleryImages }) => {
   return (
     <Section>
       <div className="flex flex-row justify-between pb-10">
-        <BackButton link="/admin" />
-        <AddButton navigate={navigateHandler} buttonType="gallery" />
+        <BackButton t={t} link="/admin" />
+        <AddButton t={t} navigate={navigateHandler} buttonType="gallery" />
       </div>
 
       <div className="w-full flex flex-row justify-center">
         <table className="table-auto border-separate border-spacing-y-3 border-spacing-x-5">
           <thead>
             <tr>
-              <th>Снимка</th>
-              <th>Други опций</th>
+              <th>{t("admin.edit-gallery.table.col-1")}</th>
+              <th>{t("admin.edit-gallery.table.col-2.title")}</th>
             </tr>
           </thead>
           <tbody>
@@ -114,6 +117,7 @@ const EditGallery = ({ galleryImages }) => {
                 </td>
                 <td className="flex flex-col gap-2">
                   <RemoveButton
+                    t={t}
                     buttonType="gallery"
                     handlerDeleteItem={() => handleDeleteItem(gallery.name)}
                     productID={gallery.name}
@@ -135,9 +139,9 @@ const EditGallery = ({ galleryImages }) => {
   );
 };
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({ req, locale }) {
   const galleryImages = await getGallery();
-  const session = await getSession({ req: context.req });
+  const session = await getSession({ req });
 
   if (!session) {
     return {
@@ -152,6 +156,7 @@ export async function getServerSideProps(context) {
     props: {
       galleryImages: galleryImages,
       session,
+      ...(await serverSideTranslations(locale)),
     },
   };
 }

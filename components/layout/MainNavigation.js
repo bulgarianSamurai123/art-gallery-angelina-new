@@ -7,7 +7,6 @@ import { useTranslation } from "next-i18next";
 
 import NavLinks from "../navigation/NavLinks";
 import NavBarDropdown from "../navigation/NavDropdown";
-// import { navigationLinks } from "../../navigationLinks";
 
 import localFont from "next/font/local";
 import LanguageSwitcher from "../ui/LanguageSwitcher";

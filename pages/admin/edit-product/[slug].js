@@ -1,6 +1,8 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { getSession } from "next-auth/client";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 import { storage } from "../../../helpers/firebase";
 import { notificationHandler } from "../../../helpers/notification-util";
@@ -16,6 +18,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 const EditProductData = ({ selectedProduct }) => {
+  const { t } = useTranslation();
   const { image, setImage, nameRef } = useImage(
     selectedProduct ? selectedProduct.coverImage : null
   );
@@ -139,16 +142,18 @@ const EditProductData = ({ selectedProduct }) => {
       </Head>
       <Section>
         <div className="flex flex-row w-full items-start">
-          <BackButton link="/admin/edit-product/" />
+          <BackButton t={t} link="/admin/edit-product/" />
         </div>
 
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-          Edit Product
+          {t("admin.edit-products-page.title")}
         </h1>
 
         <form encType="multipart/form-data" onSubmit={submitHandler}>
           <InputContainer>
-            <label htmlFor="name">Enter Product Name: </label>
+            <label htmlFor="name">
+              {t("admin.edit-products-page.table.product-name")}
+            </label>
             <input
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
               type="text"
@@ -160,7 +165,7 @@ const EditProductData = ({ selectedProduct }) => {
           </InputContainer>
           <InputContainer>
             <label htmlFor="product-id">
-              Enter Product Id (how it will be displayed in the search bar):{" "}
+              {t("admin.edit-products-page.table.product-id")}
             </label>
             <input
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
@@ -173,7 +178,9 @@ const EditProductData = ({ selectedProduct }) => {
             />
           </InputContainer>
           <InputContainer>
-            <label htmlFor="price">Enter Product Price</label>
+            <label htmlFor="price">
+              {t("admin.edit-products-page.table.product-price")}
+            </label>
             <input
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
               type="text"
@@ -185,7 +192,9 @@ const EditProductData = ({ selectedProduct }) => {
             />
           </InputContainer>
           <InputContainer>
-            <label htmlFor="cover-img">Enter Cover Image: </label>
+            <label htmlFor="cover-img">
+              {t("admin.edit-products-page.table.product-images")}
+            </label>
             <input
               multiple
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
@@ -198,7 +207,9 @@ const EditProductData = ({ selectedProduct }) => {
             />
           </InputContainer>
           <InputContainer>
-            <label htmlFor="description">Enter Description: </label>
+            <label htmlFor="description">
+              {t("admin.edit-products-page.table.product-description")}
+            </label>
             <textarea
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
               rows={10}
@@ -223,7 +234,9 @@ const EditProductData = ({ selectedProduct }) => {
             <label htmlFor="featured">Is Featured</label>
           </InputContainer>
           <div>
-            <Button type="submit">Submit</Button>
+            <Button type="submit">
+              {t("admin.edit-products-page.table.product-submit")}
+            </Button>
           </div>
         </form>
         {notification && (
@@ -238,13 +251,14 @@ const EditProductData = ({ selectedProduct }) => {
   );
 };
 
-export async function getStaticProps(context) {
-  const productID = context.params.slug;
+export async function getStaticProps({ params, locale }) {
+  const productID = params.slug;
   const product = await getProductById(productID);
 
   return {
     props: {
       selectedProduct: product,
+      ...(await serverSideTranslations(locale)),
     },
     revalidate: 30,
   };

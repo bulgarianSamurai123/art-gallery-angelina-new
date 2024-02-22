@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const AddButton = ({ navigate, buttonType }) => {
+const AddButton = ({ navigate, buttonType, t }) => {
   let link
 
   if (buttonType === 'gallery') {
@@ -21,8 +21,8 @@ const AddButton = ({ navigate, buttonType }) => {
       <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg">
         <path fill="currentColor" d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z" />
       </svg>
-      {buttonType === 'gallery' && 'Добави галерна снимка'}
-      {buttonType === 'product' && 'Добави продукт'}
+      {buttonType === 'gallery' && t("admin.buttons.add-gallery")}
+      {buttonType === 'product' && t("admin.buttons.add-product")}
     </motion.button>
   );
 };

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { getSession } from "next-auth/client";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 import { storage } from "../../../helpers/firebase";
 import { notificationHandler } from "../../../helpers/notification-util";
@@ -12,6 +14,7 @@ import Button from "../../../components/ui/Button";
 import Notification from "../../../components/ui/Notification";
 
 const AddGallery = () => {
+  const { t } = useTranslation();
   const { image, setImage, imageRef: nameRef } = useImage();
 
   const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
@@ -98,16 +101,16 @@ const AddGallery = () => {
   return (
     <Section>
       <div className="flex flex-row w-full items-start">
-        <BackButton link="/admin/edit-gallery/" />
+        <BackButton t={t} link="/admin/edit-gallery/" />
       </div>
 
       <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-        Add Gallery Image
+        {t("admin.add-gallery.title")}
       </h1>
 
       <form encType="multipart/form-data" onSubmit={submitHandler}>
         <InputContainer>
-          <label htmlFor="name">Въведи име на продукт: </label>
+          <label htmlFor="name">{t("admin.add-gallery.table.gallery-name")}</label>
           <input
             className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
             type="text"
@@ -116,7 +119,7 @@ const AddGallery = () => {
           />
         </InputContainer>
         <InputContainer>
-          <label htmlFor="cover-img">Enter Cover Image: </label>
+          <label htmlFor="cover-img">{t("admin.add-gallery.table.gallery-image")}</label>
           <input
             className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
             type="file"
@@ -128,7 +131,7 @@ const AddGallery = () => {
           />
         </InputContainer>
         <div>
-          <Button type="submit">Submit</Button>
+          <Button type="submit">{t("admin.add-gallery.table.gallery-submit")}</Button>
         </div>
       </form>
       {notification && (
@@ -142,8 +145,8 @@ const AddGallery = () => {
   );
 };
 
-export async function getServerSideProps(context) {
-  const session = await getSession({ req: context.req });
+export async function getServerSideProps({ req, locale }) {
+  const session = await getSession({ req });
 
   if (!session) {
     return {
@@ -157,6 +160,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       session,
+      ...(await serverSideTranslations(locale)),
     },
   };
 }

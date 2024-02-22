@@ -5,7 +5,7 @@ import { storage } from "../../helpers/firebase";
 import RemoveButton from "./Buttons/RemoveButton";
 import EditButton from "./Buttons/EditButton";
 
-const Table = ({ products, setRequestStatus, setRequestError }) => {
+const Table = ({ products, setRequestStatus, setRequestError, t }) => {
   const [productList, setProductList] = useState(products);
 
   useEffect(() => {
@@ -59,12 +59,12 @@ const Table = ({ products, setRequestStatus, setRequestError }) => {
     <table className="table-auto border-separate border-spacing-y-3 border-spacing-x-5">
       <thead>
         <tr>
-          <th>Снимка</th>
-          <th>Име на продукт</th>
-          <th>Цена</th>
-          <th>Описание</th>
-          <th>Специален продукт</th>
-          <th>Други опций</th>
+          <th>{t("admin.edit-products.table.col-1")}</th>
+          <th>{t("admin.edit-products.table.col-2")}</th>
+          <th>{t("admin.edit-products.table.col-3")}</th>
+          <th>{t("admin.edit-products.table.col-4")}</th>
+          <th>{t("admin.edit-products.table.col-5")}</th>
+          <th>{t("admin.edit-products.table.col-6.title")}</th>
         </tr>
       </thead>
       <tbody>
@@ -85,6 +85,7 @@ const Table = ({ products, setRequestStatus, setRequestError }) => {
             </td>
             <td className="flex flex-row gap-2">
               <RemoveButton
+                t={t}
                 buttonType="product"
                 handlerDeleteItem={() => {
                   handleDeleteItem(product.id);
@@ -92,6 +93,7 @@ const Table = ({ products, setRequestStatus, setRequestError }) => {
                 productID={product.id}
               />
               <EditButton
+                t={t}
                 buttonType="product"
                 link={`/admin/edit-product/${product.id}`}
               />

@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from "react";
 import Head from "next/head";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { getProducts } from "../../helpers/api-util";
 import Section from "../../components/layout/Section";
@@ -10,6 +12,7 @@ import useCheck from "../../hooks/useCheck";
 import { applyFilters } from "../../helpers/filter-util";
 
 const ProductPage = ({ products }) => {
+  const { t } = useTranslation();
   const [toggle, setToggle] = useState(false);
 
   const { check: abstractChecked, toggleCheck: toggleAbstractCheck } =
@@ -24,22 +27,22 @@ const ProductPage = ({ products }) => {
 
   const filters = [
     {
-      name: "Абстракций",
+      name: t("shop.filter.abstractions"),
       check: abstractChecked,
       toggleCheck: toggleAbstractCheck,
     },
     {
-      name: "Лица",
+      name: t("shop.filter.faces"),
       check: faceChecked,
       toggleCheck: toggleFaceCheck,
     },
     {
-      name: "Зима",
+      name: t("shop.filter.winter"),
       check: winterChecked,
       toggleCheck: toggleWinterCheck,
     },
     {
-      name: "Лято",
+      name: t("shop.filter.summer"),
       check: summerChecked,
       toggleCheck: toggleSummerCheck,
     },
@@ -86,25 +89,26 @@ const ProductPage = ({ products }) => {
       </Head>
       <Section>
         <div className="flex flex-row justify-end">
-          <FilterButton toggle={toggle} toggleHandler={toggleHandler} />
+          <FilterButton t={t} toggle={toggle} toggleHandler={toggleHandler} />
         </div>
         {toggle && <DropDown filters={filters} />}
 
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-          Магазин
+          {t("shop.title")}
         </h1>
-        {products.length < 1 && <p>Няма продукти</p>}
+        {products.length < 1 && <p>{t("shop.no-products")}</p>}
         {products.length >= 1 && <ProductsList products={filteredProducts} />}
       </Section>
     </Fragment>
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ locale }) {
   const products = await getProducts();
 
   return {
     props: {
+      ...(await serverSideTranslations(locale)),
       products: products,
     },
   };

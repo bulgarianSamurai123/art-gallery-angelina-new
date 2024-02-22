@@ -1,9 +1,10 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en">
+      <Html>
         <Head />
         <body>
           <Main />

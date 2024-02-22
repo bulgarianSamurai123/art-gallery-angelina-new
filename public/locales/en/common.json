@@ -41,5 +41,102 @@
         "text": "Thank you for the inspiring collection of paintings! They not only decorate my home, but also bring me joy every day. Your works are a real miracle!"
       }
     }
+  },
+  "shop": {
+    "title": "Shop",
+    "no-products": "No products",
+    "filter-btn": "Filter",
+    "filter": {
+      "abstractions": "Abstractions",
+      "faces": "Faces",
+      "winter": "Winter",
+      "summer": "Summer"
+    }
+  },
+  "contact-us": {
+    "title": "Contact me",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "message": "Message",
+      "send": "Send"
+    }
+  },
+  "gallery": {
+    "title": "Gallery"
+  },
+  "admin": {
+    "title": "Choose option",
+    "buttons": {
+      "edit-product": "Change products",
+      "edit-gallery": "Change gallery images",
+      "back": "Back",
+      "add-product": "Add product",
+      "add-gallery": "Add gallery picture"
+    },
+    "edit-products": {
+      "table": {
+        "col-1": "Picture",
+        "col-2": "Product name",
+        "col-3": "Price",
+        "col-4": "Description",
+        "col-5": "Special product",
+        "col-6": {
+          "title": "Other options",
+          "buttons": {
+            "delete-product": "Delete product",
+            "edit-product": "Edit product"
+          }
+        }
+      }
+    },
+    "edit-gallery": {
+      "table": {
+        "col-1": "Picture",
+        "col-2": {
+          "title": "Other options",
+          "delete-gallery": "Delete gallery picture"
+        }
+      }
+    },
+    "add-product": {
+      "title": "Add product",
+      "table": {
+        "product-name": "Enter product name: ",
+        "product-id": "Enter product id (how it will be displayed in search bar): ",
+        "product-price": "Enter product price: ",
+        "product-images": "Enter product image/images",
+        "product-description": "Enter description",
+        "product-submit": "Submit"
+      }
+    },
+    "edit-products-page": {
+      "title": "Edit Product",
+      "table": {
+        "product-name": "Enter product name: ",
+        "product-id": "Enter product id (how it will be displayed in search bar): ",
+        "product-price": "Enter product price: ",
+        "product-images": "Enter product image/images",
+        "product-description": "Enter description",
+        "product-submit": "Submit"
+      }
+    },
+    "add-gallery": {
+      "title": "Add Gallery Image",
+      "table": {
+        "gallery-name": "Enter gallery image description: ",
+        "gallery-image": "Enter Cover Image: ",
+        "gallery-submit": "Submit"
+      }
+    }
+  },
+  "footer": {
+    "useful-links": {
+      "title": "Useful links",
+      "gallery": "Ready projects gallery",
+      "order": "Order painting"
+    },
+    "socials": "Social medias"
   }
 }

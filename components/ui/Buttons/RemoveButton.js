@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const RemoveButton = ({ buttonType, handlerDeleteItem, productID }) => {
+const RemoveButton = ({ buttonType, handlerDeleteItem, productID, t }) => {
   return (
     <motion.button
       className="flex flex-row gap-1 items-center border-red-rosso-corsa border-2 px-5 py-2 rounded-xl text-red-rosso-corsa"
@@ -20,8 +20,8 @@ const RemoveButton = ({ buttonType, handlerDeleteItem, productID }) => {
           clipRule="evenodd"
         />
       </svg>
-      Изтрии {buttonType === "gallery" && "галерна снимка"}
-      {buttonType === "product" && "продукт"}
+      {buttonType === "gallery" && t("admin.edit-gallery.table.col-2.delete-gallery")}
+      {buttonType === "product" && t("admin.edit-products.table.col-6.buttons.delete-product")}
     </motion.button>
   );
 };

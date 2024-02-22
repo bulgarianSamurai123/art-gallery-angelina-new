@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useRouter } from "next/router";
 import { getSession } from "next-auth/client";
+import { useTranslation } from "next-i18next";
 
 import { getProducts } from "../../../helpers/api-util";
 import { notificationHandler } from "../../../helpers/notification-util";
@@ -10,8 +11,10 @@ import Section from "../../../components/layout/Section";
 import Table from "../../../components/ui/Table";
 import Notification from "../../../components/ui/Notification";
 import Head from "next/head";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const EditProductPage = ({ products }) => {
+  const { t } = useTranslation();
   const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
   const [requestError, setRequestError] = useState();
 
@@ -44,16 +47,16 @@ const EditProductPage = ({ products }) => {
   return (
     <Fragment>
       <Head>
-        <title>Angelina's Art Galler - Таблица с продукти</title>
+        <title>Angelina's Art Gallery - Таблица с продукти</title>
       </Head>
       <Section>
         <div className="flex flex-row justify-between pb-10">
-          <BackButton link="/admin" />
-          <AddButton navigate={navigateHandler} buttonType="product" />
+          <BackButton t={t} link="/admin" />
+          <AddButton t={t} navigate={navigateHandler} buttonType="product" />
         </div>
 
-        {/* Table */}
         <Table
+          t={t}
           products={products}
           setRequestStatus={setRequestStatus}
           setRequestError={setRequestError}
@@ -71,9 +74,9 @@ const EditProductPage = ({ products }) => {
   );
 };
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({req, locale}) {
   const products = await getProducts();
-  const session = await getSession({req: context.req})
+  const session = await getSession({ req });
 
   if (!session) {
     return {
@@ -87,7 +90,8 @@ export async function getServerSideProps(context) {
   return {
     props: {
       products: products,
-      session
+      session,
+      ...(await serverSideTranslations(locale))
     },
   };
 }
