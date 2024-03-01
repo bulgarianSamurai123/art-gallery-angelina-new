@@ -17,7 +17,7 @@ const nextConfig = (phase) => {
         email_pass: "najg wlhm dosd zkxl",
         firebase_storage: "dev",
         firebase_product_db_name: "products_dev",
-        NEXT_PUBLIC_GOOGLE_ANALYTICS: 'G-T4NXB79J1B'
+        NEXT_PUBLIC_GOOGLE_ANALYTICS: "G-T4NXB79J1B",
       },
     };
   }
@@ -36,7 +36,7 @@ const nextConfig = (phase) => {
       email_pass: "xogx raxn cshe hblh",
       firebase_storage: "images",
       firebase_product_db_name: "products",
-      NEXT_PUBLIC_GOOGLE_ANALYTICS: 'G-T4NXB79J1B'
+      NEXT_PUBLIC_GOOGLE_ANALYTICS: "G-T4NXB79J1B",
     },
   };
 };

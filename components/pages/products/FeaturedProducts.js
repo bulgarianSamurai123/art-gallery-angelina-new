@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const FeaturedProducts = ({ products }) => {
   return (
@@ -7,7 +8,11 @@ const FeaturedProducts = ({ products }) => {
       {products
         ? products.map((product) => (
             <li key={product.id}>
-              <Link className="flex flex-col" href={`/products/${product.id}`}>
+              <Link
+                className="flex flex-col"
+                href={`/products/${product.id}`}
+                prefetch={false}
+              >
                 <img
                   className="w-[16.25em] h-[18.125em] object-cover object-center"
                   src={product.coverImage}

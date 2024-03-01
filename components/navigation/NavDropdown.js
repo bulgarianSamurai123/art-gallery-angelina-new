@@ -8,8 +8,8 @@ const NavBarDropdown = ({
   router,
   toggleDropdown,
   setToggleDropdown,
-  isLoggedIn,
   links,
+  myFont,
 }) => {
   return (
     <motion.div
@@ -23,7 +23,7 @@ const NavBarDropdown = ({
       exit="hidden"
     >
       <div className="flex flex-row justify-between px-8">
-        <h1 className="text-2xl w-[9rem] text-center font-brittany">
+        <h1 className={`text-2xl w-[9rem] text-center ${myFont.className}`}>
           Angelina's Art Gallery
         </h1>
 

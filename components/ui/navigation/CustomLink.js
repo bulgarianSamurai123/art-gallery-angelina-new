@@ -19,6 +19,7 @@ const CustomLink = (props) => {
         className={`${isActive ? "font-bold" : "undefined"}`}
         onClick={onClick}
         passHref
+        prefetch={false}
       >
         {children}
       </Link>

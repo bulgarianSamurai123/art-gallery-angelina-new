@@ -4,20 +4,24 @@ import { getSession } from "next-auth/client";
 import { deleteObject, ref } from "firebase/storage";
 
 import { storage } from "../../../helpers/firebase";
-import { getGallery } from "../../../helpers/api-util";
 import { notificationHandler } from "../../../helpers/notification-util";
-import Notification from "../../../components/ui/Notification";
 import AddButton from "../../../components/ui/Buttons/AddButton";
 import RemoveButton from "../../../components/ui/Buttons/RemoveButton";
 import Section from "../../../components/layout/Section";
 import BackButton from "../../../components/ui/Buttons/BackButton";
+import dynamic from "next/dynamic";
+import { deleteResponseHandler } from "../../../helpers/edit-gallery";
+
+const Notification = dynamic(() =>
+  import("../../../components/ui/Notification")
+);
 
 const EditGallery = ({ galleryImages }) => {
   const router = useRouter();
 
   const [galleryList, setGalleryList] = useState(galleryImages);
 
-  const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
+  const [requestStatus, setRequestStatus] = useState();
   const [requestError, setRequestError] = useState();
 
   const navigateHandler = (url) => {
@@ -55,12 +59,7 @@ const EditGallery = ({ galleryImages }) => {
       const data = await response.json();
       const imageUrl = data.image;
 
-      const deleteResponse = await fetch(
-        `https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/gallery/${itemId}.json`,
-        {
-          method: "DELETE",
-        }
-      );
+      const deleteResponse = deleteResponseHandler(itemId)
 
       if (!deleteResponse.ok) {
         setRequestStatus("error");
@@ -70,12 +69,11 @@ const EditGallery = ({ galleryImages }) => {
       const imageRef = ref(storage, imageUrl);
       await deleteObject(imageRef);
 
-      setProductList((prevGalleryImage) =>
+      setGalleryList((prevGalleryImage) =>
         prevGalleryImage.filter((gallery) => gallery.name !== itemId)
       );
 
       setRequestStatus("success");
-      console.log("User deleted successfully");
     } catch (error) {
       setRequestStatus("error");
       setRequestError(error);
@@ -136,7 +134,9 @@ const EditGallery = ({ galleryImages }) => {
 };
 
 export async function getServerSideProps(context) {
-  const galleryImages = await getGallery();
+  const galleryImages = await import("../../../helpers/api-util").then((mod) =>
+    mod.getGallery()
+  );
   const session = await getSession({ req: context.req });
 
   if (!session) {

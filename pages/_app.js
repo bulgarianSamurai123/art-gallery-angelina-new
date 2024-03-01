@@ -44,6 +44,10 @@ export default function App({ Component, pageProps }) {
         <Head>
           <title>Angelina's Art Gallery</title>
           <meta name="description" content="" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+          />
           <link
             rel="apple-touch-icon"
             sizes="180x180"

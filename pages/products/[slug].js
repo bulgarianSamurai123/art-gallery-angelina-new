@@ -1,13 +1,16 @@
 import React, { Fragment } from "react";
 import Head from "next/head";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 
-import { getProductById, getProducts } from "/helpers/api-util";
+import { getProducts } from "/helpers/api-util";
 import Section from "../../components/layout/Section";
 import Product from "../../components/pages/products/Product";
-import FeaturedProducts from "../../components/pages/products/FeaturedProducts";
-import { getFeaturedProducts } from "../../helpers/api-util";
 import BackButton from "../../components/ui/Buttons/BackButton";
+
+const FeaturedProducts = dynamic(() =>
+  import("../../components/pages/products/FeaturedProducts")
+);
 
 const ProductDetailPage = ({ selectedProduct, featuredProducts }) => {
   const product = selectedProduct;
@@ -65,8 +68,12 @@ const ProductDetailPage = ({ selectedProduct, featuredProducts }) => {
 
 export async function getStaticProps(context) {
   const productID = context.params.slug;
-  const product = await getProductById(productID);
-  const featuredProducts = await getFeaturedProducts();
+  const product = await import("../../helpers/api-util").then((mod) =>
+    mod.getProductById(productID)
+  );
+  const featuredProducts = await import("../../helpers/api-util").then((mod) =>
+    mod.getFeaturedProducts()
+  );
 
   return {
     props: {

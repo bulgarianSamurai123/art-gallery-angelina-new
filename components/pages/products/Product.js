@@ -2,6 +2,7 @@ import React, { useContext, useState, Fragment } from "react";
 import { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
+import dynamic from "next/dynamic";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -9,7 +10,9 @@ import "swiper/css/navigation";
 
 import Button from "../../ui/Button";
 import DataContext from "../../../context/DataCotext";
-import ProductModal from "../../layout/ProductModal";
+import ProductDescription from "./ProductDescription";
+
+const ProductModal = dynamic(() => import("../../layout/ProductModal"));
 
 const Product = ({ product }) => {
   const [isPopup, setIsPopup] = useState(false);
@@ -70,20 +73,11 @@ const Product = ({ product }) => {
           </button>
         )}
 
-        <div>
-          <h1 className="text-3xl">{product ? product.name : null}</h1>
-          {product ? (
-            <span className="text-xl font-light">
-              {product.price === new RegExp("^[1-9]", "g")
-                ? `${product.price}лв.`
-                : product.price}
-            </span>
-          ) : null}
-          <p className="text-base font-light text-gray-250">
-            {product ? product.description : null}
-          </p>
-          <Button onClick={navigationHandler}>Поръчай</Button>
-        </div>
+        <ProductDescription
+          product={product}
+          navigationHandler={navigationHandler}
+          Button={Button}
+        />
       </div>
       {isPopup && (
         <ProductModal

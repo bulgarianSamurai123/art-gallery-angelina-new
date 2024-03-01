@@ -10,6 +10,7 @@ import DropDown from "../../components/ui/DropDown";
 import useCheck from "../../hooks/useCheck";
 import { applyFilters } from "../../helpers/filter-util";
 import PaginationNum from "../../components/ui/PaginationNum";
+import { filterHandler } from "../../helpers/filters";
 
 const ProductPage = ({ products }) => {
   const [toggle, setToggle] = useState(false);
@@ -30,28 +31,16 @@ const ProductPage = ({ products }) => {
     setToggle(!toggle);
   };
 
-  const filters = [
-    {
-      name: "Абстракций",
-      check: abstractChecked,
-      toggleCheck: toggleAbstractCheck,
-    },
-    {
-      name: "Лица",
-      check: faceChecked,
-      toggleCheck: toggleFaceCheck,
-    },
-    {
-      name: "Зима",
-      check: winterChecked,
-      toggleCheck: toggleWinterCheck,
-    },
-    {
-      name: "Лято",
-      check: summerChecked,
-      toggleCheck: toggleSummerCheck,
-    },
-  ];
+  const filters = filterHandler(
+    toggleAbstractCheck,
+    toggleFaceCheck,
+    toggleWinterCheck,
+    toggleSummerCheck,
+    abstractChecked,
+    faceChecked,
+    winterChecked,
+    summerChecked
+  );
 
   const applyFiltersAndPagination = () => {
     const filteredProducts = applyFilters(
