@@ -13,8 +13,8 @@ import PaginationNum from "../../components/ui/PaginationNum";
 
 const ProductPage = ({ products }) => {
   const [toggle, setToggle] = useState(false);
-  const [pageNumber, setPageNumber] = useState(2);
-  const pageSize = 10;
+  // const [pageNumber, setPageNumber] = useState(2);
+  // const pageSize = 10;
 
   const { check: abstractChecked, toggleCheck: toggleAbstractCheck } =
     useCheck();
@@ -22,9 +22,9 @@ const ProductPage = ({ products }) => {
   const { check: winterChecked, toggleCheck: toggleWinterCheck } = useCheck();
   const { check: summerChecked, toggleCheck: toggleSummerCheck } = useCheck();
 
-  useEffect(() => {
-    setPageNumber(1);
-  }, [abstractChecked, faceChecked, winterChecked, summerChecked]);
+  // useEffect(() => {
+  //   setPageNumber(1);
+  // }, [abstractChecked, faceChecked, winterChecked, summerChecked]);
 
   const toggleHandler = () => {
     setToggle(!toggle);
@@ -53,36 +53,36 @@ const ProductPage = ({ products }) => {
     },
   ];
 
-  const applyFiltersAndPagination = () => {
-    const filteredProducts = applyFilters(
-      abstractChecked,
-      faceChecked,
-      winterChecked,
-      summerChecked,
-      products
-    );
-    const startIndex = (pageNumber - 1) * pageSize;
-    const endIndex = pageNumber * pageSize;
-    return filteredProducts.slice(startIndex, endIndex);
-  };
+  const filteredProducts = applyFilters(
+    abstractChecked,
+    faceChecked,
+    winterChecked,
+    summerChecked,
+    products
+  );
+  // const applyFiltersAndPagination = () => {
+  // const startIndex = (pageNumber - 1) * pageSize;
+  // const endIndex = pageNumber * pageSize;
+  // return filteredProducts.slice(startIndex, endIndex);
+  // };
 
-  const handleNextPage = () => {
-    setPageNumber(pageNumber + 1);
-  };
+  // const handleNextPage = () => {
+  //   setPageNumber(pageNumber + 1);
+  // };
 
-  const handlePreviousPage = () => {
-    if (pageNumber > 1) {
-      setPageNumber(pageNumber - 1);
-    }
-  };
+  // const handlePreviousPage = () => {
+  //   if (pageNumber > 1) {
+  //     setPageNumber(pageNumber - 1);
+  //   }
+  // };
 
-  const handlePageChange = (page) => {
-    setPageNumber(page);
-  };
+  // const handlePageChange = (page) => {
+  //   setPageNumber(page);
+  // };
 
-  const paginatedProducts = applyFiltersAndPagination();
+  // const paginatedProducts = applyFiltersAndPagination();
 
-  const totalPages = Math.ceil(products.length / pageSize);
+  // const totalPages = Math.ceil(products.length / pageSize);
 
   return (
     <Fragment>
@@ -125,14 +125,14 @@ const ProductPage = ({ products }) => {
           Магазин
         </h1>
         {products.length < 1 && <p>Няма продукти</p>}
-        {products.length >= 1 && <ProductsList products={paginatedProducts} />}
-        <PaginationNum
+        {products.length >= 1 && <ProductsList products={filteredProducts} />}
+        {/* <PaginationNum
           handlePreviousPage={handlePreviousPage}
           pageNumber={pageNumber}
           handleNextPage={handleNextPage}
           totalPages={totalPages}
           handlePageChange={handlePageChange}
-        />
+        /> */}
       </Section>
     </Fragment>
   );
