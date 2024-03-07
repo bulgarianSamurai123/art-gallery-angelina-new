@@ -122,7 +122,7 @@ const ProductPage = ({ products }) => {
         {toggle && <DropDown filters={filters} />}
 
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-          Магазин
+          Творби
         </h1>
         {products.length < 1 && <p>Няма продукти</p>}
         {products.length >= 1 && <ProductsList products={filteredProducts} />}

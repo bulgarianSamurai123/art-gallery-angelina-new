@@ -9,7 +9,7 @@ const SpecialProducts = ({ products }) => {
       className="flex flex-col"
     >
       <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-        Специални Продукти
+        Акценти
       </h1>
 
       {products.length < 1 && <p>Няма продукти</p>}

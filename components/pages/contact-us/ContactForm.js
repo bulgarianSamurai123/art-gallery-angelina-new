@@ -170,7 +170,11 @@ const ContactForm = () => {
           errorMessage="Съобщението не е валидно!"
           textarea
         />
-        <div className="flex flex-row justify-end">
+        <div className="flex flex-row justify-between items-center text-center">
+          <p>
+            С натискане на "Изпрати" се съгласявам данните ми да бъдат
+            обработени
+          </p>
           <button
             className={`mt-3 bg-gray-730 enabled:hover:bg-gray-800 enabled:active:bg-gray-600 disabled:text-gray-490 px-7 py-2 rounded-xl`}
             type="submit"
