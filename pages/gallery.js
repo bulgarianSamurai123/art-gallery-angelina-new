@@ -12,7 +12,7 @@ const GalleryPage = ({ galleryImages }) => {
         <title>Angelina's Art Gallery - Gallery</title>
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5"
         />
         <meta
           name="title"
