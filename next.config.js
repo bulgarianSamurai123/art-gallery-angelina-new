@@ -4,7 +4,7 @@ const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 const nextConfig = (phase) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
-      env: {
+            env: {
         mongodb_username: "markpetarpetrov",
         mongodb_password: "srt1fYxnHZp7jQ3v",
         mongodb_clustername: "cluster0",
@@ -17,13 +17,13 @@ const nextConfig = (phase) => {
         email_pass: "najg wlhm dosd zkxl",
         firebase_storage: "dev",
         firebase_product_db_name: "products_dev",
-        NEXT_PUBLIC_GOOGLE_ANALYTICS: 'G-T4NXB79J1B'
+        NEXT_PUBLIC_GOOGLE_ANALYTICS: "G-T4NXB79J1B",
       },
     };
   }
 
   return {
-    env: {
+        env: {
       mongodb_username: "markpetarpetrov",
       mongodb_password: "srt1fYxnHZp7jQ3v",
       mongodb_clustername: "cluster0",
@@ -36,7 +36,7 @@ const nextConfig = (phase) => {
       email_pass: "xogx raxn cshe hblh",
       firebase_storage: "images",
       firebase_product_db_name: "products",
-      NEXT_PUBLIC_GOOGLE_ANALYTICS: 'G-T4NXB79J1B'
+      NEXT_PUBLIC_GOOGLE_ANALYTICS: "G-T4NXB79J1B",
     },
   };
 };

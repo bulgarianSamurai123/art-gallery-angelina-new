@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import Button from "../../ui/Button";
 import Link from "next/link";
+import Image from "next/image";
 
 const CustomPainting = () => {
   const router = useRouter();
@@ -22,7 +23,7 @@ const CustomPainting = () => {
           история с масивно и уникално авторско пано по поръчка. Натиснете
           бутона по-долу, за да попълните форма и се свържете с мен. Не
           пропускайте да посетите и секция{" "}
-          <Link href="/gallery" className="text-link-blue">
+          <Link href="/gallery" className="text-link-blue font-semibold hover:underline">
             Галерия Готови Проекти
           </Link>
           , за да получите перфектен ориентир за пана намерили вече своят
@@ -33,10 +34,13 @@ const CustomPainting = () => {
           <Button onClick={() => router.push("/contact-us")}>Контакти</Button>
         </div>
       </div>
-      <img
-        className="w-full md:w-1/3 lg:w-2/3 lg:h-2/3"
-        src="/assets/custom-painting.jpeg"
+      <Image
+        src="/assets/webp/custom-painting.webp"
         alt="Custom Painting Image"
+        width={100}
+        height={100}
+        sizes="100vw"
+        className="w-full md:w-1/3 lg:w-2/3 lg:h-2/3"
       />
     </div>
   );

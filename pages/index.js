@@ -1,23 +1,18 @@
 import React, { Fragment } from "react";
 import Head from "next/head";
 
-import { getFeaturedProducts } from "../helpers/api-util";
-import Section from "../components/layout/Section";
-import Hero from "../components/pages/home/Hero";
-import SpecialProducts from "../components/pages/home/SpecialProducts";
-import MyMission from "../components/pages/home/MyMission";
-import CustomPainting from "../components/pages/home/CustomPainting";
-import Testimonials from "../components/pages/home/Testimonials";
-import ThreeImages from "../components/pages/home/ThreeImages";
-import ThreeImagesOne from "../components/pages/home/ThreeImagesOne";
+import Home from "../components/pages/home/Home";
 
 const HomePage = ({ products }) => {
   return (
     <Fragment>
       <Head>
+        <link rel="preload" href="/assets/webp/image_home.webp" as="image" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
         />
         <meta property="og:title" content="Angelina's Art Gallery" />
         <meta
@@ -25,23 +20,22 @@ const HomePage = ({ products }) => {
           content="Textured. Minimalistic. Art."
         />
         <meta property="og:url" content="http://angelinartgallery.com/" />
-        <meta property="og:image" content="/assets/image_home.png" />
+        <meta property="og:image" content="/assets/webp/image_home.webp" />
       </Head>
-      <Section>
-        <Hero />
-        <SpecialProducts products={products} />
-        <MyMission />
-        <ThreeImagesOne />
-        <CustomPainting />
-        <Testimonials />
-      </Section>
-      <ThreeImages />
+      <Home products={products} />
     </Fragment>
   );
 };
 
-export async function getServerSideProps() {
-  const featuredProducts = await getFeaturedProducts();
+export async function getServerSideProps({ res }) {
+  const featuredProducts = await import("../helpers/api-util").then((mod) =>
+    mod.getFeaturedProducts()
+  );
+
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  );
 
   return {
     props: {
