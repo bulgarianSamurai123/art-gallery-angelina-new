@@ -1,5 +1,12 @@
 import { db } from "../helpers/firebase";
-import { ref, child, get, orderByChild, query } from "firebase/database";
+import {
+  ref,
+  child,
+  get,
+  orderByChild,
+  query,
+  equalTo,
+} from "firebase/database";
 import { applyFilters } from "./filter-util";
 
 export function getProductsQuery(
@@ -18,7 +25,7 @@ export function getProductsQuery(
   const endIndex = startIndex + productsPerPage;
 
   let productFetchQuery = query(
-    child(dbRef, "products_dev"),
+    child(dbRef, process.env.firebase_product_db_name),
     orderByChild("id")
   );
 
@@ -79,4 +86,28 @@ export function generatePageNumbers(currentPage, totalPages) {
   }
 
   return pageNumbers;
+}
+
+export function getFeaturedProductsQuery(setProducts) {
+  const dbRef = ref(db);
+
+  let productFetchQuery = query(
+    child(dbRef, process.env.firebase_product_db_name),
+    orderByChild("isFeatured"),
+    equalTo(true)
+  );
+
+  get(productFetchQuery)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const productsArray = Object.values(snapshot.val());
+        productsArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setProducts(productsArray);
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }

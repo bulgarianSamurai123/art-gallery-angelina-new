@@ -1,9 +1,18 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Head from "next/head";
 
 import Home from "../components/pages/home/Home";
+import { getFeaturedProductsQuery } from "../helpers/database-queries";
 
-const HomePage = ({ products }) => {
+const HomePage = () => {
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    getFeaturedProductsQuery(setProducts)
+  }, [])
+
+  console.log(products);
+
   return (
     <Fragment>
       <Head>
@@ -27,21 +36,21 @@ const HomePage = ({ products }) => {
   );
 };
 
-export async function getServerSideProps({ res }) {
-  const featuredProducts = await import("../helpers/api-util").then((mod) =>
-    mod.getFeaturedProducts()
-  );
+// export async function getServerSideProps({ res }) {
+//   const featuredProducts = await import("../helpers/api-util").then((mod) =>
+//     mod.getFeaturedProducts()
+//   );
 
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=10, stale-while-revalidate=59"
-  );
+//   res.setHeader(
+//     "Cache-Control",
+//     "public, s-maxage=10, stale-while-revalidate=59"
+//   );
 
-  return {
-    props: {
-      products: featuredProducts,
-    },
-  };
-}
+//   return {
+//     props: {
+//       products: featuredProducts,
+//     },
+//   };
+// }
 
 export default HomePage;
