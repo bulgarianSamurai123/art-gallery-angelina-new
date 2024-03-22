@@ -18,7 +18,7 @@ export async function getProducts() {
 
   const sortedData = products.sort((a, b) => b.timestamp - a.timestamp);
 
-  return sortedData[0];
+  return sortedData;
 }
 
 export async function getFeaturedProducts() {
