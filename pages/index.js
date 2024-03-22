@@ -11,8 +11,6 @@ const HomePage = () => {
     getFeaturedProductsQuery(setProducts)
   }, [])
 
-  console.log(products);
-
   return (
     <Fragment>
       <Head>
@@ -35,22 +33,5 @@ const HomePage = () => {
     </Fragment>
   );
 };
-
-// export async function getServerSideProps({ res }) {
-//   const featuredProducts = await import("../helpers/api-util").then((mod) =>
-//     mod.getFeaturedProducts()
-//   );
-
-//   res.setHeader(
-//     "Cache-Control",
-//     "public, s-maxage=10, stale-while-revalidate=59"
-//   );
-
-//   return {
-//     props: {
-//       products: featuredProducts,
-//     },
-//   };
-// }
 
 export default HomePage;

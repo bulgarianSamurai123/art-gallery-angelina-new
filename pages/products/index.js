@@ -117,7 +117,7 @@ const ProductPage = ({ products: firstProduct }) => {
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
           Творби
         </h1>
-        {products.length < 1 && <p>Няма продукти</p>}
+        {products.length < 1 && <p>Зарежда се...</p>}
         {products.length >= 1 && <ProductsList products={products} />}
         <ProductPagination
           currentPage={currentPage}
