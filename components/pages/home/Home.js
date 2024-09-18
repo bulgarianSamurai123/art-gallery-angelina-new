@@ -11,6 +11,7 @@ import LazyLoad from "react-lazyload";
 const SpecialProducts = dynamic(() => import("./SpecialProducts"));
 const ThreeImages = dynamic(() => import("./ThreeImages"));
 const ThreeImagesOne = dynamic(() => import("./ThreeImagesOne"));
+const ThreeImagesTwo = dynamic(() => import("./ThreeImagesTwo"));
 
 const Home = ({ products }) => {
   return (
@@ -21,6 +22,7 @@ const Home = ({ products }) => {
         <MyMission />
         <LazyLoad offset={100}>
           <ThreeImagesOne />
+          <ThreeImagesTwo />
           <CustomPainting />
           <Testimonials />
         </LazyLoad>

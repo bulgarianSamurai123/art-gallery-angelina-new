@@ -1,11 +1,34 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Head from "next/head";
 
 import { getGallery } from "../helpers/api-util";
+import { getGalleryQuery } from "../helpers/database-queries";
 import GalleryList from "../components/pages/gallery/GalleryList";
 import Section from "../components/layout/Section";
+import Pagination from "../components/ui/Pagination";
 
-const GalleryPage = ({ galleryImages }) => {
+const GalleryPage = ({ galleryImages: gallery }) => {
+  const [galleryImages, setGalleryImages] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [galleryPerPage] = useState(10);
+  const [totalPages, setTotalPages] = useState(0);
+  const [hasNextPage, setHasNextPage] = useState(true);
+
+  useEffect(() => {
+    console.log(
+      getGalleryQuery(
+        currentPage,
+        galleryPerPage,
+        setGalleryImages,
+        setTotalPages,
+        setHasNextPage
+      )
+    );
+  }, [
+    currentPage,
+    galleryPerPage,
+  ]);
+
   return (
     <Fragment>
       <Head>
@@ -29,12 +52,8 @@ const GalleryPage = ({ galleryImages }) => {
           property="og:url"
           content="http://angelinartgallery.com/gallery"
         />
-        {galleryImages ? (
-          <meta
-            name="image"
-            property="og:image"
-            content={galleryImages[0].image}
-          />
+        {gallery ? (
+          <meta name="image" property="og:image" content={gallery.image} />
         ) : null}
       </Head>
       <Section>
@@ -42,6 +61,12 @@ const GalleryPage = ({ galleryImages }) => {
           Галерия
         </h1>
         <GalleryList galleryImages={galleryImages} />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
+          hasNextPage={hasNextPage}
+        />
       </Section>
     </Fragment>
   );
@@ -52,7 +77,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      galleryImages: galleryImages,
+      galleryImages: galleryImages[0],
     },
   };
 }

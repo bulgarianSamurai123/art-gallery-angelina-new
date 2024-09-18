@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { generatePageNumbers } from "../../helpers/database-queries";
 
-const ProductPagination = ({
+const Pagination = ({
   currentPage,
   totalPages,
   setCurrentPage,
@@ -19,6 +19,10 @@ const ProductPagination = ({
   const goToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, [prevPage])
 
   return (
     <div className="w-full flex flex-row gap-4 justify-center mt-20 mb-20 xl:mb-0">
@@ -91,4 +95,4 @@ const ProductPagination = ({
   );
 };
 
-export default ProductPagination;
+export default Pagination;

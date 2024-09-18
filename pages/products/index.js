@@ -6,7 +6,7 @@ import ProductsList from "../../components/pages/products/ProductsList";
 import FilterButton from "../../components/ui/Buttons/FilterButton";
 import DropDown from "../../components/ui/DropDown";
 import useCheck from "../../hooks/useCheck";
-import ProductPagination from "../../components/ui/ProductPagination";
+import Pagination from "../../components/ui/Pagination";
 import { getProducts } from "../../helpers/api-util";
 import { applyFilters } from "../../helpers/filter-util";
 import {
@@ -19,7 +19,7 @@ const ProductPage = ({ products: firstProduct }) => {
 
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(10);
+  const [productsPerPage] = useState(5);
   const [totalPages, setTotalPages] = useState(0);
   const [hasNextPage, setHasNextPage] = useState(true);
 
@@ -119,7 +119,7 @@ const ProductPage = ({ products: firstProduct }) => {
         </h1>
         {products.length < 1 && <p>Зарежда се...</p>}
         {products.length >= 1 && <ProductsList products={products} />}
-        <ProductPagination
+        <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
           setCurrentPage={setCurrentPage}

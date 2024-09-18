@@ -63,6 +63,48 @@ export function getProductsQuery(
     });
 }
 
+export function getGalleryQuery(
+  currentPage,
+  galleryPerPage,
+  setGalleryImages,
+  setTotalPages,
+  setHasNextPage
+) {
+  const dbRef = ref(db);
+  const startIndex = (currentPage - 1) * galleryPerPage;
+  const endIndex = startIndex + galleryPerPage;
+
+  let galleryFetchQuery = query(
+    child(dbRef, process.env.firebase_gallery_db_name),
+    orderByChild("name")
+  );
+
+  get(galleryFetchQuery)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const galleryArray = Object.values(snapshot.val());
+        galleryArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        const paginatedGallery = galleryArray.slice(startIndex, endIndex);
+        setGalleryImages(paginatedGallery);
+
+        const totalPages = Math.ceil(galleryArray.length / galleryPerPage);
+        setTotalPages(totalPages);
+
+        if (galleryArray.length <= endIndex) {
+          setHasNextPage(false);
+        } else {
+          setHasNextPage(true);
+        }
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 export function generatePageNumbers(currentPage, totalPages) {
   const pageNumbers = [];
   const maxPagesToShow = 5;

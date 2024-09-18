@@ -27,7 +27,7 @@ const HomePage = () => {
           content="Textured. Minimalistic. Art."
         />
         <meta property="og:url" content="http://angelinartgallery.com/" />
-        <meta property="og:image" content="/assets/webp/image_home.webp" />
+        <meta property="og:image" content="/assets/image_home.png" />
       </Head>
       <Home products={products} />
     </Fragment>
