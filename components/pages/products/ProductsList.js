@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-const ProductsList = ({ products }) => {
+const ProductsList = ({ products, currentPage }) => {
   return (
     <motion.ul
       className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 items-top justify-center overflow-hidden"
@@ -31,7 +31,13 @@ const ProductsList = ({ products }) => {
             },
           }}
         >
-          <Link className="flex flex-col" href={`/products/${product.id}`}>
+          <Link
+            className="flex flex-col"
+            href={{
+              pathname: `/products/${product.id}`,
+              query: { page: currentPage },
+            }}
+          >
             <img
               className="w-[16.25em] h-[18.125em] object-cover object-center"
               src={product.coverImage}

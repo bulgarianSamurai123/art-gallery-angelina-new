@@ -1,6 +1,7 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Head from "next/head";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 import { getProductById, getProducts } from "/helpers/api-util";
 import Section from "../../components/layout/Section";
@@ -9,8 +10,9 @@ import FeaturedProducts from "../../components/pages/products/FeaturedProducts";
 import { getFeaturedProducts } from "../../helpers/api-util";
 import BackButton from "../../components/ui/Buttons/BackButton";
 
-const ProductDetailPage = ({ selectedProduct, featuredProducts }) => {
+const ProductDetailPage = ({ selectedProduct, featuredProducts, currentPage }) => {
   const product = selectedProduct;
+  const router = useRouter();
 
   return (
     <Fragment>
@@ -46,7 +48,7 @@ const ProductDetailPage = ({ selectedProduct, featuredProducts }) => {
       </Head>
       <Section>
         <div className="pb-10">
-          <BackButton link={"/products"} />
+          <BackButton link={`/products?page=${router.query.page}`} />
         </div>
         <Product product={product} />
         <motion.div
@@ -64,7 +66,7 @@ const ProductDetailPage = ({ selectedProduct, featuredProducts }) => {
 };
 
 export async function getStaticProps(context) {
-  const productID = context.params.slug;
+  const productID = context.params.slug;  
   const product = await getProductById(productID);
   const featuredProducts = await getFeaturedProducts();
 

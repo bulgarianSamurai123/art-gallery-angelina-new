@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 import Section from "../../components/layout/Section";
 import ProductsList from "../../components/pages/products/ProductsList";
@@ -17,9 +18,12 @@ import {
 const ProductPage = ({ products: firstProduct }) => {
   const [toggle, setToggle] = useState(false);
 
+  const router = useRouter();
+  const { page } = router.query;
+
   const [products, setProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(Number(page) || 1);
+  const [productsPerPage] = useState(2);
   const [totalPages, setTotalPages] = useState(0);
   const [hasNextPage, setHasNextPage] = useState(true);
 
@@ -118,11 +122,16 @@ const ProductPage = ({ products: firstProduct }) => {
           Творби
         </h1>
         {products.length < 1 && <p>Зарежда се...</p>}
-        {products.length >= 1 && <ProductsList products={products} />}
+        {products.length >= 1 && (
+          <ProductsList products={products} currentPage={currentPage} />
+        )}
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
-          setCurrentPage={setCurrentPage}
+          setCurrentPage={(page) => {
+            setCurrentPage(page);
+            router.push(`/products?page=${page}`);
+          }}
           hasNextPage={hasNextPage}
         />
       </Section>
