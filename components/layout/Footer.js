@@ -7,7 +7,7 @@ const myFont = localFont({ src: "../../public/fonts/BrittanySignature.ttf" });
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col md:flex-row justify-between items-start md:items-center gap-10 md:gap-20 xl:gap-80 bg-gray-820 py-16 px-10 md:px-32">
+    <footer className="flex flex-col md:flex-row justify-between items-start md:items-center gap-10 md:gap-20 xl:gap-80 bg-gray-820 pt-16 pb-28 px-10 md:px-32">
       <Link
         className={`text-4xl w-[15rem] text-center ${myFont.className}`}
         href="/"

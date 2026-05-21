@@ -63,6 +63,48 @@ export function getProductsQuery(
     });
 }
 
+export function getProjectsQuery(
+  currentPage,
+  projectsPerPage,
+  setProjects,
+  setTotalPages,
+  setHasNextPage,
+) {
+  const dbRef = ref(db);
+  const startIndex = (currentPage - 1) * projectsPerPage;
+  const endIndex = startIndex + projectsPerPage;
+
+  let productFetchQuery = query(
+    child(dbRef, process.env.firebase_project_db_name),
+    orderByChild("id")
+  );
+
+  get(productFetchQuery)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const projectsArray = Object.values(snapshot.val());
+        projectsArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        const paginatedProjects = projectsArray.slice(startIndex, endIndex);
+        setProjects(paginatedProjects);
+
+        const totalPages = Math.ceil(projectsArray.length / projectsPerPage);
+        setTotalPages(totalPages);
+
+        if (projectsArray.length <= endIndex) {
+          setHasNextPage(false);
+        } else {
+          setHasNextPage(true);
+        }
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 export function getGalleryQuery(
   currentPage,
   galleryPerPage,

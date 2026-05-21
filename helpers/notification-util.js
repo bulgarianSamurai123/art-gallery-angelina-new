@@ -25,16 +25,16 @@ export function notificationHandler(
     if (requestStatus === "pending") {
       notification = {
         status: "pending",
-        title: "Добавяне на продукт...",
-        message: "Продуктът се добавя!",
+        title: "Добавяне...",
+        message: "Добавя се!",
       };
     }
 
     if (requestStatus === "success") {
       notification = {
         status: "success",
-        title: "Продуктът добавен!",
-        message: "Продуктът бе добавен успешно!",
+        title: "Добавен!",
+        message: "Добавен успешно!",
       };
     }
   }

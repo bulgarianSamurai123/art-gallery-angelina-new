@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { getSession, signIn } from "next-auth/client";
 import { useRouter } from "next/router";
+
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../helpers/firebase";
 
 import InputContainer from "../components/ui/form/InputContainer";
 import Button from "../components/ui/Button";
@@ -8,20 +10,22 @@ import Button from "../components/ui/Button";
 const LogInPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const router = useRouter()
 
   async function submitHandler(event) {
     event.preventDefault();
 
-    const result = await signIn("credentials", {
-      redirect: false,
-      username: username,
-      password: password,
-    });
+    setError("");
+    
+    try {
+      await signInWithEmailAndPassword(auth, username, password);
 
-    if (!result.error) {
-      router.replace('/admin')
+      router.push("/admin");
+    } catch (err) {
+      setError(err.message || "Login failed");
+      console.error("Login error:", err);
     }
   }
 
@@ -67,22 +71,5 @@ const LogInPage = () => {
     </section>
   );
 };
-
-export async function getServerSideProps(context) {
-  const session = await getSession({ req: context.req });
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
-}
 
 export default LogInPage;

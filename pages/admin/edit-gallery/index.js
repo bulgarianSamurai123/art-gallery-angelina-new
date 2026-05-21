@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { getSession } from "next-auth/client";
 import { deleteObject, ref } from "firebase/storage";
+
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../helpers/firebase";
+import { isAdmin } from "../../../helpers/admin-check";
 
 import { storage } from "../../../helpers/firebase";
 import { getGallery } from "../../../helpers/api-util";
@@ -29,6 +32,21 @@ const EditGallery = ({ galleryImages }) => {
   }, [galleryImages]);
 
   useEffect(() => {
+    return onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        router.replace("/log-in");
+        return;
+      }
+
+      const admin = await isAdmin(user.uid);
+      if (!admin) {
+        router.replace("/");
+        return;
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     if (requestStatus === "success" || requestStatus === "error") {
       const timer = setTimeout(() => {
         setRequestStatus(null);
@@ -44,7 +62,7 @@ const EditGallery = ({ galleryImages }) => {
 
     try {
       const response = await fetch(
-        `https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/gallery/${itemId}.json`
+        `https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/gallery/${itemId}.json`,
       );
 
       if (!response.ok) {
@@ -59,7 +77,7 @@ const EditGallery = ({ galleryImages }) => {
         `https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/gallery/${itemId}.json`,
         {
           method: "DELETE",
-        }
+        },
       );
 
       if (!deleteResponse.ok) {
@@ -71,7 +89,7 @@ const EditGallery = ({ galleryImages }) => {
       await deleteObject(imageRef);
 
       setProductList((prevGalleryImage) =>
-        prevGalleryImage.filter((gallery) => gallery.name !== itemId)
+        prevGalleryImage.filter((gallery) => gallery.name !== itemId),
       );
 
       setRequestStatus("success");
@@ -88,7 +106,7 @@ const EditGallery = ({ galleryImages }) => {
     requestStatus,
     notification,
     requestError,
-    "remove"
+    "remove",
   );
 
   return (
@@ -135,23 +153,12 @@ const EditGallery = ({ galleryImages }) => {
   );
 };
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   const galleryImages = await getGallery();
-  const session = await getSession({ req: context.req });
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/log-in",
-        permanent: false,
-      },
-    };
-  }
 
   return {
     props: {
       galleryImages: galleryImages,
-      session,
     },
   };
 }

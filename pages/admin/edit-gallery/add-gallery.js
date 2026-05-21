@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { getSession } from "next-auth/client";
+
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../helpers/firebase";
+import { isAdmin } from "../../../helpers/admin-check";
 
 import { storage } from "../../../helpers/firebase";
 import { notificationHandler } from "../../../helpers/notification-util";
@@ -28,6 +31,21 @@ const AddGallery = () => {
     }
   }, [requestStatus]);
 
+  useEffect(() => {
+    return onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        router.replace("/log-in");
+        return;
+      }
+
+      const admin = await isAdmin(user.uid);
+      if (!admin) {
+        router.replace("/");
+        return;
+      }
+    });
+  }, []);
+
   async function responseHandler(name, imageUrl, date) {
     const response = await fetch(
       `https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/gallery/${name}.json`,
@@ -41,7 +59,7 @@ const AddGallery = () => {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     const data = await response.json();
@@ -78,7 +96,7 @@ const AddGallery = () => {
             responseHandler(name, downloadURL, insertedDate);
             setRequestStatus("success");
           });
-        }
+        },
       );
     } catch (error) {
       setRequestStatus("error");
@@ -92,7 +110,7 @@ const AddGallery = () => {
     requestStatus,
     notification,
     requestError,
-    "add"
+    "add",
   );
 
   return (
@@ -141,24 +159,5 @@ const AddGallery = () => {
     </Section>
   );
 };
-
-export async function getServerSideProps(context) {
-  const session = await getSession({ req: context.req });
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/log-in",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {
-      session,
-    },
-  };
-}
 
 export default AddGallery;

@@ -21,6 +21,29 @@ export async function getProducts() {
   return sortedData;
 }
 
+export async function getProjects() {
+  const connectionString = `${process.env.firebase_projects_url}.json`;
+  const response = await fetch(connectionString);
+
+  const data = await response.json();
+
+  const projects = [];
+
+  for (const key in data) {
+    const project = data[key];
+    const dateObject = new Date(project.date);
+    projects.push({
+      id: key,
+      ...data[key],
+      timestamp: dateObject.getTime(),
+    });
+  }
+
+  const sortedData = projects.sort((a, b) => b.timestamp - a.timestamp);
+
+  return sortedData;
+}
+
 export async function getFeaturedProducts() {
   const allProducts = await getProducts();
   return allProducts.filter((product) => product.isFeatured);

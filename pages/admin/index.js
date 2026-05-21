@@ -1,8 +1,11 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { getSession } from "next-auth/client";
+
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../helpers/firebase";
+import { isAdmin } from "../../helpers/admin-check";
 
 import Section from "../../components/layout/Section";
 
@@ -12,6 +15,21 @@ const AdminPage = () => {
   const navigateHandler = (url) => {
     router.push(url);
   };
+
+  useEffect(() => {
+    return onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        router.replace("/log-in");
+        return;
+      }
+
+      const admin = await isAdmin(user.uid);
+      if (!admin) {
+        router.replace("/");
+        return;
+      }
+    });
+  }, []);
 
   return (
     <Fragment>
@@ -23,7 +41,7 @@ const AdminPage = () => {
           Избери опция
         </h1>
 
-        <div className="flex flex-row gap-10 justify-center pb-20">
+        <div className="flex flex-row gap-10 justify-center mb-48">
           <motion.button
             className="flex flex-row gap-1 border-gray-380 border-2 px-5 py-2 rounded-xl text-gray-380"
             onClick={() => navigateHandler("/admin/edit-product")}
@@ -38,27 +56,17 @@ const AdminPage = () => {
           >
             Коригирай галерни снимки
           </motion.button>
+          <motion.button
+            className="flex flex-row gap-1 border-gray-380 border-2 px-5 py-2 rounded-xl text-gray-380"
+            onClick={() => navigateHandler("/admin/edit-projects")}
+            whileHover={{ backgroundColor: "#626262", color: "#fff" }}
+          >
+            Коригирай реклами
+          </motion.button>
         </div>
       </Section>
     </Fragment>
   );
 };
-
-export async function getServerSideProps(context) {
-  const session = await getSession({ req: context.req });
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/log-in",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
-}
 
 export default AdminPage;

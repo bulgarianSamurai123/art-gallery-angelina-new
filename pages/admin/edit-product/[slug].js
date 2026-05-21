@@ -2,6 +2,10 @@ import React, { useState, useEffect, Fragment } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { getSession } from "next-auth/client";
 
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../helpers/firebase";
+import { isAdmin } from "../../../helpers/admin-check";
+
 import { storage } from "../../../helpers/firebase";
 import { notificationHandler } from "../../../helpers/notification-util";
 import { getProductById, getProducts } from "../../../helpers/api-util";
@@ -17,41 +21,56 @@ import Head from "next/head";
 
 const EditProductData = ({ selectedProduct }) => {
   const { image, setImage, nameRef } = useImage(
-    selectedProduct ? selectedProduct.coverImage : null
+    selectedProduct ? selectedProduct.coverImage : null,
   );
 
   const [images, setImages] = useState(
-    selectedProduct ? selectedProduct.coverImage : null
+    selectedProduct ? selectedProduct.coverImage : null,
   );
   const [imageIsChanged, setImageIsChanged] = useState(false);
 
   const [name, setName] = useState(
-    selectedProduct ? selectedProduct.name : null
+    selectedProduct ? selectedProduct.name : null,
   );
   const [id, setId] = useState(selectedProduct ? selectedProduct.id : null);
   const [price, setPrice] = useState(
-    selectedProduct ? selectedProduct.price : null
+    selectedProduct ? selectedProduct.price : null,
   );
   const [description, setDescription] = useState(
-    selectedProduct ? selectedProduct.description : null
+    selectedProduct ? selectedProduct.description : null,
   );
   const [isFeatured, setIsFeatured] = useState(
-    selectedProduct ? selectedProduct.isFeatured : null
+    selectedProduct ? selectedProduct.isFeatured : null,
   );
 
   const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
   const [requestError, setRequestError] = useState();
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
+  // useEffect(() => {
+  //   getSession().then((session) => {
+  //     if (!session) {
+  //       window.location.href = "/log-in";
+  //     } else {
+  //       setIsLoading(false);
+  //     }
+  //   });
+  // }, []);
+
   useEffect(() => {
-    getSession().then((session) => {
-      if (!session) {
-        window.location.href = "/log-in";
-      } else {
-        setIsLoading(false);
+    return onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        router.replace("/log-in");
+        return;
+      }
+
+      const admin = await isAdmin(user.uid);
+      if (!admin) {
+        router.replace("/");
+        return;
       }
     });
   }, []);
@@ -79,7 +98,7 @@ const EditProductData = ({ selectedProduct }) => {
       for (const image of images) {
         const imageRef = ref(
           storage,
-          `${process.env.firebase_storage}/${id}/${image.name}`
+          `${process.env.firebase_storage}/${id}/${image.name}`,
         );
         const uploadImage = uploadBytesResumable(imageRef, image);
 
@@ -105,14 +124,14 @@ const EditProductData = ({ selectedProduct }) => {
                       description,
                       urls,
                       isFeatured,
-                      editDate
+                      editDate,
                     );
                     setRequestStatus("success");
                     router.push("/admin/edit-product");
                   }
-                }
+                },
               );
-            }
+            },
           );
         } catch (error) {
           setRequestStatus("error");
@@ -127,7 +146,7 @@ const EditProductData = ({ selectedProduct }) => {
         description,
         images,
         isFeatured,
-        editDate
+        editDate,
       );
       setRequestStatus("success");
       router.push("/admin/edit-product");
@@ -140,7 +159,7 @@ const EditProductData = ({ selectedProduct }) => {
     requestStatus,
     notification,
     requestError,
-    "update"
+    "update",
   );
 
   if (isLoading) {
@@ -175,7 +194,8 @@ const EditProductData = ({ selectedProduct }) => {
           </InputContainer>
           <InputContainer>
             <label htmlFor="product-id">
-              Enter Product Id (how it will be displayed in the search bar):{" "}
+              Enter Product Id (how it will be displayed in the search
+              bar):{" "}
             </label>
             <input
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"

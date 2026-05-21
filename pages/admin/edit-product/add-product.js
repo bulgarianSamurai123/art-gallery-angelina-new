@@ -1,18 +1,24 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { getSession } from "next-auth/client";
+import { useRouter } from "next/router";
+
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../helpers/firebase";
+import { isAdmin } from "../../../helpers/admin-check";
 
 import { storage } from "../../../helpers/firebase";
 import { notificationHandler } from "../../../helpers/notification-util";
-import InputContainer from "../../../components/ui/form/InputContainer";
-import Button from "../../../components/ui/Button";
-import Section from "../../../components/layout/Section";
-import BackButton from "../../../components/ui/Buttons/BackButton";
-import Notification from "../../../components/ui/Notification";
+import InputContainer from "../../../components/ui/form/InputContainer"; //
+import Button from "../../../components/ui/Button"; //
+import Section from "../../../components/layout/Section"; //
+import BackButton from "../../../components/ui/Buttons/BackButton"; //
+import Notification from "../../../components/ui/Notification"; //
 import useImage from "../../../hooks/use-image";
 import Head from "next/head";
 
 const AddProductPage = () => {
+  const router = useRouter();
+
   const { imageRef: nameRef } = useImage();
 
   const [images, setImages] = useState([]);
@@ -36,6 +42,21 @@ const AddProductPage = () => {
     }
   }, [requestStatus]);
 
+  useEffect(() => {
+    return onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        router.replace("/log-in");
+        return;
+      }
+
+      const admin = await isAdmin(user.uid);
+      if (!admin) {
+        router.replace("/");
+        return;
+      }
+    });
+  }, []);
+
   async function responseHandler(
     id,
     name,
@@ -43,7 +64,7 @@ const AddProductPage = () => {
     description,
     imageUrls,
     isFeatured,
-    date
+    date,
   ) {
     const response = await fetch(
       `${process.env.firebase_products_url}/${id}.json`,
@@ -61,7 +82,7 @@ const AddProductPage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     const data = await response.json();
@@ -84,7 +105,7 @@ const AddProductPage = () => {
     for (const image of images) {
       const imageRef = ref(
         storage,
-        `${process.env.firebase_storage}/${id}/${image.name}`
+        `${process.env.firebase_storage}/${id}/${image.name}`,
       );
       const uploadImage = uploadBytesResumable(imageRef, image);
 
@@ -109,13 +130,13 @@ const AddProductPage = () => {
                     description,
                     urls,
                     isFeatured,
-                    insertedDate
+                    insertedDate,
                   );
                   setRequestStatus("success");
                 }
-              }
+              },
             );
-          }
+          },
         );
       } catch (error) {
         setRequestStatus("error");
@@ -130,7 +151,7 @@ const AddProductPage = () => {
     requestStatus,
     notification,
     requestError,
-    "add"
+    "add",
   );
 
   return (
@@ -233,24 +254,5 @@ const AddProductPage = () => {
     </Fragment>
   );
 };
-
-export async function getServerSideProps(context) {
-  const session = await getSession({ req: context.req });
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/log-in",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {
-      session,
-    },
-  };
-}
 
 export default AddProductPage;

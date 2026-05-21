@@ -12,6 +12,10 @@ const AddButton = ({ navigate, buttonType }) => {
     link = "/admin/edit-product/add-product"
   }
 
+  if (buttonType === 'projects') {
+    link = "/admin/edit-projects/add-projects"
+  }
+
   return (
     <motion.button
       className="flex flex-row gap-1 border-forest-green border-2 px-5 py-2 rounded-xl text-forest-green"
@@ -23,6 +27,7 @@ const AddButton = ({ navigate, buttonType }) => {
       </svg>
       {buttonType === 'gallery' && 'Добави галерна снимка'}
       {buttonType === 'product' && 'Добави продукт'}
+      {buttonType === 'projects' && 'Добави проект'}
     </motion.button>
   );
 };
