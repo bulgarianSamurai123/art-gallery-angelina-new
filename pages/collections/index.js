@@ -65,7 +65,7 @@ useEffect(() => {
       </Head>
       <Section>
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-          Реклами
+          Частни Колекции
         </h1>
 
         {projects.length < 1 && <p>Зарежда се...</p>}

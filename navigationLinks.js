@@ -3,5 +3,5 @@ export const navigationLinks = [
   { id: "products", destination: "/products", title: "Творби" },
   { id: "contact-us", destination: "/contact-us", title: "Контакти" },
   { id: "gallery", destination: "/gallery", title: "Галерия готови проекти" },
-  { id: "projects", destination: "/projects", title: "Проекти" },
+  { id: "projects", destination: "/collections", title: "Частни Колекции" },
 ];
