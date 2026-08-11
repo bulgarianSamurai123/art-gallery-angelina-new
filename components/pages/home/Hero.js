@@ -19,7 +19,8 @@ const Hero = () => {
   return (
     <div className="pb-36">
       <Image
-        src="/assets/webp/image_home.webp"
+        // src="/assets/webp/image_home.webp"
+        src="/assets/image_home_new.png"
         alt="Home Page Image"
         width={100}
         height={100}
