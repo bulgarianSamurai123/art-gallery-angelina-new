@@ -1,16 +1,19 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 import CustomDropDownLink from "../ui/navigation/CustomDropDownLink";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const NavBarDropdown = ({
   router,
   toggleDropdown,
   setToggleDropdown,
-  isLoggedIn,
   links,
 }) => {
+  const t = useTranslations("Nav");
+
   return (
     <motion.div
       className="pt-6 absolute z-10 top-0 left-0 w-full h-1/2 bg-white md:hidden"
@@ -30,7 +33,7 @@ const NavBarDropdown = ({
         <Image
           className={`w-8 h-auto ${toggleDropdown ? "block" : "hidden"}`}
           src="/assets/close.svg"
-          alt="Close Icon"
+          alt={t("close")}
           width={30}
           height={30}
           onClick={() => setToggleDropdown(false)}
@@ -44,9 +47,13 @@ const NavBarDropdown = ({
             destination={link.destination}
             closeDropdown={() => setToggleDropdown(false)}
           >
-            {link.title}
+            {t(link.key)}
           </CustomDropDownLink>
         ))}
+        <LanguageSwitcher
+          className="justify-center text-xl mt-2"
+          onSwitch={() => setToggleDropdown(false)}
+        />
       </div>
     </motion.div>
   );

@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 const RadioPlayer = () => {
+  const t = useTranslations("Radio");
   const audioRef = useRef(null);
   const hasStarted = useRef(false);
   const [volume, setVolume] = useState(0.5);
@@ -93,7 +95,7 @@ const RadioPlayer = () => {
         >
           <div className="bg-[rgba(0,0,0,0.75)] backdrop-blur-md text-white py-5 px-7 rounded-2xl text-center text-sm animate-[fadeIn_0.4s_ease]">
             <span className="text-2xl block mb-2">🎵</span>
-            <p>Tap anywhere to enable ambient audio</p>
+            <p>{t("hint")}</p>
           </div>
         </div>
       )}
@@ -103,14 +105,14 @@ const RadioPlayer = () => {
 
         <div className="flex items-center gap-4 bg-[#111] text-white p-4 max-w-full w-full shadow-[0_10px_30px_rgba(0,0,0,0.3)]">
           <div className="flex-1 flex flex-col">
-            <span className="font-semibold text-base">🎨 Gallery Radio</span>
-            <span className="text-sm opacity-70">Ambient Art Music</span>
+            <span className="font-semibold text-base">🎨 {t("title")}</span>
+            <span className="text-sm opacity-70">{t("subtitle")}</span>
           </div>
 
           <button
             onClick={togglePlay}
             className={`w-12 h-12 rounded-[50%] border-none cursor-pointer text-lg bg-white text-[#111] active:transform-[scale(1.05)] active:bg-[#f2f2f2] ${isPlaying ? "pause" : "play"}`}
-            aria-label={isPlaying ? "Pause radio" : "Play radio"}
+            aria-label={isPlaying ? t("pause") : t("play")}
           >
             {isPlaying ? "❚❚" : "▶"}
           </button>
@@ -123,7 +125,7 @@ const RadioPlayer = () => {
             value={volume}
             onChange={handleVolumeChange}
             className="w-20"
-            aria-label="Volume"
+            aria-label={t("volume")}
           />
         </div>
       </div>
@@ -132,14 +134,14 @@ const RadioPlayer = () => {
 
         <div className="flex items-center gap-4 bg-[#111] text-white p-4 max-w-full w-full shadow-[0_10px_30px_rgba(0,0,0,0.3)]">
           <div className="flex-1 flex flex-col">
-            <span className="font-semibold text-base">🎨 Angelina's Radio</span>
-            <span className="text-sm opacity-70">Ambient Art Music</span>
+            <span className="font-semibold text-base">🎨 {t("title")}</span>
+            <span className="text-sm opacity-70">{t("subtitle")}</span>
           </div>
 
           <button
             onClick={togglePlay}
             className={`w-12 h-12 rounded-[50%] border-none cursor-pointer text-lg bg-white text-[#111] active:transform-[scale(1.05)] active:bg-[#f2f2f2] ${isPlaying ? "pause" : "play"}`}
-            aria-label={isPlaying ? "Pause radio" : "Play radio"}
+            aria-label={isPlaying ? t("pause") : t("play")}
           >
             {isPlaying ? "❚❚" : "▶"}
           </button>
@@ -152,7 +154,7 @@ const RadioPlayer = () => {
             value={volume}
             onChange={handleVolumeChange}
             className="w-20"
-            aria-label="Volume"
+            aria-label={t("volume")}
           />
         </div>
       </div>

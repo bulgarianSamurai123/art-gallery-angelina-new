@@ -1,0 +1,103 @@
+{
+  "Meta": {
+    "siteName": "Angelina's Art Gallery",
+    "siteDescription": "Angelina's Art Gallery – textured, minimalist, handmade wall art and paintings.",
+    "homeOgDescription": "Textured. Minimalistic. Art.",
+    "contactTitle": "Angelina's Art Gallery - Contact",
+    "contactDescription": "Contact us for any information or to place an order.",
+    "galleryTitle": "Angelina's Art Gallery - Gallery",
+    "galleryDescription": "See our artworks in the homes of hundreds of clients.",
+    "productsTitle": "Angelina's Art Gallery - Artworks",
+    "productsDescription": "Original wall art and paintings, made to order.",
+    "collectionsTitle": "Angelina's Art Gallery - Private Collections",
+    "collectionsDescription": "Private collections and projects by Angelina's Art Gallery."
+  },
+  "Nav": {
+    "home": "Home",
+    "products": "Artworks",
+    "contact": "Contact",
+    "gallery": "Finished Projects Gallery",
+    "collections": "Private Collections",
+    "menu": "Menu",
+    "close": "Close",
+    "language": "Language"
+  },
+  "Footer": {
+    "usefulLinks": "Useful links",
+    "gallery": "Finished Projects Gallery",
+    "orderPanel": "Order an artwork",
+    "socialMedia": "Social media"
+  },
+  "Home": {
+    "heroButton": "View all artworks",
+    "highlights": "Highlights",
+    "noProducts": "No products",
+    "missionTitle": "My mission",
+    "missionText": "My name is Angelina, and as a modern artist I strive for innovation and experiment with new techniques, materials and concepts. I want to challenge traditional norms and offer you something new and fresh that inspires, stimulates and enriches your inner world, while fitting harmoniously into the overall composition of your interior. I love exploring ideas and concepts, expressing them through abstraction, pop art, minimalism and more. I focus on the content and symbolism in my work, often aiming to challenge the minds of viewers as well as their senses, emotions and memories.",
+    "customTitle": "Custom artworks",
+    "customText": "Whether you are transforming a commercial space, designing an office or renovating your own home, Angelina’s Art Gallery artworks are an accessible and easy way to make any wall modern, distinctive and unique. Browse the artworks in the shop, choose the perfect texture and colors, give me your size requirements and tell a story with a large, unique, original artwork made to order. Press the button below to fill in a form and get in touch with me. Don't miss the <link>Finished Projects Gallery</link> section, where you'll find the perfect reference of artworks that have already found their wonderful home and unique place in it, and get inspired to travel, dream, dare and achieve! Be blessed!",
+    "contactButton": "Contact",
+    "facebookTitle": "FOLLOW ME ON FACEBOOK",
+    "likes": "24K likes",
+    "followers": "24K followers",
+    "follow": "Follow"
+  },
+  "Radio": {
+    "hint": "Tap anywhere to enable ambient audio",
+    "title": "Angelina's Radio",
+    "subtitle": "Ambient Art Music",
+    "play": "Play radio",
+    "pause": "Pause radio",
+    "volume": "Volume"
+  },
+  "NotFound": {
+    "message": "Page not found",
+    "backHome": "Back to home"
+  },
+  "Contact": {
+    "title": "Contact form",
+    "name": "Name",
+    "nameError": "Please enter a valid name!",
+    "email": "Email",
+    "emailError": "Please enter a valid email!",
+    "phone": "Phone",
+    "phoneError": "Please enter a valid phone number!",
+    "message": "Message",
+    "messageError": "Please enter a message!",
+    "messagePlaceholder": "Enter your message.",
+    "consent": "By clicking \"Send\" I agree to my data being processed",
+    "send": "Send",
+    "pendingTitle": "Sending your message...",
+    "pendingMessage": "Your message is on its way!",
+    "successTitle": "Delivered!",
+    "successMessage": "Your message was sent successfully!",
+    "errorTitle": "Error!",
+    "errorMessage": "Something went wrong. Please try again."
+  },
+  "Gallery": {
+    "title": "Gallery"
+  },
+  "Products": {
+    "title": "Artworks",
+    "loading": "Loading...",
+    "filter": "Filter",
+    "filterAbstract": "Abstract",
+    "filterFaces": "Faces",
+    "filterWinter": "Winter",
+    "filterSummer": "Summer",
+    "alsoLike": "You may also like",
+    "order": "Order",
+    "back": "Back"
+  },
+  "Collections": {
+    "title": "Private Collections",
+    "loading": "Loading..."
+  },
+  "Login": {
+    "title": "Log in",
+    "username": "Username",
+    "password": "Password",
+    "signIn": "Sign in",
+    "failed": "Login failed"
+  }
+}

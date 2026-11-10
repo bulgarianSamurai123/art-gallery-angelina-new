@@ -1,17 +1,22 @@
 import { useEffect } from "react";
 import Head from "next/head";
 import Script from "next/script";
-import { Provider } from "next-auth/client";
 import { useRouter } from "next/router";
+import { NextIntlClientProvider } from "next-intl";
 
 import "/styles/globals.css";
 
 import Layout from "../components/layout/Layout";
 import { DataProvider } from "../context/DataCotext";
 import { pageview } from "../helpers/gtag";
+import bg from "../messages/bg.json";
+import en from "../messages/en.json";
+
+const allMessages = { bg, en };
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
+  const locale = router.locale || "bg";
 
   useEffect(() => {
     const handleRouteChange = (url) => {
@@ -24,7 +29,11 @@ export default function App({ Component, pageProps }) {
   }, [router.events]);
 
   return (
-    <Provider session={pageProps.session}>
+    <NextIntlClientProvider
+      locale={locale}
+      messages={allMessages[locale] || bg}
+      timeZone="Europe/Sofia"
+    >
       <Layout>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
@@ -43,7 +52,10 @@ export default function App({ Component, pageProps }) {
         </Script>
         <Head>
           <title>Angelina's Art Gallery</title>
-          <meta name="description" content="Angelina's Art Gallery" />
+          <meta
+            name="description"
+            content={(allMessages[locale] || bg).Meta.siteDescription}
+          />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -73,6 +85,6 @@ export default function App({ Component, pageProps }) {
           </DataProvider>
         </main>
       </Layout>
-    </Provider>
+    </NextIntlClientProvider>
   );
 }

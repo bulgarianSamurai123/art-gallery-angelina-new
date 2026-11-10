@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import useInput from "../../../hooks/use-input";
-import { notificationHandler } from "../../../helpers/notification-util";
 import Input from "/components/ui/form/Input";
 import Notification from "../../ui/Notification";
 import { sendForm } from "../../../helpers/api-util";
@@ -10,6 +10,7 @@ import DataContext from "../../../context/DataCotext";
 
 const ContactForm = () => {
   const { sharedData } = useContext(DataContext);
+  const t = useTranslations("Contact");
 
   let regTel =
     /(?:([+]\d{1,4})[-.\s]?)?(?:[(](\d{1,3})[)][-.\s]?)?(\d{1,4})[-.\s]?(\d{1,4})[-.\s]?(\d{1,9})/;
@@ -119,12 +120,27 @@ const ContactForm = () => {
   }
 
   let notification;
-  notification = notificationHandler(
-    requestStatus,
-    notification,
-    requestError,
-    "contact"
-  );
+  if (requestStatus === "pending") {
+    notification = {
+      status: "pending",
+      title: t("pendingTitle"),
+      message: t("pendingMessage"),
+    };
+  }
+  if (requestStatus === "success") {
+    notification = {
+      status: "success",
+      title: t("successTitle"),
+      message: t("successMessage"),
+    };
+  }
+  if (requestStatus === "error") {
+    notification = {
+      status: "error",
+      title: t("errorTitle"),
+      message: t("errorMessage"),
+    };
+  }
 
   return (
     <>
@@ -132,55 +148,53 @@ const ContactForm = () => {
         <Input
           for="name"
           invalidPropHandler={invalidNameHandler}
-          label="Име"
+          label={t("name")}
           type="text"
           val={name}
           inputHandler={nameInputHandler}
           blurHandler={nameInputBlurHandler}
-          errorMessage="Името не е валидно!"
+          errorMessage={t("nameError")}
         />
         <Input
           for="email"
           invalidPropHandler={invalidEmailHandler}
-          label="Имейл"
+          label={t("email")}
           type="email"
           val={email}
           inputHandler={emailInputHandler}
           blurHandler={emailInputBlurHandler}
-          errorMessage="Имейла не е валиден!"
+          errorMessage={t("emailError")}
         />
         <Input
           for="tel"
           invalidPropHandler={invalidTelHandler}
-          label="Телефон"
+          label={t("phone")}
           type="tel"
           val={tel}
           inputHandler={telInputHandler}
           blurHandler={telInputBlurHandler}
-          errorMessage="Телефонът не е валиден!"
+          errorMessage={t("phoneError")}
         />
         <Input
           for="message"
           invalidPropHandler={invalidMessageHandler}
-          label="Съобщение"
+          label={t("message")}
           type="text"
           val={message}
           inputHandler={messageInputHandler}
           blurHandler={messageInputBlurHandler}
-          errorMessage="Съобщението не е валидно!"
+          errorMessage={t("messageError")}
+          placeholder={t("messagePlaceholder")}
           textarea
         />
         <div className="flex flex-row justify-between items-center text-center">
-          <p>
-            С натискане на "Изпрати" се съгласявам данните ми да бъдат
-            обработени
-          </p>
+          <p>{t("consent")}</p>
           <button
             className={`mt-3 bg-gray-730 enabled:hover:bg-gray-800 enabled:active:bg-gray-600 disabled:text-gray-490 px-7 py-2 rounded-xl`}
             type="submit"
             disabled={!formIsValid}
           >
-            Изпрати
+            {t("send")}
           </button>
         </div>
       </form>

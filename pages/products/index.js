@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useTranslations } from "next-intl";
 
 import Section from "../../components/layout/Section";
 import ProductsList from "../../components/pages/products/ProductsList";
@@ -19,6 +20,8 @@ const ProductPage = ({ products: firstProduct }) => {
   const [toggle, setToggle] = useState(false);
 
   const router = useRouter();
+  const t = useTranslations("Products");
+  const tMeta = useTranslations("Meta");
   const { page } = router.query;
 
   const [products, setProducts] = useState([]);
@@ -39,22 +42,22 @@ const ProductPage = ({ products: firstProduct }) => {
 
   const filters = [
     {
-      name: "Абстракций",
+      name: t("filterAbstract"),
       check: abstractChecked,
       toggleCheck: toggleAbstractCheck,
     },
     {
-      name: "Лица",
+      name: t("filterFaces"),
       check: faceChecked,
       toggleCheck: toggleFaceCheck,
     },
     {
-      name: "Зима",
+      name: t("filterWinter"),
       check: winterChecked,
       toggleCheck: toggleWinterCheck,
     },
     {
-      name: "Лято",
+      name: t("filterSummer"),
       check: summerChecked,
       toggleCheck: toggleSummerCheck,
     },
@@ -84,7 +87,7 @@ const ProductPage = ({ products: firstProduct }) => {
   return (
     <Fragment>
       <Head>
-        <title>Angelina's Art Gallery - Products</title>
+        <title>{tMeta("productsTitle")}</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=5"
@@ -92,12 +95,12 @@ const ProductPage = ({ products: firstProduct }) => {
         <meta
           name="title"
           property="og:title"
-          content="Angelina's Art Gallery - Products"
+          content={tMeta("productsTitle")}
         />
         <meta
           name="description"
           property="og:description"
-          content="The best paintings you will find."
+          content={tMeta("productsDescription")}
         />
         <meta
           name="url"
@@ -119,9 +122,9 @@ const ProductPage = ({ products: firstProduct }) => {
         {toggle && <DropDown filters={filters} />}
 
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-          Творби
+          {t("title")}
         </h1>
-        {products.length < 1 && <p>Зарежда се...</p>}
+        {products.length < 1 && <p>{t("loading")}</p>}
         {products.length >= 1 && (
           <ProductsList products={products} currentPage={currentPage} />
         )}

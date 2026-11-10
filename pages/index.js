@@ -1,11 +1,13 @@
 import React, { Fragment, useEffect, useState } from "react";
 import Head from "next/head";
+import { useTranslations } from "next-intl";
 
 import Home from "../components/pages/home/Home";
 import { getFeaturedProductsQuery } from "../helpers/database-queries";
 
 const HomePage = () => {
   const [products, setProducts] = useState([])
+  const tMeta = useTranslations("Meta");
 
   useEffect(() => {
     getFeaturedProductsQuery(setProducts)
@@ -24,7 +26,7 @@ const HomePage = () => {
         <meta property="og:title" content="Angelina's Art Gallery" />
         <meta
           property="og:description"
-          content="Textured. Minimalistic. Art."
+          content={tMeta("homeOgDescription")}
         />
         <meta property="og:url" content="http://angelinartgallery.com/" />
         <meta property="og:image" content="/assets/image_home.png" />

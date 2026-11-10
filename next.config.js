@@ -1,9 +1,17 @@
 /** @type {import('next').NextConfig} */
 const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 
+// Bulgarian is the main language (no URL prefix), English lives under /en
+const i18n = {
+  locales: ["bg", "en"],
+  defaultLocale: "bg",
+  localeDetection: false,
+};
+
 const nextConfig = (phase) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
+      i18n,
       env: {
         mongodb_username: "markpetarpetrov",
         mongodb_password: "srt1fYxnHZp7jQ3v",
@@ -28,6 +36,7 @@ const nextConfig = (phase) => {
   }
 
   return {
+    i18n,
     env: {
       mongodb_username: "markpetarpetrov",
       mongodb_password: "srt1fYxnHZp7jQ3v",

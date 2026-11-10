@@ -2,11 +2,11 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
-import { useSession, signOut, signout } from "next-auth/client";
+import { useTranslations } from "next-intl";
 
 import NavLinks from "../navigation/NavLinks";
-import CustomLink from "../ui/navigation/CustomLink";
 import NavBarDropdown from "../navigation/NavDropdown";
+import LanguageSwitcher from "../navigation/LanguageSwitcher";
 import { navigationLinks } from "../../navigationLinks";
 
 import localFont from "next/font/local";
@@ -15,16 +15,11 @@ const myFont = localFont({ src: "../../public/fonts/BrittanySignature.ttf" });
 const MainNavigation = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const router = useRouter();
-
-  const [session, loading] = useSession();
+  const t = useTranslations("Nav");
 
   const dropdownHandler = () => {
     setToggleDropdown(!toggleDropdown);
   };
-
-  function logoutHandler() {
-    signOut();
-  }
 
   return (
     <nav className="flex justify-between items-center my-6 mx-8 md:mx-14 lg:mx-32">
@@ -37,19 +32,20 @@ const MainNavigation = () => {
           <NavLinks
             key={link.id}
             href={link.destination}
-            title={link.title}
+            title={t(link.key)}
             router={router}
           />
         ))}
       </ul>
 
       <div className="flex flex-row gap-5 items-center">
+        <LanguageSwitcher className="hidden md:flex" />
         <Image
           className={`block w-8 h-auto md:hidden ${
             toggleDropdown ? "hidden" : "block"
           }`}
           src="/assets/menu.svg"
-          alt="Menu Icon"
+          alt={t("menu")}
           width={30}
           height={30}
           onClick={dropdownHandler}
@@ -60,7 +56,6 @@ const MainNavigation = () => {
         <NavBarDropdown
           toggleDropdown={toggleDropdown}
           setToggleDropdown={setToggleDropdown}
-          isLoggedIn={session}
           router={router}
           links={navigationLinks}
         />

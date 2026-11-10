@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import Head from "next/head";
+import { useTranslations } from "next-intl";
 
 import { getGallery } from "../helpers/api-util";
 import { getGalleryQuery } from "../helpers/database-queries";
@@ -8,6 +9,8 @@ import Section from "../components/layout/Section";
 import Pagination from "../components/ui/Pagination";
 
 const GalleryPage = ({ galleryImages: gallery }) => {
+  const t = useTranslations("Gallery");
+  const tMeta = useTranslations("Meta");
   const [galleryImages, setGalleryImages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [galleryPerPage] = useState(10);
@@ -32,7 +35,7 @@ const GalleryPage = ({ galleryImages: gallery }) => {
   return (
     <Fragment>
       <Head>
-        <title>Angelina's Art Gallery - Gallery</title>
+        <title>{tMeta("galleryTitle")}</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=5"
@@ -40,12 +43,12 @@ const GalleryPage = ({ galleryImages: gallery }) => {
         <meta
           name="title"
           property="og:title"
-          content="Angelina's Art Gallery - Gallery"
+          content={tMeta("galleryTitle")}
         />
         <meta
           name="description"
           property="og:description"
-          content="Check out beautifully placed paintings in the homes of hondreds of clients."
+          content={tMeta("galleryDescription")}
         />
         <meta
           name="url"
@@ -58,7 +61,7 @@ const GalleryPage = ({ galleryImages: gallery }) => {
       </Head>
       <Section>
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-          Галерия
+          {t("title")}
         </h1>
         <GalleryList galleryImages={galleryImages} />
         <Pagination
