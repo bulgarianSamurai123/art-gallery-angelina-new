@@ -2,6 +2,7 @@ import React, { useContext, useState, Fragment } from "react";
 import { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
+import { useTranslations } from "next-intl";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -10,6 +11,7 @@ import "swiper/css/navigation";
 import Button from "../../ui/Button";
 import DataContext from "../../../context/DataCotext";
 import ProductModal from "../../layout/ProductModal";
+import { useLocalize } from "../../../helpers/localize";
 
 const Product = ({ product }) => {
   const [isPopup, setIsPopup] = useState(false);
@@ -19,6 +21,9 @@ const Product = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState();
   const { updateSharedData } = useContext(DataContext);
   const router = useRouter();
+  const t = useTranslations("Products");
+  const l = useLocalize();
+  const name = l(product, "name");
 
   const navigationHandler = () => {
     updateSharedData(product.id);
@@ -49,7 +54,7 @@ const Product = ({ product }) => {
                 <button onClick={() => openPopupHandler(image)}>
                   <img
                     src={image}
-                    alt={product.name}
+                    alt={name}
                     className="h-full w-full object-contain object-center"
                   />
                 </button>
@@ -65,13 +70,13 @@ const Product = ({ product }) => {
             <img
               className="w-[56em] h-[30em] md:h-[36em] object-cover object-center"
               src={product ? product.coverImage : null}
-              alt={product ? product.name : null}
+              alt={name}
             />
           </button>
         )}
 
         <div>
-          <h1 className="text-3xl">{product ? product.name : null}</h1>
+          <h1 className="text-3xl">{name}</h1>
           {product ? (
             <span className="text-xl font-light">
               {product.price === new RegExp("^[1-9]", "g")
@@ -80,9 +85,9 @@ const Product = ({ product }) => {
             </span>
           ) : null}
           <p className="text-base font-light text-gray-250">
-            {product ? product.description : null}
+            {l(product, "description")}
           </p>
-          <Button onClick={navigationHandler}>Поръчай</Button>
+          <Button onClick={navigationHandler}>{t("order")}</Button>
         </div>
       </div>
       {isPopup && (

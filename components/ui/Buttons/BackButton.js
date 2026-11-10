@@ -1,9 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import { useTranslations } from "next-intl";
 
 const BackButton = ({ link }) => {
   const router = useRouter();
+  const t = useTranslations("Products");
 
   const navigateHandler = (url) => {
     router.push(url);
@@ -25,7 +27,7 @@ const BackButton = ({ link }) => {
           d="m5 12l6-6m-6 6l6 6m-6-6h14"
         />
       </svg>
-      Назад
+      {t("back")}
     </motion.button>
   );
 };

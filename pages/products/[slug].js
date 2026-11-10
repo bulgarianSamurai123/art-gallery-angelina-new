@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import Head from "next/head";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import { useTranslations } from "next-intl";
 
 import { getProductById, getProducts } from "/helpers/api-util";
 import Section from "../../components/layout/Section";
@@ -9,25 +10,29 @@ import Product from "../../components/pages/products/Product";
 import FeaturedProducts from "../../components/pages/products/FeaturedProducts";
 import { getFeaturedProducts } from "../../helpers/api-util";
 import BackButton from "../../components/ui/Buttons/BackButton";
+import { localize } from "../../helpers/localize";
 
 const ProductDetailPage = ({ selectedProduct, featuredProducts, currentPage }) => {
   const product = selectedProduct;
   const router = useRouter();
+  const t = useTranslations("Products");
+  const name = localize(product, "name", router.locale);
+  const description = localize(product, "description", router.locale);
 
   return (
     <Fragment>
       <Head>
         {product ? (
-          <title>Angelina's Art Gallery - {product.name}</title>
+          <title>{`Angelina's Art Gallery - ${name}`}</title>
         ) : null}
         {product ? (
-          <meta name="title" property="og:title" content={product.name} />
+          <meta name="title" property="og:title" content={name} />
         ) : null}
         {product ? (
           <meta
             name="description"
             property="og:description"
-            content={product.description}
+            content={description}
           />
         ) : null}
         {product ? (
@@ -57,7 +62,7 @@ const ProductDetailPage = ({ selectedProduct, featuredProducts, currentPage }) =
           whileInView="onscreen"
           viewport={{ once: true, amount: 0.8 }}
         >
-          <h1 className="text-2xl">Може също така да харесате</h1>
+          <h1 className="text-2xl">{t("alsoLike")}</h1>
           <FeaturedProducts products={featuredProducts} motion={motion} />
         </motion.div>
       </Section>
@@ -79,12 +84,16 @@ export async function getStaticProps(context) {
   };
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales = ["bg"] }) {
   const allProducts = await getProducts();
 
-  const paths = allProducts.map((product) => ({
-    params: { slug: product.id },
-  }));
+  // Pre-render every product in every language (/products/x and /en/products/x)
+  const paths = allProducts.flatMap((product) =>
+    locales.map((locale) => ({
+      params: { slug: product.id },
+      locale,
+    }))
+  );
 
   return {
     paths: paths,

@@ -5,8 +5,8 @@ import Section from "../../layout/Section";
 import Hero from "./Hero";
 import MyMission from "./MyMission";
 import CustomPainting from "./CustomPainting";
-import LazyLoad from "react-lazyload";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const SpecialProducts = dynamic(() => import("./SpecialProducts"));
 const ThreeImages = dynamic(() => import("./ThreeImages"));
@@ -14,22 +14,22 @@ const ThreeImagesOne = dynamic(() => import("./ThreeImagesOne"));
 const ThreeImagesTwo = dynamic(() => import("./ThreeImagesTwo"));
 
 const Home = ({ products }) => {
+  const t = useTranslations("Home");
+
   return (
     <>
       <Section>
         <Hero />
         <SpecialProducts products={products} />
         <MyMission />
-        <LazyLoad offset={100}>
-          <ThreeImagesOne />
-          <ThreeImagesTwo />
-          <CustomPainting />
-        </LazyLoad>
+        <ThreeImagesOne />
+        <ThreeImagesTwo />
+        <CustomPainting />
       </Section>
       <ThreeImages />
       <div className="py-10 mx-8 lg:mx-20 xl:mx-32 overflow-hidden">
         <h2 className="pb-10 text-xl md:text-3xl font-normal text-center">
-          FOLLOW ME ON FACEBOOK
+          {t("facebookTitle")}
         </h2>
         <div className="flex flex-row justify-between mt-16">
           <div className="flex flex-row gap-5">
@@ -46,20 +46,20 @@ const Home = ({ products }) => {
                   href="https://www.facebook.com/profile.php?id=100076377284606"
                   className="hover:underline"
                 >
-                  24K likes
+                  {t("likes")}
                 </Link>
                 <Link
                   href="https://www.facebook.com/profile.php?id=100076377284606"
                   className="hover:underline"
                 >
-                  24K followers
+                  {t("followers")}
                 </Link>
               </span>
             </div>
           </div>
           <button className="py-2 px-5 bg-[#1877F2] text-white font-bold rounded-lg hover:bg-[#166cdb]">
             <Link href="https://www.facebook.com/profile.php?id=100076377284606">
-              Follow
+              {t("follow")}
             </Link>
           </button>
         </div>

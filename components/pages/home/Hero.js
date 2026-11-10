@@ -8,9 +8,11 @@ const myFont = localFont({
 
 import Button from "../../ui/Button";
 import { useRouter } from "next/router";
+import { useTranslations } from "next-intl";
 
 const Hero = () => {
   const router = useRouter();
+  const t = useTranslations("Home");
 
   const navigationHandler = () => {
     router.push("/products");
@@ -38,7 +40,7 @@ const Hero = () => {
         >
           Angelina's Art Gallery
         </h1>
-        <Button onClick={navigationHandler}>Вижте всички произведения</Button>
+        <Button onClick={navigationHandler}>{t("heroButton")}</Button>
       </div>
     </div>
   );

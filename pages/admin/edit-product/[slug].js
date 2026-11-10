@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { getSession } from "next-auth/client";
 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../helpers/firebase";
@@ -38,6 +37,12 @@ const EditProductData = ({ selectedProduct }) => {
   );
   const [description, setDescription] = useState(
     selectedProduct ? selectedProduct.description : null,
+  );
+  const [nameEn, setNameEn] = useState(
+    selectedProduct?.name_en || "",
+  );
+  const [descriptionEn, setDescriptionEn] = useState(
+    selectedProduct?.description_en || "",
   );
   const [isFeatured, setIsFeatured] = useState(
     selectedProduct ? selectedProduct.isFeatured : null,
@@ -125,6 +130,7 @@ const EditProductData = ({ selectedProduct }) => {
                       urls,
                       isFeatured,
                       editDate,
+                      { name_en: nameEn, description_en: descriptionEn },
                     );
                     setRequestStatus("success");
                     router.push("/admin/edit-product");
@@ -147,6 +153,7 @@ const EditProductData = ({ selectedProduct }) => {
         images,
         isFeatured,
         editDate,
+        { name_en: nameEn, description_en: descriptionEn },
       );
       setRequestStatus("success");
       router.push("/admin/edit-product");
@@ -244,6 +251,27 @@ const EditProductData = ({ selectedProduct }) => {
               onChange={(event) => {
                 setDescription(event.target.value);
               }}
+            />
+          </InputContainer>
+          <InputContainer>
+            <label htmlFor="name-en">Product name in English (optional): </label>
+            <input
+              className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
+              type="text"
+              id="name-en"
+              value={nameEn}
+              onChange={(event) => setNameEn(event.target.value)}
+            />
+          </InputContainer>
+          <InputContainer>
+            <label htmlFor="description-en">Description in English (optional): </label>
+            <textarea
+              className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
+              rows={10}
+              placeholder="English description..."
+              id="description-en"
+              value={descriptionEn}
+              onChange={(event) => setDescriptionEn(event.target.value)}
             />
           </InputContainer>
           <InputContainer className="flex flex-row gap-2 items-center">

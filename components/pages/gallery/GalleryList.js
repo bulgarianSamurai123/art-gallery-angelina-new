@@ -1,10 +1,12 @@
 import React, { Fragment, useState } from "react";
 import { motion } from "framer-motion";
 import Modal from "../../layout/Modal";
+import { useLocalize } from "../../../helpers/localize";
 
 const GalleryList = ({ galleryImages }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const l = useLocalize();
 
   const openPopupHandler = (image) => {
     setSelectedImage(image);
@@ -49,7 +51,7 @@ const GalleryList = ({ galleryImages }) => {
               <img
                 className="w-[16.25em] h-[18.125em] object-cover object-center"
                 src={image.image}
-                alt={image.name}
+                alt={l(image, "name")}
               />
             </button>
           </motion.li>
@@ -59,7 +61,7 @@ const GalleryList = ({ galleryImages }) => {
         <Modal
           onClose={closePopupHandler}
           image={selectedImage.image}
-          text={selectedImage.name}
+          text={l(selectedImage, "name")}
           type="gallery"
         />
       )}

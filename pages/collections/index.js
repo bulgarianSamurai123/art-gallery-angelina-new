@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { useTranslations } from "next-intl";
 
 import { getProjects } from "../../helpers/api-util";
 import { getProductsQuery, getProjectsQuery } from "../../helpers/database-queries";
@@ -11,6 +12,8 @@ import Pagination from "../../components/ui/Pagination";
 
 const Advertisements = ({ projects: firstProject }) => {
   const router = useRouter();
+  const t = useTranslations("Collections");
+  const tMeta = useTranslations("Meta");
     const { page } = router.query;
 
   const [projects, setProjects] = useState([]);
@@ -35,7 +38,7 @@ useEffect(() => {
   return (
     <Fragment>
       <Head>
-        <title>Aneglina's Art Gallery - Advertisements</title>
+        <title>{tMeta("collectionsTitle")}</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=5"
@@ -43,12 +46,12 @@ useEffect(() => {
         <meta
           name="title"
           property="og:title"
-          content="Angelina's Art Gallery - Advertisements"
+          content={tMeta("collectionsTitle")}
         />
         <meta
           name="description"
           property="og:description"
-          content="The best paintings you will find."
+          content={tMeta("collectionsDescription")}
         />
         <meta
           name="url"
@@ -65,10 +68,10 @@ useEffect(() => {
       </Head>
       <Section>
         <h1 className="pb-10 text-xl md:text-3xl font-normal text-center">
-          Частни Колекции
+          {t("title")}
         </h1>
 
-        {projects.length < 1 && <p>Зарежда се...</p>}
+        {projects.length < 1 && <p>{t("loading")}</p>}
         {projects.length >= 1 && (
           <ProjectList projects={projects} currentPage={currentPage} />
         )}

@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import VideoPlayer from "../ui/VideoPlayer";
+import { useLocalize } from "../../helpers/localize";
 
 const ProjectModal = ({ project, onClose }) => {
+  const l = useLocalize();
+
   // Close on Escape key
   useEffect(() => {
     const handleKey = (e) => {
@@ -50,10 +53,10 @@ const ProjectModal = ({ project, onClose }) => {
           <VideoPlayer project={project} />
 
           <div className="flex flex-col gap-5">
-            <h2 className="text-2xl font-semibold">{project.title}</h2>
+            <h2 className="text-2xl font-semibold">{l(project, "title")}</h2>
             <p className="text-sm opacity-70">{project.client}</p>
             <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
-              {project.description}
+              {l(project, "description")}
             </p>
           </div>
 

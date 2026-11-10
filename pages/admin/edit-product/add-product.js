@@ -26,6 +26,8 @@ const AddProductPage = () => {
   const [id, setId] = useState();
   const [price, setPrice] = useState();
   const [description, setDescription] = useState();
+  const [nameEn, setNameEn] = useState("");
+  const [descriptionEn, setDescriptionEn] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
 
   const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
@@ -65,6 +67,7 @@ const AddProductPage = () => {
     imageUrls,
     isFeatured,
     date,
+    translations = {},
   ) {
     const response = await fetch(
       `${process.env.firebase_products_url}/${id}.json`,
@@ -78,6 +81,8 @@ const AddProductPage = () => {
           coverImage: imageUrls,
           isFeatured,
           date,
+          name_en: translations.name_en || "",
+          description_en: translations.description_en || "",
         }),
         headers: {
           "Content-Type": "application/json",
@@ -131,6 +136,7 @@ const AddProductPage = () => {
                     urls,
                     isFeatured,
                     insertedDate,
+                    { name_en: nameEn, description_en: descriptionEn },
                   );
                   setRequestStatus("success");
                 }
@@ -224,6 +230,29 @@ const AddProductPage = () => {
               id="description"
               onChange={(event) => {
                 setDescription(event.target.value);
+              }}
+            />
+          </InputContainer>
+          <InputContainer>
+            <label htmlFor="name-en">Име на английски (по избор): </label>
+            <input
+              className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
+              type="text"
+              id="name-en"
+              onChange={(event) => {
+                setNameEn(event.target.value);
+              }}
+            />
+          </InputContainer>
+          <InputContainer>
+            <label htmlFor="description-en">Описание на английски (по избор): </label>
+            <textarea
+              className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
+              rows={10}
+              placeholder="English description..."
+              id="description-en"
+              onChange={(event) => {
+                setDescriptionEn(event.target.value);
               }}
             />
           </InputContainer>
