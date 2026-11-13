@@ -24,7 +24,7 @@ const nextConfig = (phase) => {
         firebase_projects_url:
           "https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/projects",
         email: "mark.petar.petrov@gmail.com",
-        email_pass: "najg wlhm dosd zkxl",
+        email_pass: "bmlp bxpx fayj cyey",
         firebase_storage: "dev",
         firebase_product_db_name: "products_dev",
         firebase_project_db_name: "projects",
@@ -49,7 +49,7 @@ const nextConfig = (phase) => {
       firebase_projects_url:
         "https://art-gallery-angelina-default-rtdb.europe-west1.firebasedatabase.app/projects",
       email: "artgalleryangelina@gmail.com",
-      email_pass: "xogx raxn cshe hblh",
+      email_pass: "laec xudm fbma dkjk",
       firebase_storage: "images",
       firebase_product_db_name: "products",
       firebase_project_db_name: "projects",
