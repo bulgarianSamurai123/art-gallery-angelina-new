@@ -29,27 +29,31 @@ const generateEmailContent = (data) => {
 };
 
 export default async function handler(req, res) {
-  if (req.method === "POST") {
-    const { name, email, tel, message, date } = req.body;
-
-    if (!name || !email || !tel || !message) {
-      res.status(400).json({ message: "Form inputs cannot be empty!" });
-      return;
-    }
-
-    try {
-      await transporter.sendMail({
-        ...mailOptions,
-        ...generateEmailContent(req.body),
-        subject: `Angelina's Art Gallery new message from ${name}`,
-      });
-    } catch (error) {
-      console.log(error);
-      res.status(400).json({ message: error.message });
-    }
-
-    res.status(200).json({ message: "Success!" });
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method not allowed!" });
   }
 
-  res.status(400).json({ message: "Bad request!" });
+  const { name, email, tel, message } = req.body;
+
+  if (!name || !email || !tel || !message) {
+    return res.status(400).json({ message: "Form inputs cannot be empty!" });
+  }
+
+  if (!process.env.email || !process.env.email_pass) {
+    console.error("Contact form: the email / email_pass env variables are not set");
+    return res.status(500).json({ message: "Email is not configured on the server." });
+  }
+
+  try {
+    await transporter.sendMail({
+      ...mailOptions,
+      ...generateEmailContent(req.body),
+      subject: `Angelina's Art Gallery new message from ${name}`,
+    });
+  } catch (error) {
+    console.error("Contact form: sending failed:", error);
+    return res.status(500).json({ message: error.message });
+  }
+
+  return res.status(200).json({ message: "Success!" });
 }
