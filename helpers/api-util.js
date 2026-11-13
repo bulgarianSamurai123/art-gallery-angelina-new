@@ -86,7 +86,7 @@ export const sendForm = async (content) => {
     },
   });
 
-  const data = response.json();
+  const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
     throw new Error(data.message || "Something went wrong!");
