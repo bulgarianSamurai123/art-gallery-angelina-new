@@ -16,7 +16,7 @@ const NavBarDropdown = ({
 
   return (
     <motion.div
-      className="pt-6 absolute z-10 top-0 left-0 w-full h-1/2 bg-white md:hidden"
+      className="pt-6 absolute z-10 top-0 left-0 w-full h-96 bg-white md:hidden"
       variants={{
         hidden: { opacity: 0, y: -30 },
         visible: { opacity: 1, y: 0 },
