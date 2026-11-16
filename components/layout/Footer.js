@@ -1,21 +1,22 @@
 import Link from "next/link";
 import React from "react";
 
-import localFont from "next/font/local";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-const myFont = localFont({ src: "../../public/fonts/BrittanySignature.ttf" });
 
 const Footer = () => {
   const t = useTranslations("Footer");
 
   return (
     <footer className="flex flex-col md:flex-row justify-between items-start md:items-center gap-10 md:gap-20 xl:gap-80 bg-gray-820 pt-16 pb-28 px-10 md:px-32">
-      <Link
-        className={`text-4xl w-[15rem] text-center ${myFont.className}`}
-        href="/"
-      >
-        Angelina's Art Gallery
+      <Link href="/" aria-label="Angelina's Art Gallery" className="shrink-0">
+        <Image
+          src="/assets/logo.png"
+          alt="Angelina's Art Gallery"
+          width={160}
+          height={160}
+          className="w-32 h-32 md:w-40 md:h-40"
+        />
       </Link>
 
       <div className="flex flex-col md:flex-row gap-10 md:gap-20 xl:gap-40">

@@ -9,8 +9,6 @@ import NavBarDropdown from "../navigation/NavDropdown";
 import LanguageSwitcher from "../navigation/LanguageSwitcher";
 import { navigationLinks } from "../../navigationLinks";
 
-import localFont from "next/font/local";
-const myFont = localFont({ src: "../../public/fonts/BrittanySignature.ttf" });
 
 const MainNavigation = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -23,8 +21,15 @@ const MainNavigation = () => {
 
   return (
     <nav className="flex justify-between items-center my-6 mx-8 md:mx-14 lg:mx-32">
-      <Link className={`text-2xl w-[9rem] text-center ${myFont.className}`} href="/">
-        Angelina's Art Gallery
+      <Link href="/" aria-label="Angelina's Art Gallery" className="shrink-0">
+        <Image
+          src="/assets/logo.png"
+          alt="Angelina's Art Gallery"
+          width={96}
+          height={96}
+          className="w-16 h-16 md:w-20 md:h-20"
+          priority
+        />
       </Link>
 
       <ul className="hidden md:flex flex-row gap-5">
