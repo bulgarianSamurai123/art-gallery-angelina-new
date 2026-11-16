@@ -11,7 +11,8 @@ export async function responseHandler(
   const response = await fetch(
     `${process.env.firebase_products_url}/${id}.json`,
     {
-      method: "PUT",
+      // PATCH updates only these fields and keeps anything else stored on the product
+      method: "PATCH",
       body: JSON.stringify({
         id: id,
         name: name,
@@ -20,9 +21,9 @@ export async function responseHandler(
         coverImage: coverImage,
         isFeatured: isFeatured,
         date: date,
-        // English translations (optional). Empty fields fall back to Bulgarian.
-        name_en: translations.name_en || "",
-        description_en: translations.description_en || "",
+        // English translations. Empty fields fall back to Bulgarian on the site.
+        name_en: translations.name_en ?? "",
+        description_en: translations.description_en ?? "",
       }),
       headers: {
         "Content-Type": "application/json",
