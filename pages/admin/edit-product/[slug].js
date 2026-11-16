@@ -7,7 +7,7 @@ import { isAdmin } from "../../../helpers/admin-check";
 
 import { storage } from "../../../helpers/firebase";
 import { notificationHandler } from "../../../helpers/notification-util";
-import { getProductById, getProducts } from "../../../helpers/api-util";
+import { getProductById } from "../../../helpers/api-util";
 import { responseHandler } from "../../../helpers/edit-product";
 import InputContainer from "../../../components/ui/form/InputContainer";
 import Button from "../../../components/ui/Button";
@@ -28,15 +28,13 @@ const EditProductData = ({ selectedProduct }) => {
   );
   const [imageIsChanged, setImageIsChanged] = useState(false);
 
-  const [name, setName] = useState(
-    selectedProduct ? selectedProduct.name : null,
-  );
+  const [name, setName] = useState(selectedProduct?.name || "");
   const [id, setId] = useState(selectedProduct ? selectedProduct.id : null);
   const [price, setPrice] = useState(
     selectedProduct ? selectedProduct.price : null,
   );
   const [description, setDescription] = useState(
-    selectedProduct ? selectedProduct.description : null,
+    selectedProduct?.description || "",
   );
   const [nameEn, setNameEn] = useState(
     selectedProduct?.name_en || "",
@@ -145,7 +143,7 @@ const EditProductData = ({ selectedProduct }) => {
         }
       }
     } else {
-      responseHandler(
+      await responseHandler(
         id,
         name,
         price,
@@ -197,6 +195,17 @@ const EditProductData = ({ selectedProduct }) => {
               ref={nameRef}
               value={name}
               onChange={(event) => setName(event.target.value)}
+            />
+          </InputContainer>
+          <InputContainer>
+            <label htmlFor="name-en">Enter Product Name in English: </label>
+            <input
+              className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
+              type="text"
+              id="name-en"
+              placeholder="Leave empty to show the Bulgarian name"
+              value={nameEn}
+              onChange={(event) => setNameEn(event.target.value)}
             />
           </InputContainer>
           <InputContainer>
@@ -254,21 +263,11 @@ const EditProductData = ({ selectedProduct }) => {
             />
           </InputContainer>
           <InputContainer>
-            <label htmlFor="name-en">Product name in English (optional): </label>
-            <input
-              className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
-              type="text"
-              id="name-en"
-              value={nameEn}
-              onChange={(event) => setNameEn(event.target.value)}
-            />
-          </InputContainer>
-          <InputContainer>
-            <label htmlFor="description-en">Description in English (optional): </label>
+            <label htmlFor="description-en">Enter Description in English: </label>
             <textarea
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
               rows={10}
-              placeholder="English description..."
+              placeholder="Leave empty to show the Bulgarian description"
               id="description-en"
               value={descriptionEn}
               onChange={(event) => setDescriptionEn(event.target.value)}
@@ -302,28 +301,21 @@ const EditProductData = ({ selectedProduct }) => {
   );
 };
 
-export async function getStaticProps(context) {
+// Loaded fresh on every visit, so the form always shows the latest saved data
+// (a cached static page could show an old version without the English fields,
+// and saving it would overwrite them with empty values).
+export async function getServerSideProps(context) {
   const productID = context.params.slug;
   const product = await getProductById(productID);
+
+  if (!product) {
+    return { notFound: true };
+  }
 
   return {
     props: {
       selectedProduct: product,
     },
-    revalidate: 30,
-  };
-}
-
-export async function getStaticPaths() {
-  const allProducts = await getProducts();
-
-  const paths = allProducts.map((product) => ({
-    params: { slug: product.id },
-  }));
-
-  return {
-    paths: paths,
-    fallback: true,
   };
 }
 

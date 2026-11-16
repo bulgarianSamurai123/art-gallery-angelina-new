@@ -185,6 +185,17 @@ const AddProductPage = () => {
             />
           </InputContainer>
           <InputContainer>
+            <label htmlFor="name-en">Въведи име на продукт на английски: </label>
+            <input
+              className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
+              type="text"
+              id="name-en"
+              placeholder="Ако е празно, ще се показва българското име"
+              value={nameEn}
+              onChange={(event) => setNameEn(event.target.value)}
+            />
+          </InputContainer>
+          <InputContainer>
             <label htmlFor="product-id">
               Въведи id на продъкта (как ще бъде показано в search bar):{" "}
             </label>
@@ -234,26 +245,14 @@ const AddProductPage = () => {
             />
           </InputContainer>
           <InputContainer>
-            <label htmlFor="name-en">Име на английски (по избор): </label>
-            <input
-              className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
-              type="text"
-              id="name-en"
-              onChange={(event) => {
-                setNameEn(event.target.value);
-              }}
-            />
-          </InputContainer>
-          <InputContainer>
-            <label htmlFor="description-en">Описание на английски (по избор): </label>
+            <label htmlFor="description-en">Въведи описание на английски: </label>
             <textarea
               className="border-2 rounded-lg border-gray-850 p-2 text-sm outline-none focus:border-4 focus:border-gray-850"
               rows={10}
-              placeholder="English description..."
+              placeholder="Ако е празно, ще се показва българското описание"
               id="description-en"
-              onChange={(event) => {
-                setDescriptionEn(event.target.value);
-              }}
+              value={descriptionEn}
+              onChange={(event) => setDescriptionEn(event.target.value)}
             />
           </InputContainer>
           <InputContainer className="flex flex-row gap-2 items-center">
